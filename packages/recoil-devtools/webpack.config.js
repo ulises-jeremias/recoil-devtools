@@ -1,7 +1,10 @@
+const path = require('path');
+
 const config = {
   entry: './index.d.tsx',
   output: {
-    filename: 'lib/[name].js',
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'lib/'),
   },
   module: {
     rules: [{
