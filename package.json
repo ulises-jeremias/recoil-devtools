@@ -1,0 +1,8 @@
+{
+  "name": "recoil-devtool",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:ulises-jeremias/recoil-devtool.git",
+  "author": "ulises-jeremias <ulisescf.24@gmail.com>",
+  "license": "MIT"
+}
