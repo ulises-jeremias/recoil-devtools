@@ -35,7 +35,7 @@ export interface Options {
  * @param {Function} options.actionTransformer - transform action before print
  * @param {Function} options.errorTransformer - transform error before print
  *
- * @returns {Function} logger middleware
+ * @returns {Function} logger
  */
 const createLogger = (options?: Options) => {
   const loggerOptions = { ...defaults, ...options };
@@ -51,14 +51,14 @@ const createLogger = (options?: Options) => {
 
   // Return if 'console' object is not defined
   if (typeof logger === 'undefined') {
-    return () => (next: Function) => (action: any) => next(action);
+    return (next: Function) => () => next(null);
   }
 
   const logBuffer: any[] = [];
 
-  return ({ getState }: { getState: Function }) => (next: Function) => (action: any) => {
+  return (next: Function) => ({ prevState, nextState, action }: { prevState: any, nextState: any, action?: any }) => {
     // Exit early if predicate function returns 'false'
-    if (typeof predicate === 'function' && !predicate(getState, action)) {
+    if (typeof predicate === 'function' && !predicate(prevState, action)) {
       return next(action);
     }
 
@@ -68,7 +68,7 @@ const createLogger = (options?: Options) => {
 
     logEntry.started = timer.now();
     logEntry.startedTime = new Date();
-    logEntry.prevState = stateTransformer(getState());
+    logEntry.prevState = stateTransformer(prevState);
     logEntry.action = action;
 
     let returnedValue;
@@ -83,10 +83,10 @@ const createLogger = (options?: Options) => {
     }
 
     logEntry.took = timer.now() - logEntry.started;
-    logEntry.nextState = stateTransformer(getState());
+    logEntry.nextState = stateTransformer(nextState);
 
     const diff = loggerOptions.diff && typeof diffPredicate === 'function'
-      ? diffPredicate(getState, action)
+      ? diffPredicate(nextState, action)
       : loggerOptions.diff;
 
     printBuffer(logBuffer, { ...loggerOptions, diff });
@@ -98,10 +98,8 @@ const createLogger = (options?: Options) => {
 };
 
 
-const defaultLogger = ({ getState }: { getState?: Function } = {}) => {
-  if (typeof getState === 'function') {
-    return createLogger()({ getState });
-  }
+const defaultLogger = (next: Function) => ({ prevState, nextState }: { prevState: any, nextState: any }) => {
+  return createLogger()(next)({ prevState, nextState });
 };
 
 export { defaults, createLogger, defaultLogger as logger };
