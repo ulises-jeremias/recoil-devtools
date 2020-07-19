@@ -9,14 +9,17 @@ export type Logger = (
 export interface RecoilDevtoolsProps {
   values?: RecoilState<any>[];
   logger?: Logger;
+  next?: Function;
+  actionTransformer?: Function;
 }
 
-const RecoilDevtools: FC<RecoilDevtoolsProps> = ({
+export const RecoilDevtools: FC<RecoilDevtoolsProps> = ({
   values,
+  next = () => null,
   logger = defaultLogger,
+  actionTransformer = () => 'state update',
 }) => {
   const [state, setState] = useState({ prevState: {}, nextState: {} });
-  const [log, setLog] = useState(false);
 
   useRecoilTransactionObserver_UNSTABLE(async ({ previousSnapshot, snapshot }) => {
     values?.forEach(async (value) => {
@@ -34,15 +37,11 @@ const RecoilDevtools: FC<RecoilDevtoolsProps> = ({
         }
       }));
     });
-
-    setLog(true);
   });
 
   useEffect(() => {
-    logger(() => null)({ ...state, action: { description: 'change' } });
+    logger(next)({ ...state, action: actionTransformer(state) });
   }, [state]);
 
   return null;
 };
-
-export default RecoilDevtools;
