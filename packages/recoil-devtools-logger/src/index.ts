@@ -98,9 +98,7 @@ const createLogger = (options?: Options) => {
 };
 
 
-const defaultLogger = (next: Function) => ({ prevState, nextState }: { prevState: any, nextState: any }) => {
-  return createLogger()(next)({ prevState, nextState });
-};
+const defaultLogger = createLogger();
 
 export { defaults, createLogger, defaultLogger as logger };
 
