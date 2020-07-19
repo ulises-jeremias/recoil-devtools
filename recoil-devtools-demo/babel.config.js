@@ -10,6 +10,7 @@ module.exports = {
     ],
     "@babel/preset-react",
     "@babel/preset-env",
+    "@babel/typescript"
   ],
   plugins: [
     "@babel/plugin-proposal-class-properties",

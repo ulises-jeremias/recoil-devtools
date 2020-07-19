@@ -1,12 +1,20 @@
-import React from 'react';
-import Cracked from 'app/components/Animation/Cracked';
+import { useEffect } from 'react';
+import { commonNotification } from 'app/state';
 
 import "./Landing.css";
+import { useSetRecoilState } from 'recoil';
 
-const Landing = () => (
-  <Cracked>
-    recoil-devtools-demo
-  </Cracked>
-);
+const Landing = () => {
+  const setNotification = useSetRecoilState(commonNotification);
+
+  useEffect(() => {
+    setNotification({
+      isVisible: true,
+      message: 'Hi!',
+    });
+  }, []);
+
+  return null;
+};
 
 export default Landing;
