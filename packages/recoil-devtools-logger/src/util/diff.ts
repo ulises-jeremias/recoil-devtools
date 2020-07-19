@@ -50,7 +50,12 @@ export function render(diff: any) {
   }
 }
 
-export default function diffLogger(prevState: any, newState: any, logger: Logger, isCollapsed: any) {
+export default function diffLogger(
+  prevState: any,
+  newState: any,
+  logger: Logger,
+  isCollapsed: any
+) {
   const diffs = diff(prevState, newState);
 
   try {

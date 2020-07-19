@@ -56,7 +56,15 @@ const createLogger = (options?: Options) => {
 
   const logBuffer: any[] = [];
 
-  return (next: Function) => ({ prevState, nextState, action }: { prevState: any, nextState: any, action?: any }) => {
+  return (next: Function) => ({
+    prevState,
+    nextState,
+    action,
+  }: {
+    prevState: any;
+    nextState: any;
+    action?: any;
+  }) => {
     // Exit early if predicate function returns 'false'
     if (typeof predicate === 'function' && !predicate(prevState, action)) {
       return next(action);
@@ -85,10 +93,10 @@ const createLogger = (options?: Options) => {
     logEntry.took = timer.now() - logEntry.started;
     logEntry.nextState = stateTransformer(nextState);
 
-    const diff = loggerOptions.diff && typeof diffPredicate === 'function'
-      ? diffPredicate(nextState, action)
-      : loggerOptions.diff;
-
+    const diff =
+      loggerOptions.diff && typeof diffPredicate === 'function'
+        ? diffPredicate(nextState, action)
+        : loggerOptions.diff;
     printBuffer(logBuffer, { ...loggerOptions, diff });
     logBuffer.length = 0;
 
@@ -96,7 +104,6 @@ const createLogger = (options?: Options) => {
     return returnedValue;
   };
 };
-
 
 const defaultLogger = createLogger();
 

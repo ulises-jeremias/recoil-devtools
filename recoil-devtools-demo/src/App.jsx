@@ -9,8 +9,7 @@ import MomentLocale from 'app/components/MomentLocale';
 import Notification from 'app/components/Notification';
 import AppRoutes from 'app/routes/AppRoutes';
 
-import { RecoilDevtools } from 'app/components/RecoilDevtools';
-import { commonNotification } from 'app/state';
+import { Devtools } from 'app/components/RecoilDevtools';
 
 import 'app/i18n';
 
@@ -18,7 +17,7 @@ const App = () => (
   <RecoilRoot>
     <Suspense fallback={<Loading />}>
       <BrowserRouter>
-        <RecoilDevtools values={[commonNotification]} />
+        <Devtools />
         <Notification />
         <MomentLocale />
         <AppRoutes />

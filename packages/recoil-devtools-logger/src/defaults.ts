@@ -4,7 +4,7 @@ export default {
   logErrors: true,
   collapsed: false,
   predicate: false,
-  duration: false,
+  duration: true,
   timestamp: true,
   stateTransformer: (state: any) => state,
   actionTransformer: (action: any) => action,
