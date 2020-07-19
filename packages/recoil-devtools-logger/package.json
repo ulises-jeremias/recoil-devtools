@@ -1,5 +1,5 @@
 {
-  "name": "recoil-devtools",
+  "name": "recoil-devtools-logger",
   "version": "0.0.1",
   "main": "lib/index.js",
   "files": [
