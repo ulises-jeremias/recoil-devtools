@@ -14,7 +14,9 @@
     "build": "webpack -p"
   },
   "dependencies": {
-    "react": "^16.13.1"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "recoil": "^0.0.10"
   },
   "peerDependencies": {
     "react": ">=16.13.1"
@@ -28,6 +30,7 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
     "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
     "awesome-typescript-loader": "^5.2.1",
     "path": "^0.12.7",
     "prettier": "^2.0.5",
