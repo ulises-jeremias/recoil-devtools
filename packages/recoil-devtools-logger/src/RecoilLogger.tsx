@@ -20,23 +20,25 @@ export const RecoilLogger: FC<RecoilLoggerProps> = ({
 }) => {
   const [state, setState] = useState({ prevState: {}, nextState: {} });
 
-  useRecoilTransactionObserver_UNSTABLE(async ({ previousSnapshot, snapshot }) => {
-    values?.forEach(async (value) => {
-      const previousValue = await previousSnapshot.getPromise(value);
-      const nextValue = await snapshot.getPromise(value);
+  useRecoilTransactionObserver_UNSTABLE(
+    async ({ previousSnapshot, snapshot }) => {
+      values?.forEach(async value => {
+        const previousValue = await previousSnapshot.getPromise(value);
+        const nextValue = await snapshot.getPromise(value);
 
-      setState(({ prevState, nextState }) => ({
-        prevState: {
-          ...prevState,
-          [value.key]: previousValue,
-        },
-        nextState: {
-          ...nextState,
-          [value.key]: nextValue,
-        }
-      }));
-    });
-  });
+        setState(({ prevState, nextState }) => ({
+          prevState: {
+            ...prevState,
+            [value.key]: previousValue,
+          },
+          nextState: {
+            ...nextState,
+            [value.key]: nextValue,
+          },
+        }));
+      });
+    }
+  );
 
   useEffect(() => {
     const logEntry = { ...state, action: actionTransformer(state) };

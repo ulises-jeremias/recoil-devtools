@@ -69,7 +69,7 @@ export default function diffLogger(
   }
 
   if (diffs) {
-    diffs.forEach((elem) => {
+    diffs.forEach(elem => {
       const { kind } = elem;
       const output = render(elem);
 

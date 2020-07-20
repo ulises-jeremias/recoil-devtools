@@ -6,7 +6,10 @@ export interface RecoilDevtoolsProps {
   children?: ReactNode;
 }
 
-export const RecoilDevtools: FC<RecoilDevtoolsProps> = ({ values, children }) => {
+export const RecoilDevtools: FC<RecoilDevtoolsProps> = ({
+  values,
+  children,
+}) => {
   return (
     <>
       {Children.map(children, (child: ReactNode) => {

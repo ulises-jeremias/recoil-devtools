@@ -17,7 +17,7 @@ export default {
     error: () => '#F20404',
   },
   diff: false,
-  diffPredicate: (...data: any[]) => false,
+  diffPredicate: (..._data: any[]) => false,
 
   // Deprecated options
   transformer: undefined,

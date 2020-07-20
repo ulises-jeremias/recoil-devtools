@@ -5,9 +5,7 @@ import { commonNotification } from '../../state';
 
 const Devtools: FC<void> = () => {
   return (
-    <RecoilDevtools >
-      <RecoilLogger values={[commonNotification]} />
-    </RecoilDevtools>
+    <RecoilLogger values={[commonNotification]} />
   );
 };
 

@@ -60,9 +60,16 @@ const createLogger = (options?: Options) => {
     prevState,
     nextState,
     action,
+  }: {
+    prevState: any;
+    nextState: any;
+    action: any;
   }) => {
     // Exit early if predicate function returns 'false'
-    if (typeof predicate === 'function' && !predicate({ prevState, nextState }, action)) {
+    if (
+      typeof predicate === 'function' &&
+      !predicate({ prevState, nextState }, action)
+    ) {
       return next(action);
     }
 
