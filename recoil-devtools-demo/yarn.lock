@@ -9122,10 +9122,10 @@ recoil-devtools-logger@^0.0.8:
     deep-diff "^1.0.2"
     recoil "^0.0.10"
 
-recoil-devtools@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/recoil-devtools/-/recoil-devtools-0.0.7.tgz#0f3ceac58ae92b7bd9f09f3296a12e57e5acb4c4"
-  integrity sha512-VNwd4//QCQ4CHLPKRLGT5RgKbhuEA7HFh8NSRwJKer7yyHiRQxPPBtwI0BK3btPQJ4k0JBadq4bDuwF9cIW1dQ==
+recoil-devtools@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/recoil-devtools/-/recoil-devtools-0.0.8.tgz#70f9282768bafc8c366856501de9684ee54b377d"
+  integrity sha512-+dLLXQNNLO8ZqNBXEI+FjRF+QljvOAR+EDYkSoFiQUyU3QczDYOHb2CIWFKytemiBlSAwEFFPtQWXxH4ZiFRwA==
   dependencies:
     deep-diff "^1.0.2"
     recoil "^0.0.10"
