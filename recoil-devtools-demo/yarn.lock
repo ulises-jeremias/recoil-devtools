@@ -3812,6 +3812,11 @@ decode-uri-component@^0.2.0:
   resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
   integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
 
+deep-diff@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-1.0.2.tgz#afd3d1f749115be965e89c63edc7abb1506b9c26"
+  integrity sha512-aWS3UIVH+NPGCD1kki+DCU9Dua032iSsO43LqQpcs4R3+dVv7tX0qBGjiVHJHjplsoUM2XRO/KB92glqc68awg==
+
 deep-equal@^1.0.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
@@ -9108,6 +9113,25 @@ recast@^0.11.17:
     esprima "~3.1.0"
     private "~0.1.5"
     source-map "~0.5.0"
+
+recoil-devtools-logger@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.0.4.tgz#698edade79821f5c2bab80882509161d260d2c83"
+  integrity sha512-+BUOCUpo5McccluJVFm4yDe3/YWcOnLWDJLCkAD+yO12lCNfasQIZN9Zvcz9MUhphfhlh5IW568Ixh0KoIyhwQ==
+  dependencies:
+    deep-diff "^1.0.2"
+    react "^16.13.1"
+    react-dom "^16.13.1"
+    recoil "^0.0.10"
+
+recoil-devtools@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/recoil-devtools/-/recoil-devtools-0.0.2.tgz#e91e21956b6c6533cf80fc686e38cba0d80e6264"
+  integrity sha512-xW8Xitmx3iBB5NmsPFhfsxVjxzgwIP4ggr/g4QhKgfKa+3vXs1hPYR2dhQjTOUgtvdQw92JzY7YkK9lur9jmhQ==
+  dependencies:
+    react "^16.13.1"
+    react-dom "^16.13.1"
+    recoil "^0.0.10"
 
 recoil@^0.0.10:
   version "0.0.10"

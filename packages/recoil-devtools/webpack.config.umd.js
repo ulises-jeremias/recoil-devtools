@@ -3,20 +3,13 @@ const path = require('path');
 const config = {
   entry: './index.d.ts',
   output: {
-    filename: '[name].js',
+    library: 'recoil-devtools',
+    libraryTarget: 'umd',
+    filename: 'recoil-devtools.js',
   },
+  devtool: 'source-map',
   module: {
     rules: [{
-      enforce: 'pre',
-      test: /\.(ts|tsx)$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'tslint-loader',
-      options: {
-        failOnWarning: false,
-        failOnError: true,
-      },
-    },
-    {
       test: /\.tsx?$/,
       use: [
         {

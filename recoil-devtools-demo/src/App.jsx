@@ -9,7 +9,7 @@ import MomentLocale from 'app/components/MomentLocale';
 import Notification from 'app/components/Notification';
 import AppRoutes from 'app/routes/AppRoutes';
 
-import { Devtools } from 'app/components/RecoilDevtools';
+import { Devtools } from 'app/components/Devtools';
 
 import 'app/i18n';
 

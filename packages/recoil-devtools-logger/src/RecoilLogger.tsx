@@ -6,14 +6,14 @@ export type Logger = (
   next: Function
 ) => ({ prevState, nextState }: { prevState: any; nextState: any }) => any;
 
-export interface RecoilDevtoolsProps {
+export interface RecoilLoggerProps {
   values?: RecoilState<any>[];
   logger?: Logger;
   next?: Function;
   actionTransformer?: Function;
 }
 
-export const RecoilDevtools: FC<RecoilDevtoolsProps> = ({
+export const RecoilLogger: FC<RecoilLoggerProps> = ({
   values,
   next = () => null,
   logger = defaultLogger,

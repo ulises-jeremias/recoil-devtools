@@ -1,10 +1,9 @@
 const path = require('path');
 
 const config = {
-  entry: './index.d.tsx',
+  entry: './index.d.ts',
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'lib/'),
   },
   module: {
     rules: [{
@@ -22,17 +21,6 @@ const config = {
       use: [
         {
           loader: 'awesome-typescript-loader',
-          options: {
-            silent: true,
-            useBabel: true,
-            babelOptions: {
-              babelrc: false,
-              compact: process.env.NODE_ENV === 'production',
-              highlightCode: true,
-            },
-            babelCore: '@babel/core',
-            useCache: true,
-          }
         },
       ],
       exclude: /(node_modules|bower_components)/
