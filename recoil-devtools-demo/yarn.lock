@@ -9114,10 +9114,10 @@ recast@^0.11.17:
     private "~0.1.5"
     source-map "~0.5.0"
 
-recoil-devtools-logger@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.0.8.tgz#e6ab72c04ea8b5246c3b476e5b93621d674a192f"
-  integrity sha512-sRd33fzrwYKJ8SZtE9tjDhBlCVmceJLtnPE2g0CQ8fzHktLlzbv2BmMUFphypyh1zmObW0OSqpVdW2thUPGd3w==
+recoil-devtools-logger@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.0.9.tgz#e19f520a782dee6f1b5c8b514cf01fca67cda1f4"
+  integrity sha512-ClN6zwuVM6TgbTd6MXE2CZs7kSgHM9OlnEkRABkuHXdL5xsKy6glAX5Qinb2Fxpwu811nnltAHStZ3lQFacDLw==
   dependencies:
     deep-diff "^1.0.2"
     recoil "^0.0.10"
