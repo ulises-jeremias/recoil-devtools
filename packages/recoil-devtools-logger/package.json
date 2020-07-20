@@ -33,7 +33,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "recoil-devtools",
+  "name": "recoil-devtools-logger",
   "repository": "git@github.com:ulises-jeremias/recoil-devtool.git",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",
   "keywords": [
@@ -41,9 +41,9 @@
     "logger",
     "devtools",
     "recoil-devtools",
-    "recoil-devtools"
+    "recoil-devtools-logger"
   ],
-  "module": "dist/recoil-devtools.esm.js",
+  "module": "dist/recoil-devtools-logger.esm.js",
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@storybook/addon-actions": "^5.3.19",
