@@ -1,9 +1,11 @@
 {
   "name": "recoil-devtools",
-  "version": "0.0.1",
-  "main": "lib/index.js",
+  "version": "0.0.2",
+  "main": "dist/commonjs/index.js",
+  "types": "./dist/types/index.d.ts",
   "files": [
-    "lib"
+    "src",
+    "dist"
   ],
   "repository": "git@github.com:ulises-jeremias/recoil-devtool.git",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",
@@ -11,7 +13,12 @@
   "scripts": {
     "format": "prettier --check \"src/**/*.{ts,tsx,js}\"",
     "dev": "webpack-dev-server --inline --hot",
-    "build": "webpack -p"
+    "build": "yarn build:commonjs && yarn build:es6 && yarn build:amd && yarn build:umd && yarn build:declarations",
+    "build:commonjs": "yarn tsc --module commonjs --outDir ./dist/commonjs",
+    "build:es6": "yarn tsc --module es6 --outDir ./dist/es6",
+    "build:amd": "yarn tsc --module amd --outDir ./dist/amd",
+    "build:umd": "webpack -p webpack.config.umd.js",
+    "build:declarations": "yarn tsc --declaration --emitDeclarationOnly --outDir ./dist/types"
   },
   "dependencies": {
     "react": "^16.13.1",
