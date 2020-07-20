@@ -1,4 +1,4 @@
-# Recoil Logger
+# Recoil Devtools
 
 [![npm](https://img.shields.io/npm/v/recoil-devtools.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/recoil-devtools)
 [![npm](https://img.shields.io/npm/dm/recoil-devtools.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/recoil-devtools)
