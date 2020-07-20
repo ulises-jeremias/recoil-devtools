@@ -43,7 +43,7 @@
     "react-router-dom": "^5.2.0",
     "recoil": "^0.0.10",
     "recoil-devtools": "^0.0.2",
-    "recoil-devtools-logger": "^0.0.4"
+    "recoil-devtools-logger": "^0.0.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

@@ -49,7 +49,7 @@ define(["require", "exports", "./core", "./util/helpers", "./defaults"], functio
         return function (next) { return function (_a) {
             var prevState = _a.prevState, nextState = _a.nextState, action = _a.action;
             // Exit early if predicate function returns 'false'
-            if (typeof predicate === 'function' && !predicate(prevState, action)) {
+            if (typeof predicate === 'function' && !predicate({ prevState: prevState, nextState: nextState }, action)) {
                 return next(action);
             }
             var logEntry = {};

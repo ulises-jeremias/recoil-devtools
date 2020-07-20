@@ -15,9 +15,8 @@ export interface RecoilLoggerProps {
 
 export const RecoilLogger: FC<RecoilLoggerProps> = ({
   values,
-  next = () => null,
   logger = defaultLogger,
-  actionTransformer = () => 'state update',
+  actionTransformer = () => ({ description: 'state update' }),
 }) => {
   const [state, setState] = useState({ prevState: {}, nextState: {} });
 
@@ -40,7 +39,8 @@ export const RecoilLogger: FC<RecoilLoggerProps> = ({
   });
 
   useEffect(() => {
-    logger(next)({ ...state, action: actionTransformer(state) });
+    const logEntry = { ...state, action: actionTransformer(state) };
+    logger(() => null)(logEntry);
   }, [state]);
 
   return null;

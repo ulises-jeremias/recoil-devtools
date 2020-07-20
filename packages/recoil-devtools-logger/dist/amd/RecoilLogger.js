@@ -54,8 +54,8 @@ define(["require", "exports", "react", "recoil", "./logger"], function (require,
     exports.RecoilLogger = void 0;
     logger_1 = __importDefault(logger_1);
     exports.RecoilLogger = function (_a) {
-        var values = _a.values, _b = _a.next, next = _b === void 0 ? function () { return null; } : _b, _c = _a.logger, logger = _c === void 0 ? logger_1.default : _c, _d = _a.actionTransformer, actionTransformer = _d === void 0 ? function () { return 'state update'; } : _d;
-        var _e = react_1.useState({ prevState: {}, nextState: {} }), state = _e[0], setState = _e[1];
+        var values = _a.values, _b = _a.logger, logger = _b === void 0 ? logger_1.default : _b, _c = _a.actionTransformer, actionTransformer = _c === void 0 ? function () { return ({ description: 'state update' }); } : _c;
+        var _d = react_1.useState({ prevState: {}, nextState: {} }), state = _d[0], setState = _d[1];
         recoil_1.useRecoilTransactionObserver_UNSTABLE(function (_a) {
             var previousSnapshot = _a.previousSnapshot, snapshot = _a.snapshot;
             return __awaiter(void 0, void 0, void 0, function () {
@@ -87,7 +87,8 @@ define(["require", "exports", "react", "recoil", "./logger"], function (require,
             });
         });
         react_1.useEffect(function () {
-            logger(next)(__assign(__assign({}, state), { action: actionTransformer(state) }));
+            var logEntry = __assign(__assign({}, state), { action: actionTransformer(state) });
+            logger(function () { return null; })(logEntry);
         }, [state]);
         return null;
     };

@@ -9114,10 +9114,10 @@ recast@^0.11.17:
     private "~0.1.5"
     source-map "~0.5.0"
 
-recoil-devtools-logger@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.0.4.tgz#698edade79821f5c2bab80882509161d260d2c83"
-  integrity sha512-+BUOCUpo5McccluJVFm4yDe3/YWcOnLWDJLCkAD+yO12lCNfasQIZN9Zvcz9MUhphfhlh5IW568Ixh0KoIyhwQ==
+recoil-devtools-logger@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.0.7.tgz#02d77134abfd3979f8d53990fc97a3c96e376a0b"
+  integrity sha512-IwYkdwCm+1i2yVAPoc+m5d3CewdFk0ki0o0+DYkdrNPvgyWkopep73VkYrsZq5MVSyxdazdW2zcA/r63mtl6vg==
   dependencies:
     deep-diff "^1.0.2"
     react "^16.13.1"

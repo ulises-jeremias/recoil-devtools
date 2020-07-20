@@ -37,12 +37,12 @@ export interface Options {
 declare const createLogger: (options?: Options) => (next: Function) => ({ prevState, nextState, action, }: {
     prevState: any;
     nextState: any;
-    action?: any;
+    action: any;
 }) => any;
 declare const defaultLogger: (next: Function) => ({ prevState, nextState, action, }: {
     prevState: any;
     nextState: any;
-    action?: any;
+    action: any;
 }) => any;
 export { defaults, createLogger, defaultLogger as logger };
 export default defaultLogger;
