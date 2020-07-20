@@ -1,6 +1,6 @@
 {
   "name": "recoil-devtools-logger",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/commonjs/index.js",
   "types": "./dist/types/index.d.ts",
   "files": [
