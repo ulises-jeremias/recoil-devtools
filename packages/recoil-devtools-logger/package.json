@@ -1,6 +1,6 @@
 {
   "name": "recoil-devtools-logger",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Logger for Recoil",
   "main": "dist/commonjs/index.js",
   "types": "./dist/types/index.d.ts",
