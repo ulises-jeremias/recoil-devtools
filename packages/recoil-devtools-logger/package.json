@@ -1,6 +1,7 @@
 {
   "name": "recoil-devtools-logger",
-  "version": "0.0.4",
+  "version": "0.0.5",
+  "description": "Logger for Recoil",
   "main": "dist/commonjs/index.js",
   "types": "./dist/types/index.d.ts",
   "files": [
@@ -10,6 +11,13 @@
   "repository": "git@github.com:ulises-jeremias/recoil-devtool.git",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",
   "license": "MIT",
+  "keywords": [
+    "recoil",
+    "logger",
+    "devtools",
+    "recoil-devtools",
+    "recoil-devtools-logger"
+  ],
   "scripts": {
     "format": "prettier --check \"src/**/*.{ts,tsx,js}\"",
     "dev": "webpack-dev-server --inline --hot",
@@ -27,7 +35,9 @@
     "recoil": "^0.0.10"
   },
   "peerDependencies": {
-    "react": ">=16.13.1"
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1",
+    "recoil": ">=0.0.10"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
