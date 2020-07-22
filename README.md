@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/ulises-jeremias/recoil-devtools/workflows/Build/badge.svg)](https://github.com/ulises-jeremias/recoil-devtools/commits/master)
+[![Build Status](https://github.com/ulises-jeremias/recoil-devtools/workflows/CI/badge.svg)](https://github.com/ulises-jeremias/recoil-devtools/commits/master)
 
 # Recoil DevTools
 
