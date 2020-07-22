@@ -5,10 +5,10 @@
 
 ## Table of contents
 
-* [Install](#install)
-* [Usage](#usage)
-* [To Do](#to-do)
-* [License](#license)
+- [Install](#install)
+- [Usage](#usage)
+- [To Do](#to-do)
+- [License](#license)
 
 ## Install
 
@@ -27,9 +27,15 @@ import { atom, selector, RecoilRoot } from 'recoil';
 import { RecoilDevtools } from 'recoil-devtools';
 import { RecoilLogger } from 'recoil-devtools-logger';
 
-const a = atom({ /* ... */ });
-const b = selector({ /* ... */ });
-const c = atom({ /* ... */ });
+const a = atom({
+  /* ... */
+});
+const b = selector({
+  /* ... */
+});
+const c = atom({
+  /* ... */
+});
 
 const App = () => (
   <RecoilRoot>

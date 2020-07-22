@@ -3,7 +3,7 @@ import { useSetRecoilState } from 'recoil';
 import { commonNotification } from 'app/state';
 import { useInterval } from 'app/hooks/interval';
 
-import "./Landing.css";
+import './Landing.css';
 
 const Landing = () => {
   const [count, setCount] = useState(0);

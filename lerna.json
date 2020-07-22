@@ -1,0 +1,12 @@
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "allowBranch": "master"
+    }
+  },
+  "ignoreChanges": ["**/test/**", "**/examples/**", "**/*.md"],
+  "packages": ["packages/*"]
+}

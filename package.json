@@ -1,8 +1,38 @@
 {
-  "name": "recoil-devtool",
-  "version": "0.0.1",
-  "main": "index.js",
-  "repository": "git@github.com:ulises-jeremias/recoil-devtool.git",
-  "author": "ulises-jeremias <ulisescf.24@gmail.com>",
-  "license": "MIT"
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  },
+  "scripts": {
+    "lerna": "lerna",
+    "build": "lerna run prepare --since master --stream --sort -- --scripts-prepend-node-path",
+    "build:all": "lerna run build",
+    "publish": "lerna publish",
+    "canary": "lerna publish --canary preminor --npm-tag alpha",
+    "next": "lerna publish --bump prerelease --npm-tag next",
+    "lint": "lerna run lint",
+    "lint:fix": "lerna run lint -- --fix",
+    "prettify": "prettier '**/*.{js,jsx,ts,tsx,json,css,html,md}' --ignore-path .eslintignore --single-quote --write",
+    "precommit": "lint-staged",
+    "test": "lerna run test --"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --single-quote --write",
+      "yarn lint:fix",
+      "git add"
+    ],
+    "*.{json,css,html,md}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
+  }
 }

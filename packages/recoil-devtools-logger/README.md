@@ -7,16 +7,16 @@ Recoil Logger is a recoil logging tool that lets you replay problems as if they 
 
 ## Table of contents
 
-* [Install](#install)
-* [Usage](#usage)
-* [Options](#options)
-* [Recipes](#recipes)
-  * [Log only in development](#log-only-in-development)
-  * [Log everything except actions with certain type](#log-everything-except-actions-with-certain-type)
-  * [Collapse actions with certain type](#collapse-actions-with-certain-type)
-  * [Log batched actions](#log-batched-actions)
-* [To Do](#to-do)
-* [License](#license)
+- [Install](#install)
+- [Usage](#usage)
+- [Options](#options)
+- [Recipes](#recipes)
+  - [Log only in development](#log-only-in-development)
+  - [Log everything except actions with certain type](#log-everything-except-actions-with-certain-type)
+  - [Collapse actions with certain type](#collapse-actions-with-certain-type)
+  - [Log batched actions](#log-batched-actions)
+- [To Do](#to-do)
+- [License](#license)
 
 ## Install
 
@@ -34,9 +34,15 @@ import ReactDOM from 'react-dom';
 import { atom, selector, RecoilRoot } from 'recoil';
 import { RecoilLogger } from 'recoil-devtools-logger';
 
-const a = atom({ /* ... */ });
-const b = selector({ /* ... */ });
-const c = atom({ /* ... */ });
+const a = atom({
+  /* ... */
+});
+const b = selector({
+  /* ... */
+});
+const c = atom({
+  /* ... */
+});
 
 const App = () => (
   <RecoilRoot>
@@ -110,7 +116,7 @@ const App = () => (
 
 ### Options description
 
-#### __level (string | Function | object)__
+#### **level (string | Function | object)**
 
 Level of `console`. `warn`, `error`, `info` or [else](https://developer.mozilla.org/en/docs/Web/API/console).
 
@@ -121,97 +127,98 @@ It can be an object with level string for: `prevState`, `action`, `nextState`, `
 It can be an object with getter functions: `prevState`, `action`, `nextState`, `error`. Useful if you want to print
 message based on specific state or action. Set any of them to `false` if you want to hide it.
 
-* `prevState(prevState: object) => level: string`
-* `action(action: object) => level: string`
-* `nextState(nextState: object) => level: string`
-* `error(error: any, prevState: object) => level: string`
+- `prevState(prevState: object) => level: string`
+- `action(action: object) => level: string`
+- `nextState(nextState: object) => level: string`
+- `error(error: any, prevState: object) => level: string`
 
-*Default: `log`*
+_Default: `log`_
 
-#### __duration (Boolean)__
+#### **duration (Boolean)**
 
 Print duration of each action?
 
-*Default: `false`*
+_Default: `false`_
 
-#### __timestamp (Boolean)__
+#### **timestamp (Boolean)**
 
 Print timestamp with each action?
 
-*Default: `true`*
+_Default: `true`_
 
-#### __colors (object)__
+#### **colors (object)**
 
 object with color getter functions: `title`, `prevState`, `action`, `nextState`, `error`. Useful if you want to paint
 message based on specific state or action. Set any of them to `false` if you want to show plain message without colors.
 
-* `title(action: object) => color: string`
-* `prevState(prevState: object) => color: string`
-* `action(action: object) => color: string`
-* `nextState(nextState: object) => color: string`
-* `error(error: any, prevState: object) => color: string`
+- `title(action: object) => color: string`
+- `prevState(prevState: object) => color: string`
+- `action(action: object) => color: string`
+- `nextState(nextState: object) => color: string`
+- `error(error: any, prevState: object) => color: string`
 
-#### __logger (object)__
+#### **logger (object)**
 
 Implementation of the `console` API. Useful if you are using a custom, wrapped version of `console`.
 
-*Default: `console`*
+_Default: `console`_
 
-#### __logErrors (Boolean)__
+#### **logErrors (Boolean)**
 
 Should the logger catch, log, and re-throw errors? This makes it clear which action triggered the error but makes "break
 on error" in dev tools harder to use, as it breaks on re-throw rather than the original throw location.
 
-*Default: `true`*
+_Default: `true`_
 
-#### __collapsed = ({ prevState, nextState }: object, action: object, logEntry: 
-object) => Boolean__
+#### \_\_collapsed = ({ prevState, nextState }: object, action: object, logEntry:
+
+object) => Boolean\_\_
 Takes a boolean or optionally a function that receives `getState` function for accessing current store state and `action` object as parameters. Returns `true` if the log group should be collapsed, `false` otherwise.
 
-*Default: `false`*
+_Default: `false`_
 
-#### __predicate = ({ prevState, nextState }: object, action: object) => Boolean__
+#### **predicate = ({ prevState, nextState }: object, action: object) => Boolean**
 
 If specified this function will be called before each action is processed with this middleware.
-Receives `getState` function for  accessing current store state and `action` object as parameters. Returns `true` if action should be logged, `false` otherwise.
+Receives `getState` function for accessing current store state and `action` object as parameters. Returns `true` if action should be logged, `false` otherwise.
 
-*Default: `null` (always log)*
+_Default: `null` (always log)_
 
-#### __stateTransformer = (state: object) => state__
+#### **stateTransformer = (state: object) => state**
 
 Transform state before print. Eg. convert Immutable object to plain JSON.
 
-*Default: identity function*
+_Default: identity function_
 
-#### __actionTransformer = (action: object) => action__
+#### **actionTransformer = (action: object) => action**
 
 Transform action before print. Eg. convert Immutable object to plain JSON.
 
-*Default: identity function*
+_Default: identity function_
 
-#### __errorTransformer = (error: any) => error__
+#### **errorTransformer = (error: any) => error**
 
 Transform error before print.
 
-*Default: identity function*
+_Default: identity function_
 
-#### __titleFormatter = (action: object, time: string?, took: Number?) => title__
+#### **titleFormatter = (action: object, time: string?, took: Number?) => title**
 
 Format the title used for each action.
 
-*Default: prints something like `action @ ${time} ${action.description} (in ${took.toFixed(2)} ms)`*
+_Default: prints something like `action @ ${time} ${action.description} (in ${took.toFixed(2)} ms)`_
 
-#### __diff (Boolean)__
+#### **diff (Boolean)**
 
 Show states diff.
 
-*Default: `false`*
+_Default: `false`_
 
-#### __diffPredicate = ({ prevState, nextState }: object, action: object) => Boolean__
+#### **diffPredicate = ({ prevState, nextState }: object, action: object) => Boolean**
 
 Filter states diff for certain cases.
 
-*Default: `undefined`*
+_Default: `undefined`_
 
 ## Recipes
 
@@ -240,7 +247,7 @@ const App = () => (
 import { createLogger } from 'recoil-devtools-logger';
 
 createLogger({
-  predicate: (_, action) => action.description !== AUTH_REMOVE_TOKEN
+  predicate: (_, action) => action.description !== AUTH_REMOVE_TOKEN,
 });
 ```
 
@@ -250,7 +257,7 @@ createLogger({
 import { createLogger } from 'recoil-devtools-logger';
 
 createLogger({
-  collapsed: (_, action) => action.description === FORM_CHANGE
+  collapsed: (_, action) => action.description === FORM_CHANGE,
 });
 ```
 
@@ -260,7 +267,7 @@ createLogger({
 import { createLogger } from 'recoil-devtools-logger';
 
 createLogger({
-  collapsed: (_, action, logEntry) => !logEntry.error
+  collapsed: (_, action, logEntry) => !logEntry.error,
 });
 ```
 
@@ -269,9 +276,9 @@ createLogger({
 ```js
 import { createLogger } from 'recoil-devtools-logger';
 
-const actionTransformer = action => {
+const actionTransformer = (action) => {
   if (action.description === 'BATCHING_TRANSACTION.BATCH') {
-    action.payload.type = action.payload.map(next => next.type).join(' => ');
+    action.payload.type = action.payload.map((next) => next.type).join(' => ');
     return action.payload;
   }
 
@@ -292,7 +299,7 @@ logger[level] = function levelFn(...args) {
   const lastArg = args.pop();
 
   if (Array.isArray(lastArg)) {
-    return lastArg.forEach(item => {
+    return lastArg.forEach((item) => {
       console[level].apply(console, [...args, item]);
     });
   }

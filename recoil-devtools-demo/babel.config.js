@@ -1,31 +1,29 @@
 module.exports = {
   presets: [
     [
-      "env",
+      'env',
       {
         targets: {
-          node: "12.14"
-        }
-      }
+          node: '12.14',
+        },
+      },
     ],
-    "@babel/preset-react",
-    "@babel/preset-env",
-    "@babel/typescript"
+    '@babel/preset-react',
+    '@babel/preset-env',
+    '@babel/typescript',
   ],
   plugins: [
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-object-rest-spread",
-    "react-hot-loader/babel",
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-object-rest-spread',
+    'react-hot-loader/babel',
     [
-      "module-resolver",
+      'module-resolver',
       {
-        root: [
-          "."
-        ],
+        root: ['.'],
         alias: {
-          app: "./src"
-        }
-      }
-    ]
-  ]
+          app: './src',
+        },
+      },
+    ],
+  ],
 };

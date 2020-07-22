@@ -8,9 +8,7 @@ module.exports = {
   devEnv: path.resolve(__dirname, '../', '.env.development'),
   prodEnv: path.resolve(__dirname, '../', '.env.production'),
 
-  entryPoints: [
-    path.resolve(__dirname, '../', 'src/index.jsx'),
-  ],
+  entryPoints: [path.resolve(__dirname, '../', 'src/index.jsx')],
 
   outputPath: path.resolve(__dirname, '../', 'build/'),
   outputServerPath: path.resolve(__dirname, '../', 'build/'),

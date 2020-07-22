@@ -22,7 +22,7 @@ export const RecoilLogger: FC<RecoilLoggerProps> = ({
 
   useRecoilTransactionObserver_UNSTABLE(
     async ({ previousSnapshot, snapshot }) => {
-      values?.forEach(async value => {
+      values?.forEach(async (value) => {
         const previousValue = await previousSnapshot.getPromise(value);
         const nextValue = await snapshot.getPromise(value);
 

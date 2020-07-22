@@ -12,9 +12,7 @@ const PORT = process.env.PORT || 8091;
 const URL_BASE = process.env.URL_BASE || `http://${HOST}:${PORT}`;
 
 const config = {
-  entry: [
-    'react-hot-loader/patch',
-  ],
+  entry: ['react-hot-loader/patch'],
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   devServer: {
@@ -51,7 +49,7 @@ const config = {
           from: commonPaths.favicon,
           to: commonPaths.outputPath,
         },
-      ]
+      ],
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

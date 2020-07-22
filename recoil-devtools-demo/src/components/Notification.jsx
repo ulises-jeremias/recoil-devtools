@@ -8,10 +8,11 @@ const Notification = () => {
   const [notification, setNotification] = useRecoilState(commonNotification);
 
   // on notification hide
-  const onDismiss = () => setNotification((previous) => ({
-    ...previous,
-    isVisible: false,
-  }));
+  const onDismiss = () =>
+    setNotification((previous) => ({
+      ...previous,
+      isVisible: false,
+    }));
 
   if (notification.isVisible) {
     return <div>{notification.message}</div>;

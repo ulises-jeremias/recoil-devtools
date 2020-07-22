@@ -3,7 +3,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssWebpackPlugin = require('mini-css-extract-plugin')
+const MiniCssWebpackPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
@@ -14,7 +14,7 @@ const config = {
     filename: 'static/js/[name].[chunkhash:8].bundle.js',
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
     path: commonPaths.outputServerPath,
-    publicPath: '/'
+    publicPath: '/',
   },
   mode: 'production',
   optimization: {
@@ -25,7 +25,7 @@ const config = {
           chunks: 'all',
           test: /[\\/]node_modules[\\/]/,
         },
-      }
+      },
     },
     minimize: true,
     minimizer: [
@@ -49,7 +49,11 @@ const config = {
     new HtmlWebpackPlugin({
       template: commonPaths.template,
       title: 'recoil-devtools-demo',
-      filename: path.resolve(__dirname, commonPaths.templatesOutputServerPath, 'index.html'),
+      filename: path.resolve(
+        __dirname,
+        commonPaths.templatesOutputServerPath,
+        'index.html'
+      ),
       favicon: commonPaths.favicon,
     }),
     new CleanWebpackPlugin({
@@ -61,7 +65,7 @@ const config = {
           from: commonPaths.favicon,
           to: commonPaths.outputServerPath,
         },
-      ]
+      ],
     }),
   ],
 };

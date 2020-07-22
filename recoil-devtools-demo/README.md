@@ -1,4 +1,4 @@
-# recoil-devtools-demo Frontend
+# Recoil Devtools Demo
 
 This project was generated using [React Webpack Starter](https://github.com/ulises-jeremias/react-webpack-starter).
 
@@ -26,19 +26,18 @@ $ npm run docker:dev
 
 While developing, you will probably rely mostly on `yarn start`; however, there are additional scripts at your disposal:
 
-|`yarn <script>`                |Description|
-|-------------------------------|-----------|
-|`start`                        |Serves your app at `localhost:8091`|
-|`build:dev`                    |Builds the application to ./build (_the build output dir could be configured in `./config/common-paths.js`_) |
-|`build:dev:watch`              |Builds the application and watch for changes|
-|`build:dev:analyze`            |Builds the application with Bundle Analyzer and Visualizer Plugins instaled|
-|`build:dev:dashboard`          |Builds the application with Dashboard|
-|`serve:dev:dashboard`          |Builds the application with Dashboard|
-|`test`                         |Runs unit tests with Jest. See [testing](#testing)|
-|`test:watch`                   |Runs `test` in watch mode to re-run tests when changed|
-|`lint`                         |[Lints](http://stackoverflow.com/questions/8503559/what-is-linting) the project for potential errors|
-|`lint:fix`                     |Lints the project and [fixes all correctable errors](http://eslint.org/docs/user-guide/command-line-interface.html#fix)|
-
+| `yarn <script>`       | Description                                                                                                             |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `start`               | Serves your app at `localhost:8091`                                                                                     |
+| `build:dev`           | Builds the application to ./build (_the build output dir could be configured in `./config/common-paths.js`_)            |
+| `build:dev:watch`     | Builds the application and watch for changes                                                                            |
+| `build:dev:analyze`   | Builds the application with Bundle Analyzer and Visualizer Plugins instaled                                             |
+| `build:dev:dashboard` | Builds the application with Dashboard                                                                                   |
+| `serve:dev:dashboard` | Builds the application with Dashboard                                                                                   |
+| `test`                | Runs unit tests with Jest. See [testing](#testing)                                                                      |
+| `test:watch`          | Runs `test` in watch mode to re-run tests when changed                                                                  |
+| `lint`                | [Lints](http://stackoverflow.com/questions/8503559/what-is-linting) the project for potential errors                    |
+| `lint:fix`            | Lints the project and [fixes all correctable errors](http://eslint.org/docs/user-guide/command-line-interface.html#fix) |
 
 ### Hot Reloading
 
