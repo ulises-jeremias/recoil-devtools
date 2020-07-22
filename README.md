@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-# recoil-devtool
+[![Build Status](https://github.com/ulises-jeremias/recoil-devtools/workflows/Build/badge.svg)](https://github.com/ulises-jeremias/recoil-devtools/commits/master)
 
-DevTools for Recoil with hot reloading, action replay, and customizable UI
-=======
 # Recoil DevTools
+
 
 Developer Tools to power-up [Recoil](https://recoiljs.org/) development workflow or any other architecture which handles the state change (see [integrations](#integrations)).
 
@@ -20,4 +18,3 @@ Developer Tools to power-up [Recoil](https://recoiljs.org/) development workflow
 ### License
 
 MIT
->>>>>>> e78efb6edf98230873dad269cee2118d52277e36
