@@ -1,4 +1,4 @@
-import { style, render, default as diffLogger } from '../src/util/diff';
+import { style, render, default as diffLogger } from '../../src/util/diff';
 
 describe('style', () => {
     it('return css rules for the given kind of diff changes', () => {
