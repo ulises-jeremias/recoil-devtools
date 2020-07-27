@@ -54,7 +54,7 @@ export default function diffLogger(
   prevState: any,
   newState: any,
   logger: Logger,
-  isCollapsed: any
+  isCollapsed: boolean
 ) {
   const diffs = diff(prevState, newState);
 
