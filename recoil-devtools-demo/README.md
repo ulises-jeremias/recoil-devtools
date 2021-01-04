@@ -1,6 +1,6 @@
 # Recoil Devtools Demo
 
-This project was generated using [React Webpack Starter](https://github.com/ulises-jeremias/react-webpack-starter).
+This project was generated using [React Webpack Starter](https://github.com/Create-Node-App/create-react-webpack-app).
 
 ## Development
 
@@ -22,7 +22,7 @@ $ yarn docker:dev
 $ npm run docker:dev
 ```
 
-`docker:dev` generate a docker image named recoil-devtools-demo and run it in a container. Run `docker:dev:start` for only start a container without build a new docker image
+`docker:dev` generate a docker image named myapp and run it in a container. Run `docker:dev:start` for only start a container without build a new docker image
 
 While developing, you will probably rely mostly on `yarn start`; however, there are additional scripts at your disposal:
 
@@ -50,17 +50,17 @@ For **JavaScript** modules, a code change will trigger the application to re-ren
 Generate production files running
 
 ```sh
-$ yarn build:prod
+$ yarn build
 # or with npm
-$ npm run build:prod
+$ npm run build
 ```
 
 Generate and serve production files running
 
 ```sh
-$ yarn serve:prod
+$ yarn serve
 # or with npm
-$ npm run serve:prod
+$ npm run serve
 ```
 
 ## Project Structure
@@ -74,20 +74,18 @@ $ npm run serve:prod
 │   ├── components           # Global Reusable Components
 │   ├── pages                # Components associated with routes
 │   ├── routes               # Main route definitions and async split points
-│   │   └── AppRoutes.jsx    # Bootstrap main application routes
-│   ├── styles               # Application-wide styles
-|   |   └── custom           # Custom application styles
+│   │   └── AppRoutes.tsx    # Bootstrap main application routes
+│   ├── theme                # Application-wide styles and theme
 |   ├── ...
-|   ├── i18n.js              # i18n configuration
-|   ├── index.jsx            # Application bootstrap and rendering with store
-├── static                   # Static public assets imported anywhere in source code
-└── test                     # Unit tests
+|   ├── i18n.ts              # i18n configuration
+|   ├── index.tsx            # Application bootstrap and rendering with store
+└── static                   # Static public assets imported anywhere in source code
 ```
 
 ## Testing
 
-To add a unit test, create a `.test.js` file anywhere inside of `./test`. Jest and webpack will automatically find these files.
+To add a unit test, create a `.test.ts` file anywhere inside of `./test`. Jest and webpack will automatically find these files.
 
 ## More info
 
-You can learn more about the operation of this starter kit in the official [github repository](https://github.com/ulises-jeremias/react-webpack-starter).
+You can learn more about the operation of this starter kit in the official [github repository](https://github.com/Create-Node-App/create-react-webpack-app).

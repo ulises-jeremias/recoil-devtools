@@ -2,6 +2,11 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["es5", "es6", "dom", "dom.iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "app/*": ["src/*"],
+      "app-assets/*": ["static/*"]
+    },
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -12,8 +17,7 @@
     "moduleResolution": "node",
     "noEmit": true,
     "jsx": "react",
-    "resolveJsonModule": true,
-    "isolatedModules": true
+    "resolveJsonModule": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

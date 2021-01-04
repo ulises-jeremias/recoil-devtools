@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom } from 'recoil'
 
 // notification
 export const commonNotification = atom({
@@ -7,6 +7,6 @@ export const commonNotification = atom({
     isVisible: false,
     message: '',
   },
-});
+})
 
-export default { commonNotification };
+export default { commonNotification }

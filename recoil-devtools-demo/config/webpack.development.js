@@ -1,20 +1,21 @@
-const webpack = require('webpack');
-const path = require('path');
-const Dotenv = require('dotenv-webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssWebpackPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const Dotenv = require('dotenv-webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
+const MiniCssWebpackPlugin = require('mini-css-extract-plugin')
 
-const commonPaths = require('./common-paths');
+const commonPaths = require('./common-paths')
 
-const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 8091;
-const URL_BASE = process.env.URL_BASE || `http://${HOST}:${PORT}`;
+const HOST = process.env.HOST || 'localhost'
+const PORT = process.env.PORT || 8091
+const URL_BASE = process.env.URL_BASE || `http://${HOST}:${PORT}`
 
 const config = {
   entry: ['react-hot-loader/patch'],
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: commonPaths.outputPath,
     compress: true,
@@ -33,15 +34,45 @@ const config = {
       path: commonPaths.devEnv,
     }),
     new MiniCssWebpackPlugin({
-      filename: 'static/css/[name].css',
-      chunkFilename: 'static/css/[id].css',
+      filename: 'assets/css/[name].css',
+      chunkFilename: 'assets/css/[id].css',
     }),
     new HtmlWebpackPlugin({
       template: commonPaths.template,
       base: URL_BASE,
-      title: 'recoil-devtools-demo',
+      title: 'myapp',
       filename: path.resolve(__dirname, commonPaths.outputPath, 'index.html'),
       favicon: commonPaths.favicon,
+    }),
+    new WebpackManifestPlugin({
+      publicPath: URL_BASE,
+      seed: {
+        name: 'react-base-project',
+        short_name: 'react-base-project',
+        start_url: 'index.html',
+        display: 'standalone',
+        icons: [
+          {
+            src: 'favicon.ico',
+            sizes: '512x512',
+            type: 'image/x-icon',
+          },
+        ],
+        background_color: '#4e0041',
+        theme_color: '#4e0041',
+      },
+      generate: (seed, files, entrypoints) => {
+        const manifestFiles = files.reduce((manifest, file) => {
+          manifest[file.name] = file.path
+          return manifest
+        }, seed)
+        const entrypointFiles = entrypoints.main.filter((fileName) => !fileName.endsWith('.map'))
+
+        return {
+          files: manifestFiles,
+          entrypoints: entrypointFiles,
+        }
+      },
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -53,8 +84,7 @@ const config = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
   ],
-};
+}
 
-module.exports = config;
+module.exports = config

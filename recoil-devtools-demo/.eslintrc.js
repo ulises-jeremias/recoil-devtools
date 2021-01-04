@@ -1,7 +1,21 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'plugin:react/recommended',
+    'prettier/@typescript-eslint',
+    'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
+  parserOptions: {
+    project: './tsconfig.json',
+    ecmaVersion: 2018,
+    ecmaFeatures: {
+      jsx: true,
+    },
+    sourceType: 'module',
+  },
   env: {
     browser: true,
     commonjs: true,
@@ -9,7 +23,6 @@ module.exports = {
     node: true,
     'jest/globals': true,
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
   settings: {
     'import/resolver': {
       webpack: {
@@ -17,21 +30,13 @@ module.exports = {
       },
     },
   },
-  parserOptions: {
-    ecmaVersion: 6,
-    ecmaFeatures: {
-      jsx: true,
-    },
-    sourceType: 'module',
-  },
   plugins: ['react', 'jsx-a11y', 'import', 'jest'],
-  rules: {
-    'import/no-dynamic-require': 'warn',
-    'react/jsx-props-no-spreading': 0,
-    'global-require': 'warn',
-    'no-param-reassign': 'warn',
-    'no-unused-vars': 'warn',
-    'no-underscore-dangle': 0,
-    'no-use-before-define': 0,
-  },
-};
+  overrides: [
+    {
+      files: ['**/*.tsx'],
+      rules: {
+        'react/prop-types': 'off',
+      },
+    },
+  ],
+}
