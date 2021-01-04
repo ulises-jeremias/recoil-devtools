@@ -83,7 +83,6 @@ const config = {
       ],
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
   ],
 }
 

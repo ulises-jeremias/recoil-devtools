@@ -20,6 +20,7 @@ const config = {
   },
   mode: 'production',
   optimization: {
+    noEmitOnErrors: true,
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
@@ -32,7 +33,6 @@ const config = {
     minimize: true,
     minimizer: [
       new TerserWebpackPlugin({
-        cache: true,
         parallel: true,
       }),
     ],
