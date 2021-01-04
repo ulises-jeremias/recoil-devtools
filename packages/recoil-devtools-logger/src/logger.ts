@@ -22,12 +22,12 @@ export interface Options {
  * Creates logger with following options
  *
  * @namespace
- * @param {object} options - options for logger
+ * @param {Options} options - options for logger
  * @param {LogLevel} options.level - console[level]
  * @param {boolean} options.duration - print duration of each action?
  * @param {boolean} options.timestamp - print timestamp with each action?
- * @param {object} options.colors - custom colors
- * @param {object} options.logger - implementation of the `console` API
+ * @param {Object} options.colors - custom colors
+ * @param {Object} options.logger - implementation of the `console` API
  * @param {Function} options.logErrors - should errors in action execution be caught, logged, and re-thrown?
  * @param {Function} options.collapsed - is group collapsed?
  * @param {Function} options.predicate - condition which resolves logger behavior

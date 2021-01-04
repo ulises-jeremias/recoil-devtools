@@ -20,23 +20,37 @@ export const RecoilLogger: FC<RecoilLoggerProps> = ({
 }) => {
   const [state, setState] = useState({ prevState: {}, nextState: {} });
 
+  const updateState = (value: any, previousValue: any, nextValue: any) => {
+    setState(({ prevState, nextState }) => ({
+      prevState: {
+        ...prevState,
+        [value.key]: previousValue,
+      },
+      nextState: {
+        ...nextState,
+        [value.key]: nextValue,
+      },
+    }));
+  };
+
   useRecoilTransactionObserver_UNSTABLE(
     async ({ previousSnapshot, snapshot }) => {
-      values?.forEach(async (value) => {
-        const previousValue = await previousSnapshot.getPromise(value);
-        const nextValue = await snapshot.getPromise(value);
+      if (values?.length) {
+        values?.forEach(async (value) => {
+          const previousValue = await previousSnapshot.getPromise(value);
+          const nextValue = await snapshot.getPromise(value);
 
-        setState(({ prevState, nextState }) => ({
-          prevState: {
-            ...prevState,
-            [value.key]: previousValue,
-          },
-          nextState: {
-            ...nextState,
-            [value.key]: nextValue,
-          },
-        }));
-      });
+          updateState(value, previousValue, nextValue);
+        });
+        return;
+      }
+
+      for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
+        const previousValue = await previousSnapshot.getPromise(node);
+        const nextValue = await snapshot.getPromise(node);
+
+        updateState(node, previousValue, nextValue);
+      }
     }
   );
 

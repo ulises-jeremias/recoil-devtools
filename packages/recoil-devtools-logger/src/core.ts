@@ -40,7 +40,7 @@ export type LogLevel = LogLevelFunction | LogLevelObject;
  * Get log level string based on supplied params
  *
  * @param {string | Function | object} level - console[level]
- * @param {object} action - selected action
+ * @param {Object} action - selected action
  * @param {array} newValue - selected newValue
  * @param {string} type - log entry type
  *
