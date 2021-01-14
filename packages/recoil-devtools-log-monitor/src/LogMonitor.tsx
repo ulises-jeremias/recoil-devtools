@@ -31,11 +31,11 @@ const styles: {
 
 export interface LogMonitorProps {
   values?: RecoilState<any>[];
-  select: (state: any) => unknown;
-  theme: keyof typeof themes | Base16Theme;
-  expandActionRoot: boolean;
-  expandStateRoot: boolean;
-  markStateDiff: boolean;
+  select?: (state: any) => unknown;
+  theme?: keyof typeof themes | Base16Theme;
+  expandActionRoot?: boolean;
+  expandStateRoot?: boolean;
+  markStateDiff?: boolean;
   hideMainButtons?: boolean;
 }
 
