@@ -1,6 +1,6 @@
 {
   "name": "recoil-devtools-themes",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Color themes for Recoil DevTools monitors",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
