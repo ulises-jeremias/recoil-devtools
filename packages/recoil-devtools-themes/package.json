@@ -1,0 +1,38 @@
+{
+  "name": "recoil-devtools-themes",
+  "version": "1.0.0",
+  "description": "Color themes for Recoil DevTools monitors",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "babel src --out-dir lib",
+    "lint": "eslint src",
+    "prepublish": "npm run lint && npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ulises-jeremias/recoil-devtools.git"
+  },
+  "keywords": [
+    "base16",
+    "color schemes"
+  ],
+  "author": "ulises-jeremias <ulisescf.24@gmail.com> (https://github.com/ulises-jeremias)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ulises-jeremias/recoil-devtools/issues"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-react": "^7.22.0",
+    "rimraf": "^3.0.2"
+  },
+  "dependencies": {
+    "base16": "^1.0.0"
+  }
+}
