@@ -13,4 +13,4 @@ export const brighten = (hexColor: string, lightness: number) => {
     rgb += ('00' + c).substr(c.length);
   }
   return rgb;
-}
+};

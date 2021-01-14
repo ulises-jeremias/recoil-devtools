@@ -1,5 +1,5 @@
 import React, { CSSProperties, FC, useState } from 'react';
-import { Base16Theme } from 'recoil-devtools-themes';
+import { Base16Theme } from 'base16';
 import { brighten } from './helpers';
 
 const styles: { base: CSSProperties } = {
@@ -24,12 +24,16 @@ interface Props {
   theme: Base16Theme;
   onClick?: () => void;
   enabled: boolean;
-  children: JSX.Element
+  children?: React.ReactNode;
 }
 
-const LogMonitorButton: FC<Props> = ({ theme, onClick = () => {}, enabled, children }) => {
+const LogMonitorButton: FC<Props> = ({
+  theme,
+  onClick = () => {},
+  enabled,
+  children,
+}) => {
   const [hovered, setHovered] = useState<boolean>(false);
-  const [active, setActive] = useState<boolean>(false);
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -39,13 +43,9 @@ const LogMonitorButton: FC<Props> = ({ theme, onClick = () => {}, enabled, child
     setHovered(false);
   };
 
-  const handleMouseDown = () => {
-    setActive(true);
-  };
+  const handleMouseDown = () => {};
 
-  const handleMouseUp = () => {
-    setActive(false);
-  };
+  const handleMouseUp = () => {};
 
   onClick = () => {
     if (!enabled) {
