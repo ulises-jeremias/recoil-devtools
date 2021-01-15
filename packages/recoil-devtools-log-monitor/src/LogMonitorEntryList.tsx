@@ -38,7 +38,7 @@ const LogMonitorEntryList: FC<Props> = ({
 
   for (let i = 0; i < stagedActionIds.length; i++) {
     const actionId = stagedActionIds[i];
-    const action = actionsById[actionId].action;
+    const action = actionsById[actionId];
     const { previousState, nextState: state, error } = computedStates[i];
 
     elements.push(

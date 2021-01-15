@@ -39,6 +39,14 @@ export interface LogMonitorProps {
   hideMainButtons?: boolean;
 }
 
+type StateTransaction = { previousState: {}, nextState: {} }
+interface State {
+  current: StateTransaction,
+  computedStates: StateTransaction[],
+  stagedActionIds: number[],
+  actionsById: { [key: number]: any }
+}
+
 const LogMonitor: FC<LogMonitorProps> = ({
   values,
   select = (state: unknown) => state,
@@ -48,10 +56,12 @@ const LogMonitor: FC<LogMonitorProps> = ({
   markStateDiff = false,
   hideMainButtons = false,
 }) => {
-  const [computedStates, setComputedStates] = useState<any[]>([]);
-  const [stagedActionIds, setStagedActionIds] = useState<number[]>([]);
-  const [actionsById, setActionsById] = useState<Object>({});
-  const [state, setState] = useState({ previousState: {}, nextState: {} });
+  const [state, setState] = useState<State>({
+    current: { previousState: {}, nextState: {} },
+    computedStates: [],
+    stagedActionIds: [],
+    actionsById: {},
+  })
 
   const getTheme = () => {
     if (typeof theme !== 'string') {
@@ -84,8 +94,10 @@ const LogMonitor: FC<LogMonitorProps> = ({
     },
   });
 
-  const updateState = (value: any, previousValue: any, nextValue: any) => {
-    setState(({ previousState, nextState }) => ({
+  const getNextState = (currentState: { previousState: any, nextState: any }, value: any, previousValue: any, nextValue: any) => {
+    const { previousState, nextState } = currentState;
+
+    return {
       previousState: {
         ...previousState,
         [value.key]: previousValue,
@@ -94,45 +106,55 @@ const LogMonitor: FC<LogMonitorProps> = ({
         ...nextState,
         [value.key]: nextValue,
       },
-    }));
+    };
   };
 
   useRecoilTransactionObserver_UNSTABLE(
     async ({ previousSnapshot, snapshot }) => {
       let payload = { previousState: {}, nextState: {} };
+      let currentState: StateTransaction = state.current
 
       if (values?.length) {
         values?.forEach(async (value) => {
           const nextValue = await snapshot.getPromise(value);
           const previousValue = await previousSnapshot.getPromise(value);
 
-          updateState(value, previousValue, nextValue);
           payload = getPayload(payload, value, previousValue, nextValue);
+          currentState = getNextState(currentState, value, previousValue, nextValue);
         });
       } else {
         for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
           const nextValue = await snapshot.getPromise(node);
           const previousValue = await previousSnapshot.getPromise(node);
 
-          updateState(node, previousValue, nextValue);
           payload = getPayload(payload, node, previousValue, nextValue);
+          currentState = getNextState(currentState, node, previousValue, nextValue);
         }
       }
 
+      const { actionsById, computedStates, stagedActionIds } = state;
       const actionId = stagedActionIds.length;
-      setActionsById({
+      const nextActionsById = {
         ...actionsById,
         [actionId]: {
           type: 'Updated state',
           ...payload,
         },
+      };
+      const nextComputedStates: StateTransaction[] = [...computedStates, { ...currentState }];
+      const nextStagedActionIds = [...stagedActionIds, actionId];
+      setState({
+        ...state,
+        actionsById: nextActionsById,
+        computedStates: nextComputedStates,
+        stagedActionIds: nextStagedActionIds,
       });
-      setStagedActionIds([...stagedActionIds, actionId]);
-      setComputedStates([...computedStates, { ...state }]);
     }
   );
 
   const logMonitorTheme = getTheme();
+
+  const { actionsById, computedStates, stagedActionIds } = state
 
   const entryListProps = {
     theme: logMonitorTheme,
@@ -149,6 +171,8 @@ const LogMonitor: FC<LogMonitorProps> = ({
     onActionClick: () => {},
     onActionShiftClick: () => {},
   };
+
+  console.log({ entryListProps });
 
   return (
     <div
