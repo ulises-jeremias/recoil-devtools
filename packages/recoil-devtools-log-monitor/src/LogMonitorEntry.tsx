@@ -125,7 +125,7 @@ export const LogMonitorEntry: FC<Props> = ({
     );
   };
 
-  const handleActionClick: MouseEventHandler<HTMLDivElement> = e => {
+  const handleActionClick: MouseEventHandler<HTMLDivElement> = (e) => {
     if (actionId > 0) {
       if (e.shiftKey) {
         onActionShiftClick(actionId);
