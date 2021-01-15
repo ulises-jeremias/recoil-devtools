@@ -51,7 +51,7 @@ const LogMonitor: FC<LogMonitorProps> = ({
   const [computedStates, setComputedStates] = useState<any[]>([]);
   const [stagedActionIds, setStagedActionIds] = useState<number[]>([]);
   const [actionsById, setActionsById] = useState<Object>({});
-  const [state, setState] = useState({});
+  const [state, setState] = useState({ previousState: {}, nextState: {} });
 
   const getTheme = () => {
     if (typeof theme !== 'string') {
@@ -69,13 +69,13 @@ const LogMonitor: FC<LogMonitorProps> = ({
   };
 
   const getPayload = (
-    { prevState, nextState }: { prevState: any; nextState: any },
+    { previousState, nextState }: { previousState: any; nextState: any },
     value: any,
     previousValue: any,
     nextValue: any
   ) => ({
-    prevState: {
-      ...prevState,
+    previousState: {
+      ...previousState,
       [value.key]: previousValue,
     },
     nextState: {
@@ -84,24 +84,29 @@ const LogMonitor: FC<LogMonitorProps> = ({
     },
   });
 
-  const updateState = (value: any, nextValue: any) => {
-    setState((prevState) => ({
-      ...prevState,
-      [value.key]: nextValue,
+  const updateState = (value: any, previousValue: any, nextValue: any) => {
+    setState(({ previousState, nextState }) => ({
+      previousState: {
+        ...previousState,
+        [value.key]: previousValue,
+      },
+      nextState: {
+        ...nextState,
+        [value.key]: nextValue,
+      },
     }));
   };
 
   useRecoilTransactionObserver_UNSTABLE(
     async ({ previousSnapshot, snapshot }) => {
-      let payload = { prevState: {}, nextState: {} };
-      const snapshotId = Number(snapshot.getID());
+      let payload = { previousState: {}, nextState: {} };
 
       if (values?.length) {
         values?.forEach(async (value) => {
           const nextValue = await snapshot.getPromise(value);
           const previousValue = await previousSnapshot.getPromise(value);
 
-          updateState(value, nextValue);
+          updateState(value, previousValue, nextValue);
           payload = getPayload(payload, value, previousValue, nextValue);
         });
       } else {
@@ -109,20 +114,21 @@ const LogMonitor: FC<LogMonitorProps> = ({
           const nextValue = await snapshot.getPromise(node);
           const previousValue = await previousSnapshot.getPromise(node);
 
-          updateState(node, nextValue);
+          updateState(node, previousValue, nextValue);
           payload = getPayload(payload, node, previousValue, nextValue);
         }
       }
 
+      const actionId = stagedActionIds.length;
       setActionsById({
         ...actionsById,
-        [snapshotId]: {
-          type: 'Update',
+        [actionId]: {
+          type: 'Updated state',
           ...payload,
         },
       });
-      setStagedActionIds([...stagedActionIds, snapshotId]);
-      setComputedStates([...computedStates, { state: { ...state } }]);
+      setStagedActionIds([...stagedActionIds, actionId]);
+      setComputedStates([...computedStates, { ...state }]);
     }
   );
 

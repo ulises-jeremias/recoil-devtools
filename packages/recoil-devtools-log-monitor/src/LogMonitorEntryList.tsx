@@ -4,7 +4,7 @@ import LogMonitorEntry from './LogMonitorEntry';
 
 interface Props {
   actionsById: { [actionId: number]: any };
-  computedStates: { state: any; error?: string }[];
+  computedStates: { previousState: any; nextState: any, error?: string }[];
   stagedActionIds: number[];
   skippedActionIds: number[];
   currentStateIndex: number;
@@ -39,11 +39,8 @@ const LogMonitorEntryList: FC<Props> = ({
   for (let i = 0; i < stagedActionIds.length; i++) {
     const actionId = stagedActionIds[i];
     const action = actionsById[actionId].action;
-    const { state, error } = computedStates[i];
-    let previousState;
-    if (i > 0) {
-      previousState = computedStates[i - 1].state;
-    }
+    const { previousState, nextState: state, error } = computedStates[i];
+
     elements.push(
       <LogMonitorEntry
         key={actionId}
