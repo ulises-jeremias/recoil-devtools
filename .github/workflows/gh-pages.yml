@@ -8,29 +8,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Move to demo
-        run: cd recoil-devtools-demo
-
-      - name: Use cached node_modules
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: nodeModules-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            nodeModules-
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
       - name: Install dependencies without generating a lockfile and fail if an update is needed
-        run: yarn --frozen-lockfile
+        run: |
+          cd recoil-devtools-demo
+          yarn --frozen-lockfile
 
       - name: Build page
-        run: yarn build
+        run: |
+          cd recoil-devtools-demo
+          yarn build
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./recoil-devtools-demo/build
         env:
           PUBLIC_URL: /recoil-devtools
