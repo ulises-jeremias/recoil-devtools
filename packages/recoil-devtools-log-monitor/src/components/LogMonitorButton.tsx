@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC, useState } from 'react';
 import { Base16Theme } from 'base16';
-import { brighten } from './helpers';
+import { brighten } from '../helpers';
 
 const styles: { base: CSSProperties } = {
   base: {

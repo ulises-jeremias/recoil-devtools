@@ -44,7 +44,7 @@ export const RecoilLogger: FC<RecoilLoggerProps> = ({
         });
         return;
       }
-
+      // @ts-ignore
       for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
         const previousValue = await previousSnapshot.getPromise(node);
         const nextValue = await snapshot.getPromise(node);

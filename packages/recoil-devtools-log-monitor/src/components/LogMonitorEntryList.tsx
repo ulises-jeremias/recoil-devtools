@@ -4,7 +4,7 @@ import LogMonitorEntry from './LogMonitorEntry';
 
 interface Props {
   actionsById: { [actionId: number]: any };
-  computedStates: { previousState: any; nextState: any, error?: string }[];
+  computedStates: { previousState: any; nextState: any; error?: string }[];
   stagedActionIds: number[];
   skippedActionIds: number[];
   currentStateIndex: number;
