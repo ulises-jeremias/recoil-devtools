@@ -9,6 +9,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Move to demo
         run: cd recoil-devtools-demo
 
       - name: Use Node ${{ matrix.node-version }}
