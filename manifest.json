@@ -1,0 +1,27 @@
+{
+  "files": {
+    "name": "react-base-project",
+    "short_name": "react-base-project",
+    "start_url": "index.html",
+    "display": "standalone",
+    "icons": [
+      {
+        "src": "favicon.ico",
+        "sizes": "512x512",
+        "type": "image/x-icon"
+      }
+    ],
+    "background_color": "#4e0041",
+    "theme_color": "#4e0041",
+    "main.css": "assets/css/main.c712228bb5a3e52ac656.css",
+    "main.js": "assets/js/main.adda348b.bundle.js",
+    "assets/js/246.0740270a.bundle.js": "assets/js/246.0740270a.bundle.js",
+    "public/favicon.ico": "favicon.ico",
+    "static/locales/en/translations.json": "locales/en/translations.json"
+  },
+  "entrypoints": [
+    "assets/js/246.0740270a.bundle.js",
+    "assets/css/main.c712228bb5a3e52ac656.css",
+    "assets/js/main.adda348b.bundle.js"
+  ]
+}
