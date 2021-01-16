@@ -13,7 +13,7 @@
     ],
     "background_color": "#4e0041",
     "theme_color": "#4e0041",
-    "main.css": "assets/css/main.c712228bb5a3e52ac656.css",
+    "main.css": "assets/css/main.fce2448634c2604a6c55.css",
     "main.js": "assets/js/main.adda348b.bundle.js",
     "assets/js/246.0740270a.bundle.js": "assets/js/246.0740270a.bundle.js",
     "public/favicon.ico": "favicon.ico",
@@ -21,7 +21,7 @@
   },
   "entrypoints": [
     "assets/js/246.0740270a.bundle.js",
-    "assets/css/main.c712228bb5a3e52ac656.css",
+    "assets/css/main.fce2448634c2604a6c55.css",
     "assets/js/main.adda348b.bundle.js"
   ]
 }
