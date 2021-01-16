@@ -1,7 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import {
   RecoilState,
   Snapshot,
+  useGotoRecoilSnapshot,
   useRecoilTransactionObserver_UNSTABLE,
 } from 'recoil';
 
@@ -32,6 +33,7 @@ const initialStateValue: State = {
 
 export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   const [state, setState] = useState<State>(initialStateValue);
+  const gotoSnapshot = useGotoRecoilSnapshot();
 
   const getPayload = (
     { previousState, nextState }: StateTransaction,
@@ -136,24 +138,47 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
     }
   );
 
-  const handleCommit = useCallback(() => {
+  const handleRollback = () => {
+    const { commitedIdxs } = state;
+    const nextCommitedIdx = commitedIdxs.slice(-1).pop() || 0;
+
+    setState({
+      ...state,
+      currentInitialIdx: nextCommitedIdx,
+      commitedIdxs: commitedIdxs.slice(0, commitedIdxs.length - 1),
+    });
+  };
+
+  const handleCommit = () => {
     const { commitedIdxs, currentInitialIdx, stagedActionIds } = state;
 
     setState({
       ...state,
-      currentInitialIdx: stagedActionIds.length - 1,
+      currentInitialIdx: stagedActionIds.length,
       commitedIdxs: [...commitedIdxs, currentInitialIdx],
     });
-  }, []);
+  };
+
+  const handleReset = () => {
+    const { snapshotsById, stagedActionIds } = state;
+    const actionId = stagedActionIds[0];
+    const initialSnapshot = snapshotsById[actionId];
+    gotoSnapshot(initialSnapshot);
+    setState(initialStateValue);
+  };
+
+  const handleSweep = () => {
+    console.warn('Sweep is not implemented yet');
+  };
 
   return {
     current: state.current,
     computedStates: state.computedStates.slice(state.currentInitialIdx),
     stagedActionIds: state.stagedActionIds.slice(state.currentInitialIdx),
     actionsById: state.actionsById,
-    handleRollback: () => {},
-    handleSweep: () => {},
+    handleRollback,
+    handleSweep,
     handleCommit,
-    handleReset: () => {},
+    handleReset,
   };
 };

@@ -4,7 +4,7 @@ import * as themes from 'recoil-devtools-themes';
 import { Base16Theme } from 'base16';
 import LogMonitorButtonBar from './LogMonitorButtonBar';
 import LogMonitorEntryList from './LogMonitorEntryList';
-import { useRecoilTransactionsHistory } from 'hooks/history';
+import { useRecoilTransactionsHistory } from '../history';
 
 const styles: {
   container: React.CSSProperties;
@@ -70,6 +70,10 @@ const LogMonitor: FC<LogMonitorProps> = ({
     actionsById,
     computedStates,
     stagedActionIds,
+    handleRollback,
+    handleSweep,
+    handleCommit,
+    handleReset,
   } = useRecoilTransactionsHistory(values);
 
   const entryListProps = {
@@ -95,6 +99,10 @@ const LogMonitor: FC<LogMonitorProps> = ({
       {!hideMainButtons && (
         <LogMonitorButtonBar
           theme={logMonitorTheme}
+          onRollbackClick={handleRollback}
+          onSweepClick={handleSweep}
+          onCommitClick={handleCommit}
+          onResetClick={handleReset}
           hasStates={computedStates.length > 0}
           hasSkippedActions={false}
         />

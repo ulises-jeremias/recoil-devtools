@@ -47,7 +47,7 @@ const LogMonitorButton: FC<Props> = ({
 
   const handleMouseUp = () => {};
 
-  onClick = () => {
+  const handleClick = () => {
     if (!enabled) {
       return;
     }
@@ -78,7 +78,7 @@ const LogMonitorButton: FC<Props> = ({
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-      onClick={onClick}
+      onClick={handleClick}
       style={style}
     >
       {children}

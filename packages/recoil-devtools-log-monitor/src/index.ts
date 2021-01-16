@@ -1,2 +1,2 @@
-import LogMonitor from './LogMonitor';
+import LogMonitor from './components/LogMonitor';
 export default LogMonitor;

@@ -68,7 +68,7 @@
     "react-router-dom": "^5.2.0",
     "recoil": "^0.1.2",
     "recoil-devtools": "^0.1.0",
-    "recoil-devtools-log-monitor": "^0.1.6",
+    "recoil-devtools-log-monitor": "^0.1.7",
     "recoil-devtools-logger": "^0.1.0"
   },
   "devDependencies": {

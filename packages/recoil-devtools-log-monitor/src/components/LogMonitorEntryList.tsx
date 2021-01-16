@@ -33,37 +33,35 @@ const LogMonitorEntryList: FC<Props> = ({
   expandStateRoot,
   markStateDiff,
   onActionShiftClick,
-}) => {
-  const elements = [];
+}) => (
+  <>
+    {stagedActionIds.map((stagedActionId, i) => {
+      const actionId = stagedActionId;
+      const action = actionsById[actionId];
+      const { previousState, nextState: state, error } = computedStates[i];
 
-  for (let i = 0; i < stagedActionIds.length; i++) {
-    const actionId = stagedActionIds[i];
-    const action = actionsById[actionId];
-    const { previousState, nextState: state, error } = computedStates[i];
-
-    elements.push(
-      <LogMonitorEntry
-        key={actionId}
-        theme={theme}
-        select={select}
-        action={action}
-        actionId={actionId}
-        state={state}
-        previousState={previousState}
-        collapsed={skippedActionIds.indexOf(actionId) > -1}
-        inFuture={i > currentStateIndex}
-        selected={consecutiveToggleStartId === i}
-        error={error}
-        expandActionRoot={expandActionRoot}
-        expandStateRoot={expandStateRoot}
-        markStateDiff={markStateDiff}
-        onActionClick={onActionClick}
-        onActionShiftClick={onActionShiftClick}
-      />
-    );
-  }
-
-  return <div>{elements}</div>;
-};
+      return (
+        <LogMonitorEntry
+          key={actionId}
+          theme={theme}
+          select={select}
+          action={action}
+          actionId={actionId}
+          state={state}
+          previousState={previousState}
+          collapsed={skippedActionIds.indexOf(actionId) > -1}
+          inFuture={i > currentStateIndex}
+          selected={consecutiveToggleStartId === i}
+          error={error}
+          expandActionRoot={expandActionRoot}
+          expandStateRoot={expandStateRoot}
+          markStateDiff={markStateDiff}
+          onActionClick={onActionClick}
+          onActionShiftClick={onActionShiftClick}
+        />
+      );
+    })}
+  </>
+);
 
 export default LogMonitorEntryList;
