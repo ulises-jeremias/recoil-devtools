@@ -13,11 +13,6 @@ jobs:
       - name: Move to demo
         run: cd recoil-devtools-demo
 
-      - name: Use Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v1.1.0
-        with:
-          node-version: '12'
-
       - name: Use cached node_modules
         uses: actions/cache@v1
         with:
