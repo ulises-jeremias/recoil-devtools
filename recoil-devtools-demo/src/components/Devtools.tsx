@@ -4,9 +4,9 @@ import RecoilLogMonitor from 'recoil-devtools-log-monitor'
 
 export const Devtools = () => {
   return (
-    <div style={{ float: 'right', height: '80%' }}>
+    <>
       <RecoilLogger />
       <RecoilLogMonitor />
-    </div>
+    </>
   )
 }
