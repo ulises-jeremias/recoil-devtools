@@ -8505,6 +8505,11 @@ parse-json@^5.0.0:
     json-parse-even-better-errors "^2.3.0"
     lines-and-columns "^1.1.6"
 
+parse-key@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/parse-key/-/parse-key-0.2.1.tgz#7bcf76595536e36075664be4d687e4bdd910208f"
+  integrity sha1-e892WVU242B1Zkvk1ofkvdkQII8=
+
 parse-node-version@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parse-node-version/-/parse-node-version-1.0.1.tgz#e2b5dbede00e7fa9bc363607f53327e8b073189b"
@@ -9093,6 +9098,15 @@ react-base16-styling@^0.8.0:
     csstype "^3.0.2"
     lodash.curry "^4.1.1"
 
+react-dock@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-dock/-/react-dock-0.3.0.tgz#5d9d51cac78ee5819854c3ad180dabe50c420820"
+  integrity sha512-A0Dfy6enwb6gruxsMXAkZM6hVyJETTcuB4u/CUVPAj4ZH0/ULQacLHmIdUHfYtZYmPCfeEgOa7KyTueSPrIjFg==
+  dependencies:
+    "@types/prop-types" "^15.7.3"
+    lodash.debounce "^4.0.8"
+    prop-types "^15.7.2"
+
 react-dom@^0.14.0:
   version "0.14.10"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-0.14.10.tgz#da883daef7fa86838e9e2fcfcc084c590c350e21"
@@ -9309,10 +9323,19 @@ recast@^0.11.17:
     private "~0.1.5"
     source-map "~0.5.0"
 
-recoil-devtools-log-monitor@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.1.7.tgz#5f0e9d9854cbab6780bacad45b46fafea99b0196"
-  integrity sha512-m81vsQOUorF8csQz9WbWXNZi+3b25LEhVnYnjWgp+BONi9TYkxanrQKBhyTzcC0NxxgWzu9X3++MVgqjP4QJoQ==
+recoil-devtools-dock@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-dock/-/recoil-devtools-dock-0.1.4.tgz#eea212e1dc802b1340607ebae7c9b3a78bf2261c"
+  integrity sha512-bF6MNXJs7gVHY0hoHpB44f6pO7Q+3RhlhtT6Irz/ZMZxhv6w4pqXEreiY2a9myytWdQbdWCq6Knq8Gmcb924Zw==
+  dependencies:
+    parse-key "^0.2.1"
+    react-dock "^0.3.0"
+    recoil "^0.1.2"
+
+recoil-devtools-log-monitor@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.1.9.tgz#273d009b7c53a5487d08e2fcd0d67684adb29e65"
+  integrity sha512-dmH/rktpXlPZQGlZS9e9MfTEy/rG7uGidtn3h+XRMQvkSvVbZyTht9kzAvzSHG/zH+h4ZfZcHQ1zpQbn7CKDRA==
   dependencies:
     base16 "^1.0.0"
     lodash.debounce "^4.0.8"

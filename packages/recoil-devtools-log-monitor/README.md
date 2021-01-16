@@ -21,7 +21,7 @@ Typescript types are also available.
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { atom, selector, RecoilRoot } from 'recoil';
-import LogMonitor from 'recoil-devtools-logger';
+import LogMonitor from 'recoil-devtools-log-monitor';
 
 const a = atom({
   /* ... */
