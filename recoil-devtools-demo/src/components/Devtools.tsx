@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { RecoilLogger } from 'recoil-devtools-logger'
 import LogMonitor from 'recoil-devtools-log-monitor'
 import DockMonitor from 'recoil-devtools-dock'
