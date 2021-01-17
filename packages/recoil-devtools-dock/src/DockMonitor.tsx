@@ -87,55 +87,46 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     );
   };
 
-  const handleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      // Ignore regular keys when focused on a field
-      // and no modifiers are active.
-      if (
-        !e.ctrlKey &&
-        !e.metaKey &&
-        !e.altKey &&
-        ((e.target! as { tagName?: string }).tagName === 'INPUT' ||
-          (e.target! as { tagName?: string }).tagName === 'SELECT' ||
-          (e.target! as { tagName?: string }).tagName === 'TEXTAREA' ||
-          (e.target! as { isContentEditable?: boolean }).isContentEditable)
-      ) {
-        return;
-      }
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    // Ignore regular keys when focused on a field
+    // and no modifiers are active.
+    if (
+      !e.ctrlKey &&
+      !e.metaKey &&
+      !e.altKey &&
+      ((e.target! as { tagName?: string }).tagName === 'INPUT' ||
+        (e.target! as { tagName?: string }).tagName === 'SELECT' ||
+        (e.target! as { tagName?: string }).tagName === 'TEXTAREA' ||
+        (e.target! as { isContentEditable?: boolean }).isContentEditable)
+    ) {
+      return;
+    }
 
-      const visibilityKey = parseKey(toggleVisibilityKey);
-      const positionKey = parseKey(changePositionKey);
+    const visibilityKey = parseKey(toggleVisibilityKey);
+    const positionKey = parseKey(changePositionKey);
 
-      let monitorKey;
-      if (changeMonitorKey) {
-        monitorKey = parseKey(changeMonitorKey);
-      }
+    let monitorKey;
+    if (changeMonitorKey) {
+      monitorKey = parseKey(changeMonitorKey);
+    }
 
-      if (matchesKey(visibilityKey, e)) {
-        e.preventDefault();
-        setIsVisible(!isVisible);
-      } else if (matchesKey(positionKey, e)) {
-        e.preventDefault();
-        const nextPositionIndex =
-          (POSITIONS.indexOf(position) + 1) % POSITIONS.length;
-        setPosition(POSITIONS[nextPositionIndex]);
-      } else if (matchesKey(monitorKey, e)) {
-        e.preventDefault();
-        setChildMonitorIndex(
+    if (matchesKey(visibilityKey, e)) {
+      e.preventDefault();
+      setIsVisible((isVisible) => !isVisible);
+    } else if (matchesKey(positionKey, e)) {
+      e.preventDefault();
+      setPosition(
+        (position) =>
+          POSITIONS[(POSITIONS.indexOf(position) + 1) % POSITIONS.length]
+      );
+    } else if (matchesKey(monitorKey, e)) {
+      e.preventDefault();
+      setChildMonitorIndex(
+        (childMonitorIndex) =>
           (childMonitorIndex + 1) % Children.count(children)
-        );
-      }
-    },
-    [
-      changeMonitorKey,
-      changePositionKey,
-      childMonitorIndex,
-      children,
-      isVisible,
-      position,
-      toggleVisibilityKey,
-    ]
-  );
+      );
+    }
+  }, []);
 
   const handleSizeChange = (requestedSize: number) => {
     setSize(requestedSize);
@@ -162,7 +153,7 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleKeyDown]);
+  }, []);
 
   return (
     <Dock

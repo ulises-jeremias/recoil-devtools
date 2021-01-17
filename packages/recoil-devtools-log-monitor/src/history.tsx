@@ -41,7 +41,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   });
 
   const getNextState = (
-    currentState: { previousState: any; nextState: any },
+    currentState: StateTransaction,
     value: any,
     previousValue: any,
     nextValue: any
