@@ -7,8 +7,8 @@ export const Devtools = () => {
   return (
     <>
       <RecoilLogger />
-      <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q" changeMonitorKey="ctrl-m">
-        <LogMonitor />
+      <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q" changeMonitorKey="ctrl-m" defaultIsVisible>
+        <LogMonitor markStateDiff />
       </DockMonitor>
     </>
   )

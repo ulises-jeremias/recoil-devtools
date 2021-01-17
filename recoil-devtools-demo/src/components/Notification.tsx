@@ -1,24 +1,30 @@
-import React from 'react'
-import { useRecoilState } from 'recoil'
-
+import React, { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
+import ButterToast, { Cinnamon, POS_TOP, POS_LEFT } from 'butter-toast'
 import { commonNotification } from 'app/state'
 
 // Notification provider
 const Notification = () => {
-  const [notification, setNotification] = useRecoilState(commonNotification)
+  const notification = useRecoilValue(commonNotification)
 
-  // on notification hide
-  const onDismiss = () =>
-    setNotification((previous) => ({
-      ...previous,
-      isVisible: false,
-    }))
+  useEffect(() => {
+    ButterToast.raise({
+      content: (
+        <Cinnamon.Crisp
+          scheme={Cinnamon.Crisp.SCHEME_BLUE}
+          content={() => <div>{notification.message}</div>}
+          title={notification.title}
+        />
+      ),
+    })
+  }, [notification])
 
-  if (notification.isVisible) {
-    return <div>{notification.message}</div>
+  const position = {
+    vertical: POS_TOP,
+    horizontal: POS_LEFT,
   }
 
-  return null
+  return <ButterToast position={position} />
 }
 
 export default Notification

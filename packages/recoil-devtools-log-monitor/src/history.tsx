@@ -35,20 +35,9 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   const [state, setState] = useState<State>(initialStateValue);
   const gotoSnapshot = useGotoRecoilSnapshot();
 
-  const getPayload = (
-    { previousState, nextState }: StateTransaction,
-    value: any,
-    previousValue: any,
-    nextValue: any
-  ) => ({
-    previousState: {
-      ...previousState,
-      [value.key]: previousValue,
-    },
-    nextState: {
-      ...nextState,
-      [value.key]: nextValue,
-    },
+  const getPayload = (payload: any, value: any, _: any, nextValue: any) => ({
+    ...payload,
+    [value.key]: nextValue,
   });
 
   const getNextState = (
@@ -73,7 +62,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
 
   useRecoilTransactionObserver_UNSTABLE(
     async ({ previousSnapshot, snapshot }) => {
-      let payload = { previousState: {}, nextState: {} };
+      let payload = {};
       let currentState: StateTransaction = state.current;
 
       if (values?.length) {
@@ -115,7 +104,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
       const nextActionsById = {
         ...actionsById,
         [actionId]: {
-          type: 'Updated state',
+          type: `Transaction #${actionId + 1}`,
           ...payload,
         },
       };

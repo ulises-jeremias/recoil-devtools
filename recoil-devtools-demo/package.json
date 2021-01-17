@@ -57,6 +57,7 @@
     ]
   },
   "dependencies": {
+    "butter-toast": "^3.3.5",
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-http-backend": "^1.0.21",
@@ -69,8 +70,9 @@
     "recoil": "^0.1.2",
     "recoil-devtools": "^0.1.0",
     "recoil-devtools-dock": "^0.1.4",
-    "recoil-devtools-log-monitor": "^0.1.9",
-    "recoil-devtools-logger": "^0.1.0"
+    "recoil-devtools-log-monitor": "^0.1.10",
+    "recoil-devtools-logger": "^0.1.0",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
@@ -89,6 +91,7 @@
     "@types/react-router": "^5.1.9",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-test-renderer": "^17.0.0",
+    "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "awesome-typescript-loader": "^5.2.1",

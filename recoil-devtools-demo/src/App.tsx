@@ -15,11 +15,11 @@ import 'app/i18n'
 
 const App = () => (
   <RecoilRoot>
-    <Devtools />
     <Suspense fallback={<Loading />}>
+      <Devtools />
+      <Notification />
+      <MomentLocale />
       <BrowserRouter>
-        <Notification />
-        <MomentLocale />
         <AppRoutes />
       </BrowserRouter>
     </Suspense>
