@@ -9388,10 +9388,10 @@ recast@^0.11.17:
     private "~0.1.5"
     source-map "~0.5.0"
 
-recoil-devtools-dock@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-dock/-/recoil-devtools-dock-0.1.5.tgz#608924940bedd4dc4a81f0ca2f98247adc3a17f7"
-  integrity sha512-XzCssJjUP8MxWp/QV3Itysqdu+UVovP15GAssKpZeOIq8Twt4f0q08JaLu11JD9h7n5MXY/c4oAhMkoHNjoBqA==
+recoil-devtools-dock@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-dock/-/recoil-devtools-dock-0.1.6.tgz#88037b16e44515c4f63e1d8fcb046b470cab0af1"
+  integrity sha512-ADCT7QE5H/LF2tUtz339y+pzIsEfXVh1yltBijQKnFskp6wS/JhZHRaWW6jDEXJQl6awuB+PMuS9fe46ZYN6aQ==
   dependencies:
     parse-key "^0.2.1"
     react-dock "^0.3.0"
