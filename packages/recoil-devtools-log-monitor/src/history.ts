@@ -156,8 +156,8 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   };
 
   const handleReset = () => {
-    const { snapshotsById, stagedActionIds } = state;
-    const actionId = stagedActionIds[0];
+    const { currentInitialIdx, snapshotsById, stagedActionIds } = state;
+    const actionId = stagedActionIds[currentInitialIdx];
     const initialSnapshot = snapshotsById[actionId];
     gotoSnapshot(initialSnapshot);
     setState(initialStateValue);

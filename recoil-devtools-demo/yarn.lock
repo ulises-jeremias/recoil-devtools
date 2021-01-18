@@ -9397,10 +9397,10 @@ recoil-devtools-dock@^0.1.6:
     react-dock "^0.3.0"
     recoil "^0.1.2"
 
-recoil-devtools-log-monitor@^0.1.12:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.1.12.tgz#9ad3c8490147da284ebab9c1c0cb60f926132c42"
-  integrity sha512-pPPhX8YTuKjOWv86DO/korhZ5xTlsd93bqPLZnPN84dg0RcHWsZHa5HPOqNhdzLAfiU1n+q0Dzd9oTld9jtCkA==
+recoil-devtools-log-monitor@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.1.13.tgz#63fdca66fa6e10e24e58b4a742dabcd738226821"
+  integrity sha512-lYyHYitGzBKBM4H4CKyJ2Zh3vQHI4c8nvSAC1T/D5uiGdO5S8vX/DWeg6tjhLWhK6KetlzdEEvbDCTlJuMV8/Q==
   dependencies:
     base16 "^1.0.0"
     lodash.debounce "^4.0.8"
