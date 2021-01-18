@@ -5,6 +5,7 @@ import {
   useGotoRecoilSnapshot,
   useRecoilTransactionObserver_UNSTABLE,
 } from 'recoil';
+import { findLastIndex } from './helpers';
 
 export interface StateTransaction {
   previousState: any;
@@ -17,6 +18,7 @@ export interface State {
   current: StateTransaction;
   computedStates: StateTransaction[];
   stagedActionIds: number[];
+  skippedActionIds: Record<number, boolean>;
   snapshotsById: Record<number, Snapshot>;
   actionsById: Record<number, any>;
 }
@@ -27,12 +29,17 @@ const initialStateValue: State = {
   current: { previousState: {}, nextState: {} },
   computedStates: [],
   stagedActionIds: [],
+  skippedActionIds: [],
   snapshotsById: {},
   actionsById: {},
 };
 
 export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   const [state, setState] = useState<State>(initialStateValue);
+  const [consecutiveToggleStartId, setConsecutiveToggleStartId] = useState<
+    number
+  >(0);
+
   const gotoSnapshot = useGotoRecoilSnapshot();
 
   const getPayload = (payload: any, value: any, _: any, nextValue: any) => ({
@@ -157,17 +164,62 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   };
 
   const handleSweep = () => {
-    console.warn('Sweep is not implemented yet');
+    console.warn('Log Monitor: Sweep is not implemented yet');
   };
+
+  const handleToggleAction = (id: number) => {
+    setState({
+      ...state,
+      skippedActionIds: {
+        ...state.skippedActionIds,
+        [id]: !state.skippedActionIds[id],
+      },
+    });
+  };
+
+  const setActionsActive = (start: number, end: number, active: boolean) => {
+    let nextSkippedActionIds = state.skippedActionIds;
+    for (let i = start; i < end; i++) {
+      nextSkippedActionIds[i] = active;
+    }
+    setState({
+      ...state,
+      skippedActionIds: nextSkippedActionIds,
+    });
+  };
+
+  const handleToggleConsecutiveAction = (id: number) => {
+    const { actionsById } = state;
+    if (consecutiveToggleStartId && actionsById[consecutiveToggleStartId]) {
+      const { skippedActionIds } = state;
+      const start = Math.min(consecutiveToggleStartId, id);
+      const end = Math.max(consecutiveToggleStartId, id);
+      const active = !skippedActionIds[consecutiveToggleStartId];
+      setActionsActive(start, end + 1, active);
+      setConsecutiveToggleStartId(0);
+    } else if (id > 0) {
+      setConsecutiveToggleStartId(id);
+    }
+  };
+
+  const currentStateIndex = findLastIndex(
+    state.stagedActionIds,
+    (actionId) => !state.skippedActionIds[actionId]
+  );
 
   return {
     current: state.current,
     computedStates: state.computedStates.slice(state.currentInitialIdx),
     stagedActionIds: state.stagedActionIds.slice(state.currentInitialIdx),
+    skippedActionIds: state.skippedActionIds,
     actionsById: state.actionsById,
+    currentStateIndex,
+    consecutiveToggleStartId,
     handleRollback,
     handleSweep,
     handleCommit,
     handleReset,
+    handleToggleAction,
+    handleToggleConsecutiveAction,
   };
 };

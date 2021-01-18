@@ -70,10 +70,15 @@ const LogMonitor: FC<LogMonitorProps> = ({
     actionsById,
     computedStates,
     stagedActionIds,
+    skippedActionIds,
+    currentStateIndex,
+    consecutiveToggleStartId,
     handleRollback,
     handleSweep,
     handleCommit,
     handleReset,
+    handleToggleAction,
+    handleToggleConsecutiveAction,
   } = useRecoilTransactionsHistory(values);
 
   const entryListProps = {
@@ -85,11 +90,11 @@ const LogMonitor: FC<LogMonitorProps> = ({
     actionsById,
     computedStates,
     stagedActionIds,
-    skippedActionIds: [],
-    currentStateIndex: 0,
-    consecutiveToggleStartId: 0,
-    onActionClick: () => {},
-    onActionShiftClick: () => {},
+    skippedActionIds,
+    currentStateIndex,
+    consecutiveToggleStartId,
+    onActionClick: handleToggleAction,
+    onActionShiftClick: handleToggleConsecutiveAction,
   };
 
   return (
@@ -104,7 +109,7 @@ const LogMonitor: FC<LogMonitorProps> = ({
           onCommitClick={handleCommit}
           onResetClick={handleReset}
           hasStates={computedStates.length > 0}
-          hasSkippedActions={false}
+          hasSkippedActions={Object.values(skippedActionIds).includes(true)}
         />
       )}
       <div

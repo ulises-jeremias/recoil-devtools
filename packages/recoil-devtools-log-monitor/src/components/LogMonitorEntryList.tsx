@@ -6,7 +6,7 @@ interface Props {
   actionsById: { [actionId: number]: any };
   computedStates: { previousState: any; nextState: any; error?: string }[];
   stagedActionIds: number[];
-  skippedActionIds: number[];
+  skippedActionIds: Record<number, boolean>;
   currentStateIndex: number;
   consecutiveToggleStartId: number | null | undefined;
 
@@ -49,7 +49,7 @@ const LogMonitorEntryList: FC<Props> = ({
           actionId={actionId}
           state={state}
           previousState={previousState}
-          collapsed={skippedActionIds.indexOf(actionId) > -1}
+          collapsed={!!skippedActionIds[actionId]}
           inFuture={i > currentStateIndex}
           selected={consecutiveToggleStartId === i}
           error={error}
