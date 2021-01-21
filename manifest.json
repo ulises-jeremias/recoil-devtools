@@ -13,15 +13,15 @@
     ],
     "background_color": "#4e0041",
     "theme_color": "#4e0041",
-    "main.css": "assets/css/main.0ed9b68ab88e7184ca09.css",
-    "main.js": "assets/js/main.c2c5cbbe.bundle.js",
-    "assets/js/697.9aa651d6.bundle.js": "assets/js/697.9aa651d6.bundle.js",
+    "main.css": "assets/css/main.8ec6d01513081c548e4b.css",
+    "main.js": "assets/js/main.5ab70abc.bundle.js",
+    "assets/js/231.753f0e08.bundle.js": "assets/js/231.753f0e08.bundle.js",
     "public/favicon.ico": "favicon.ico",
     "static/locales/en/translations.json": "locales/en/translations.json"
   },
   "entrypoints": [
-    "assets/js/697.9aa651d6.bundle.js",
-    "assets/css/main.0ed9b68ab88e7184ca09.css",
-    "assets/js/main.c2c5cbbe.bundle.js"
+    "assets/js/231.753f0e08.bundle.js",
+    "assets/css/main.8ec6d01513081c548e4b.css",
+    "assets/js/main.5ab70abc.bundle.js"
   ]
 }
