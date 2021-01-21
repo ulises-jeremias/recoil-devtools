@@ -37,8 +37,8 @@ const initialStateValue: State = {
 export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   const [state, setState] = useState<State>(initialStateValue);
   const [consecutiveToggleStartId, setConsecutiveToggleStartId] = useState<
-    number
-  >(0);
+    number | null
+  >(null);
 
   const gotoSnapshot = useGotoRecoilSnapshot();
 
@@ -196,7 +196,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
       const end = Math.max(consecutiveToggleStartId, id);
       const active = !skippedActionIds[consecutiveToggleStartId];
       setActionsActive(start, end + 1, active);
-      setConsecutiveToggleStartId(0);
+      setConsecutiveToggleStartId(null);
     } else if (id > 0) {
       setConsecutiveToggleStartId(id);
     }
