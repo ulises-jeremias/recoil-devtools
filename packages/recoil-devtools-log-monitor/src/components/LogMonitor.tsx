@@ -69,11 +69,11 @@ const LogMonitor: FC<LogMonitorProps> = ({
   const {
     actionsById,
     computedStates,
-    commitedIdxs,
     stagedActionIds,
     skippedActionIds,
     currentStateIndex,
     consecutiveToggleStartId,
+    hasStates,
     handleRollback,
     handleSweep,
     handleCommit,
@@ -109,7 +109,7 @@ const LogMonitor: FC<LogMonitorProps> = ({
           onSweepClick={handleSweep}
           onCommitClick={handleCommit}
           onResetClick={handleReset}
-          hasStates={commitedIdxs.length > 0}
+          hasStates={hasStates}
           hasSkippedActions={Object.values(skippedActionIds).includes(true)}
         />
       )}

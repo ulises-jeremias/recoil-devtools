@@ -207,15 +207,17 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
     (actionId) => !state.skippedActionIds[actionId]
   );
 
+  const hasStates = state.computedStates.length > 0;
+
   return {
     current: state.current,
     computedStates: state.computedStates.slice(state.currentInitialIdx),
     stagedActionIds: state.stagedActionIds.slice(state.currentInitialIdx),
     skippedActionIds: state.skippedActionIds,
     actionsById: state.actionsById,
-    commitedIdxs: state.commitedIdxs,
     currentStateIndex,
     consecutiveToggleStartId,
+    hasStates,
     handleRollback,
     handleSweep,
     handleCommit,
