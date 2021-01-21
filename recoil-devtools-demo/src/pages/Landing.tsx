@@ -24,8 +24,6 @@ const Landing = () => {
       title,
       message,
     })
-    setTitle('')
-    setMessage('')
   }
 
   return (

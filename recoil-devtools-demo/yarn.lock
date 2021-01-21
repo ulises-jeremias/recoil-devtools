@@ -3176,13 +3176,6 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
-butter-toast@^3.3.5:
-  version "3.3.5"
-  resolved "https://registry.yarnpkg.com/butter-toast/-/butter-toast-3.3.5.tgz#3a40883c7b2162eda10ff05cae01d2537f27182c"
-  integrity sha512-6TZkT5lGcX4jvucK26X156wnw79Lo137yelHPvHUnpVgz7ZiyJGYNCXFY/twE0dLDQpVDlnUWOBhNKLt5gcl2w==
-  dependencies:
-    "@babel/runtime" "^7.3.1"
-
 bytes@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.0.0.tgz#d32815404d689699f85a4ea4fa8755dd13a96048"
@@ -9397,10 +9390,10 @@ recoil-devtools-dock@^0.1.6:
     react-dock "^0.3.0"
     recoil "^0.1.2"
 
-recoil-devtools-log-monitor@^0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.1.13.tgz#63fdca66fa6e10e24e58b4a742dabcd738226821"
-  integrity sha512-lYyHYitGzBKBM4H4CKyJ2Zh3vQHI4c8nvSAC1T/D5uiGdO5S8vX/DWeg6tjhLWhK6KetlzdEEvbDCTlJuMV8/Q==
+recoil-devtools-log-monitor@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.2.0.tgz#65a979b0698e2e6a9a5d3f3ebb69a89b4285b282"
+  integrity sha512-Crx+PxdrF003HPF+3gCgt1hE30jIeHW2Q8+jeN3d5eCuISm6vva9ouU9myr8TeeLFccSvQL3MinaFauXtg9KLg==
   dependencies:
     base16 "^1.0.0"
     lodash.debounce "^4.0.8"
