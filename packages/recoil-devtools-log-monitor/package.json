@@ -65,6 +65,6 @@
     "lodash.debounce": "^4.0.8",
     "react-json-tree": "^0.13.0",
     "recoil": "^0.1.2",
-    "recoil-devtools-themes": "^0.1.0"
+    "recoil-devtools-themes": "^0.1.1"
   }
 }
