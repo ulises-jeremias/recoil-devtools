@@ -1,38 +1,66 @@
 {
-  "name": "recoil-devtools-themes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Color themes for Recoil DevTools monitors",
-  "main": "lib/index.js",
-  "jsnext:main": "src/index.js",
-  "scripts": {
-    "clean": "rimraf lib",
-    "build": "babel src --out-dir lib",
-    "lint": "eslint src",
-    "prepublish": "npm run lint && npm run clean && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ulises-jeremias/recoil-devtools.git"
-  },
-  "keywords": [
-    "base16",
-    "color schemes"
-  ],
-  "author": "ulises-jeremias <ulisescf.24@gmail.com> (https://github.com/ulises-jeremias)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ulises-jeremias/recoil-devtools/issues"
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
   },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "recoil-devtools-themes",
+  "author": "ulises-jeremias",
+  "module": "dist/recoil-devtools-themes.esm.js",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.17.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-react": "^7.22.0",
-    "rimraf": "^3.0.2"
+    "@babel/core": "^7.10.5",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-info": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/react": "^5.3.19",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "babel-loader": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^4.2.5",
+    "react": "^16.13.1",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1",
+    "ts-loader": "^8.0.1",
+    "tsdx": "^0.13.2",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.7"
   },
   "dependencies": {
+    "@types/base16": "^1.0.2",
     "base16": "^1.0.0"
   }
 }
