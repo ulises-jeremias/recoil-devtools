@@ -169,8 +169,8 @@ Change the `alias` to point to where those packages are actually installed. This
 
 ```diff
    "alias": {
--    "react": "../node_modules/react",
--    "react-dom": "../node_modules/react-dom"
+-    "react": "../../../node_modules/react",
+-    "react-dom": "../../../node_modules/react-dom"
 +    "react": "../../../node_modules/react",
 +    "react-dom": "../../../node_modules/react-dom"
    },
