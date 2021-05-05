@@ -5765,6 +5765,11 @@ gzip-size@^6.0.0:
   dependencies:
     duplexer "^0.1.2"
 
+hamt_plus@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hamt_plus/-/hamt_plus-1.0.2.tgz#e21c252968c7e33b20f6a1b094cd85787a265601"
+  integrity sha1-4hwlKWjH4zsg9qGwlM2FeHomVgE=
+
 handle-thing@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
@@ -9345,53 +9350,50 @@ recast@^0.11.17:
     private "~0.1.5"
     source-map "~0.5.0"
 
-recoil-devtools-dock@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-dock/-/recoil-devtools-dock-0.1.6.tgz#88037b16e44515c4f63e1d8fcb046b470cab0af1"
-  integrity sha512-ADCT7QE5H/LF2tUtz339y+pzIsEfXVh1yltBijQKnFskp6wS/JhZHRaWW6jDEXJQl6awuB+PMuS9fe46ZYN6aQ==
+recoil-devtools-dock@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-dock/-/recoil-devtools-dock-0.2.0.tgz#ef23ffcdcb7792141bdf8b89691ea94e0ef2fdaf"
+  integrity sha512-3hCuvL/uB/VzMPpQOxqu8Kk++Pl0FwyQaX1RMQG9wHrFh2lV4YUpBQpBWvEU/x0orym/uI6TNbPNzfqWUh5nhQ==
   dependencies:
     parse-key "^0.2.1"
     react-dock "^0.3.0"
-    recoil "^0.1.2"
 
-recoil-devtools-log-monitor@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.2.3.tgz#2b8685cb8a504cf0dfda3decae85aaf7d5b589ed"
-  integrity sha512-+xSdwUlSwvdYSWSR0pLWTFWGHKMoe6Askc4BNWYVSeWGLLcCNw+UGZMLb2crrIEyFi4xz3BMBFoDiz3j13OnAQ==
+recoil-devtools-log-monitor@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.3.0.tgz#1707e4c61fada504b507ee7e8be9602662bcbdff"
+  integrity sha512-U2/3EyKh82JmiYVGA4oxlpQ59k9f7ofoYCO2hSkqTkyDNgyLcVB8f9LvknuW8hmd7NiTdXsoMk62ZR21lTM1jw==
   dependencies:
     base16 "^1.0.0"
     lodash.debounce "^4.0.8"
     react-json-tree "^0.13.0"
-    recoil "^0.1.2"
-    recoil-devtools-themes "^0.1.0"
+    recoil-devtools-themes "^0.1.2"
 
-recoil-devtools-logger@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.1.3.tgz#fdafbd4b13708b0a3d05fd89a6091d814e42ea49"
-  integrity sha512-d7mH1yoJTME9vui2DBanmVtsLl61TvMerFaUo62FLMQ6kKcvcAzVJATjCuZkgj5/qa4FbaHm2NVJsVIu9qbRRg==
+recoil-devtools-logger@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.2.0.tgz#1403cee166d5309714fd0d77bdfdcb234e874d6e"
+  integrity sha512-BqJzIeRNh29dnAv/SETyYam9Ca85W7vz+uA87ysqeTlKyt0m0CWRDaEAiet6s1hAMvOUD7DjAu+CrVfeZ/O/9A==
   dependencies:
     deep-diff "^1.0.2"
-    recoil "^0.1.2"
 
-recoil-devtools-themes@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-themes/-/recoil-devtools-themes-0.1.0.tgz#7a1a6069e1e6130287489777d2df85ed0199768a"
-  integrity sha512-Pqi2sv2G7hxDTIJuRq5l94MRuLsCaNaswIaqBmSEk9HJ7/Gz81fin7KHZFuy+MnFw1o/KSZ539yRZ60btV9lKA==
+recoil-devtools-themes@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-themes/-/recoil-devtools-themes-0.1.2.tgz#5b6a2000153d5183417071c3a4beedd2b466b6fc"
+  integrity sha512-cawFXiUMNCw/gLImG93i4WjURBZxtuJa4bR7Y6KNvDRY2SWl2hGt+AA+r7kcs3MtdwbarR595m5yiLfUlRIyHQ==
   dependencies:
+    "@types/base16" "^1.0.2"
     base16 "^1.0.0"
 
-recoil-devtools@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/recoil-devtools/-/recoil-devtools-0.1.0.tgz#9f6b91425f1a918658f1431c5be9ba512ff0fc4b"
-  integrity sha512-MqE/5kam6V5bOYXtXONzKKM5Vq3NoIpLnlA86pOcTQc3fw7GN8rNgQ/Ee2YmbDzfobPF/qBzVi2X339+a6gtPg==
-  dependencies:
-    deep-diff "^1.0.2"
-    recoil "^0.1.2"
+recoil-devtools@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/recoil-devtools/-/recoil-devtools-0.3.1.tgz#856289489ae5e316e3230b10c2b8722b1c9481eb"
+  integrity sha512-ZKW/xLS2JXogN9dqZ22NYZJR5Jxd+ytVbXd66yvvnGScwRmzKWe1GlH1NXS1fOJ6QG7zOIor/6RVfMzkOPLA3A==
 
-recoil@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.1.2.tgz#844c612f535826dbe54c977761a67ded16f6d063"
-  integrity sha512-hIRrHlkmW4yITlBFprVYjVPhzPKYrJKoaDrrJtAtbkMeXfXaa/XE5OlyR10n+rNfnKWNToCKb3Z4fo86IGjkzg==
+recoil@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.2.0.tgz#69344b5bec3129272560d8d9d6001ada3ee4d80c"
+  integrity sha512-VOJfYVQ3VgmfS7L5tV9QdOR+AJhvll8yGr1+3nJPCqADulImuScGZ2sJtejPps3zfTu/o98y5kO4lje8Tx6XHw==
+  dependencies:
+    hamt_plus "1.0.2"
 
 redent@^1.0.0:
   version "1.0.0"
