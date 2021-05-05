@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -20,7 +20,8 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=16",
+    "recoil": "^0.2.0"
   },
   "husky": {
     "hooks": {
@@ -50,7 +51,6 @@
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
-    "@types/deep-diff": "^1.0.0",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "babel-loader": "^8.1.0",
@@ -63,9 +63,5 @@
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.7"
-  },
-  "dependencies": {
-    "deep-diff": "^1.0.2",
-    "recoil": "^0.1.2"
   }
 }
