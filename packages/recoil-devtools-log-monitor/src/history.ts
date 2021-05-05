@@ -86,7 +86,8 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
           );
         });
       } else {
-        // @ts-ignore
+        // @ts-ignore: For some reason this says that Iterable<RecoilValue<unknown>>
+        // is not iterable.
         for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
           const nextValue = await snapshot.getPromise(node);
           const previousValue = await previousSnapshot.getPromise(node);

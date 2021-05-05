@@ -71,7 +71,8 @@ export const RecoilLogger: FC<RecoilLoggerProps> = ({
           );
         });
       } else {
-        // @ts-ignore
+        // @ts-ignore: For some reason this says that Iterable<RecoilValue<unknown>>
+        // is not iterable.
         for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
           const previousValue = await previousSnapshot.getPromise(node);
           const nextValue = await snapshot.getPromise(node);
