@@ -1,5 +1,5 @@
 {
-  "version": "0.2.7",
+  "version": "0.3.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -20,7 +20,8 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "react": ">=16",
+    "recoil": "^0.2.0"
   },
   "husky": {
     "hooks": {
@@ -64,7 +65,6 @@
     "base16": "^1.0.0",
     "lodash.debounce": "^4.0.8",
     "react-json-tree": "^0.13.0",
-    "recoil": "^0.1.2",
     "recoil-devtools-themes": "^0.1.2"
   }
 }
