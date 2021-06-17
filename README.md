@@ -1,5 +1,3 @@
-[![Build Status](https://github.com/ulises-jeremias/recoil-devtools/workflows/CI/badge.svg)](https://github.com/ulises-jeremias/recoil-devtools/commits/master)
-
 # Recoil DevTools
 
 Developer Tools to power-up [Recoil](https://recoiljs.org/) development workflow or any other architecture which handles the state change (see [integrations](#integrations)).
