@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { RecoilRoot } from 'recoil'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 
 import 'app/theme'
 
@@ -19,9 +19,9 @@ const App = () => (
       <Devtools />
       <Notification />
       <MomentLocale />
-      <BrowserRouter>
+      <HashRouter>
         <AppRoutes />
-      </BrowserRouter>
+      </HashRouter>
     </Suspense>
   </RecoilRoot>
 )
