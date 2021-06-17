@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
-import Landing from 'app/pages/Landing'
+import Landing from 'pages/Landing'
 
 const AppRoutes = () => (
   <Switch>

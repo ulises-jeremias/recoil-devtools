@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { commonNotification } from 'app/state'
-import { FormGroup, Label, Input } from 'app/components/Form'
+import { commonNotification } from 'state'
+import { FormGroup, Label, Input } from 'components/Form'
 
 import './Landing.css'
 

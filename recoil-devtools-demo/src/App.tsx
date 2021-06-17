@@ -2,16 +2,16 @@ import React, { Suspense } from 'react'
 import { RecoilRoot } from 'recoil'
 import { HashRouter } from 'react-router-dom'
 
-import 'app/theme'
+import 'theme'
 
-import Loading from 'app/components/Loading'
-import MomentLocale from 'app/components/MomentLocale'
-import Notification from 'app/components/Notification'
-import AppRoutes from 'app/routes/AppRoutes'
+import Loading from 'components/Loading'
+import MomentLocale from 'components/MomentLocale'
+import Notification from 'components/Notification'
+import AppRoutes from 'routes/AppRoutes'
 
-import { Devtools } from 'app/components/Devtools'
+import { Devtools } from 'components/Devtools'
 
-import 'app/i18n'
+import 'i18n'
 
 const App = () => (
   <RecoilRoot>

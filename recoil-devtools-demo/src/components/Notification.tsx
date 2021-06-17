@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import { commonNotification } from 'app/state'
-import { Message } from 'app/components/Message'
+import { commonNotification } from 'state'
+import { Message } from 'components/Message'
 
 // Notification provider
 const Notification = () => {
