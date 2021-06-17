@@ -1,13 +1,8 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: [
-    'plugin:react/recommended',
-    'prettier/@typescript-eslint',
-    'plugin:prettier/recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'plugin:prettier/recommended', 'plugin:@typescript-eslint/recommended'],
   parserOptions: {
     project: './tsconfig.json',
     ecmaVersion: 2018,
@@ -39,4 +34,4 @@ module.exports = {
       },
     },
   ],
-}
+};

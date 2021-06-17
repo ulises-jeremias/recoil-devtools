@@ -8,23 +8,25 @@ const MiniCssWebpackPlugin = require('mini-css-extract-plugin')
 
 const commonPaths = require('./common-paths')
 
-const HOST = process.env.HOST || 'localhost'
-const PORT = process.env.PORT || 8091
-const URL_BASE = process.env.URL_BASE || `http://${HOST}:${PORT}`
+const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
+const URL_BASE = process.env.URL_BASE || `http://${HOST}:${DEFAULT_PORT}`;
+const isUnspecifiedHost = HOST === '0.0.0.0' || HOST === '::';
+const prettyHost = isUnspecifiedHost ? 'localhost' : HOST;
 
 const config = {
   entry: ['react-hot-loader/patch'],
   mode: 'development',
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   devServer: {
     contentBase: commonPaths.outputPath,
     compress: true,
     historyApiFallback: true,
     hot: true,
-    inline: true,
-    port: PORT,
     headers: { 'Access-Control-Allow-Origin': '*' },
-    public: URL_BASE,
+    host: HOST,
+    port: DEFAULT_PORT,
+    public: `http://${prettyHost}:${DEFAULT_PORT}` 
   },
   plugins: [
     new webpack.EnvironmentPlugin({

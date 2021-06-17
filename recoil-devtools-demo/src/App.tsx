@@ -19,7 +19,7 @@ const App = () => (
       <Devtools />
       <Notification />
       <MomentLocale />
-      <HashRouter>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <AppRoutes />
       </HashRouter>
     </Suspense>

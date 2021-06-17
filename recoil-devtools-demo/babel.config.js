@@ -16,7 +16,6 @@ module.exports = {
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-proposal-object-rest-spread',
     'react-hot-loader/babel',
-    'babel-plugin-styled-components',
     [
       'module-resolver',
       {
@@ -27,4 +26,4 @@ module.exports = {
       },
     ],
   ],
-}
+};

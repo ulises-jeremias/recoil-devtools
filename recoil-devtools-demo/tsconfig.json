@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["es5", "es6", "dom", "dom.iterable"],
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
       "app/*": ["src/*"],
       "app-assets/*": ["static/*"]
