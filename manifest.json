@@ -13,16 +13,16 @@
     ],
     "background_color": "#4e0041",
     "theme_color": "#4e0041",
-    "main.css": "assets/css/main.3985464223975759f211.css",
-    "main.js": "assets/js/main.94131910.bundle.js",
-    "assets/js/350.2363c2cd.bundle.js": "assets/js/350.2363c2cd.bundle.js",
+    "main.css": "assets/css/main.5c4c351a2556fbf12e8d.css",
+    "main.js": "assets/js/main.1662070a.bundle.js",
+    "assets/js/350.0f6d71a4.bundle.js": "assets/js/350.0f6d71a4.bundle.js",
     "favicon.ico": "favicon.ico",
     "index.html": "index.html",
     "locales/en/translations.json": "locales/en/translations.json"
   },
   "entrypoints": [
-    "assets/js/350.2363c2cd.bundle.js",
-    "assets/css/main.3985464223975759f211.css",
-    "assets/js/main.94131910.bundle.js"
+    "assets/js/350.0f6d71a4.bundle.js",
+    "assets/css/main.5c4c351a2556fbf12e8d.css",
+    "assets/js/main.1662070a.bundle.js"
   ]
 }
