@@ -9320,28 +9320,28 @@ recast@^0.11.17:
     private "~0.1.5"
     source-map "~0.5.0"
 
-recoil-devtools-dock@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-dock/-/recoil-devtools-dock-0.2.0.tgz#ef23ffcdcb7792141bdf8b89691ea94e0ef2fdaf"
-  integrity sha512-3hCuvL/uB/VzMPpQOxqu8Kk++Pl0FwyQaX1RMQG9wHrFh2lV4YUpBQpBWvEU/x0orym/uI6TNbPNzfqWUh5nhQ==
+recoil-devtools-dock@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-dock/-/recoil-devtools-dock-0.4.0.tgz#3e984e36dbe0e10912b2db9336a49b37b8799405"
+  integrity sha512-QQXV5knvRBoD3oxawCzU6lNmNBAMjnTSzu6RKluGDZmk3WJc5CWlBGw0jNN/E6zuz2QiWHWSRaSX6u0A1SuAEQ==
   dependencies:
     parse-key "^0.2.1"
     react-dock "^0.3.0"
 
-recoil-devtools-log-monitor@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.3.0.tgz#1707e4c61fada504b507ee7e8be9602662bcbdff"
-  integrity sha512-U2/3EyKh82JmiYVGA4oxlpQ59k9f7ofoYCO2hSkqTkyDNgyLcVB8f9LvknuW8hmd7NiTdXsoMk62ZR21lTM1jw==
+recoil-devtools-log-monitor@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-log-monitor/-/recoil-devtools-log-monitor-0.4.0.tgz#78652cdbf41fd52256e60e5e1218872fe451e1e6"
+  integrity sha512-ff70bvJ/csqcWhYEhSDI+ZimqTFExamEakMJq+xtKxF+ZoTTk9rGYlB8QqHhgG9o2qDuWsln7zI3z1fGEt34fw==
   dependencies:
     base16 "^1.0.0"
     lodash.debounce "^4.0.8"
     react-json-tree "^0.13.0"
     recoil-devtools-themes "^0.1.2"
 
-recoil-devtools-logger@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.2.0.tgz#1403cee166d5309714fd0d77bdfdcb234e874d6e"
-  integrity sha512-BqJzIeRNh29dnAv/SETyYam9Ca85W7vz+uA87ysqeTlKyt0m0CWRDaEAiet6s1hAMvOUD7DjAu+CrVfeZ/O/9A==
+recoil-devtools-logger@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/recoil-devtools-logger/-/recoil-devtools-logger-0.4.0.tgz#dc20a390fddb51e5fc6154fe20d210e8f3b9f191"
+  integrity sha512-kBirm92++6T3QeIjhIn8ewaAHcUGSpXZOfFeBygAGNnEkcrrHaXhMslwpLsLIO89Z/yg+F5q2SJjAdyuNvOznA==
   dependencies:
     deep-diff "^1.0.2"
 
@@ -9353,10 +9353,10 @@ recoil-devtools-themes@^0.1.2:
     "@types/base16" "^1.0.2"
     base16 "^1.0.0"
 
-recoil-devtools@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/recoil-devtools/-/recoil-devtools-0.3.1.tgz#856289489ae5e316e3230b10c2b8722b1c9481eb"
-  integrity sha512-ZKW/xLS2JXogN9dqZ22NYZJR5Jxd+ytVbXd66yvvnGScwRmzKWe1GlH1NXS1fOJ6QG7zOIor/6RVfMzkOPLA3A==
+recoil-devtools@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/recoil-devtools/-/recoil-devtools-0.4.0.tgz#7c69150ccfaa7bac520fce33fd44b687e67fa8e9"
+  integrity sha512-c6p9PptAJsIyDrXtQbV4dXUq5aZPUcI6LO2qdhaYMdCiGjPUO69tCxyRL3CUgnorqQq1K8fpULB/qePGgcJHUw==
 
 recoil@^0.4.0:
   version "0.4.0"
