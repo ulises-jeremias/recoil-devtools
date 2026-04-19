@@ -57,11 +57,11 @@ const getLogLevel = (
       const typeLevel = level[type];
       return typeof typeLevel === 'function'
         ? typeLevel(...newValue)
-        : typeLevel;
+        : typeLevel ?? 'log';
     case 'function':
       return level(action);
     default:
-      return level;
+      return level ?? 'log';
   }
 };
 

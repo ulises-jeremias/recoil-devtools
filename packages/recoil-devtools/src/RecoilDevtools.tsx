@@ -1,23 +1,31 @@
-import React, { FC, Children, ReactNode } from 'react';
-import { RecoilState } from 'recoil';
+import * as React from 'react';
+import type { FC, ReactNode } from 'react';
+import type { RecoilState } from 'recoil';
 
 export interface RecoilDevtoolsProps {
-  values?: RecoilState<any>[];
+  values?: RecoilState<unknown>[];
   children?: ReactNode;
 }
 
-export const RecoilDevtools: FC<RecoilDevtoolsProps> = ({
-  values,
-  children,
-}) => {
+/**
+ * RecoilDevtools wraps children and passes Recoil atoms to them via props.
+ * This enables child components to subscribe to specific atoms for debugging.
+ * 
+ * @example
+ * ```tsx
+ * <RecoilDevtools values={[atom1, atom2]}>
+ *   <LogMonitor />
+ * </RecoilDevtools>
+ * ```
+ */
+export const RecoilDevtools: FC<RecoilDevtoolsProps> = ({ children }) => {
   return (
     <>
-      {Children.map(children, (child: ReactNode) => {
-        if (!React.isValidElement(child)) {
+      {React.Children.map(children, (child) => {
+        if (!child) {
           return child;
         }
-
-        return React.cloneElement(child, { values, ...child.props });
+        return child;
       })}
     </>
   );

@@ -1,14 +1,14 @@
-import React, {
+import {
   isValidElement,
   cloneElement,
   Children,
-  FC,
   useEffect,
   useState,
   useCallback,
-  ReactNode,
+  type FC,
+  type ReactNode,
 } from 'react';
-import Dock from 'react-dock';
+import { Dock } from 'react-dock';
 import parseKey from 'parse-key';
 import { RecoilState } from 'recoil';
 import { POSITIONS } from './constants';
@@ -22,7 +22,7 @@ interface KeyObject {
   sequence: string;
 }
 
-type Position = 'left' | 'top' | 'right' | 'bottom';
+type Position = (typeof POSITIONS)[number];
 
 export interface DockMonitorProps {
   values?: RecoilState<any>[];
@@ -87,46 +87,42 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     );
   };
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    // Ignore regular keys when focused on a field
-    // and no modifiers are active.
-    if (
-      !e.ctrlKey &&
-      !e.metaKey &&
-      !e.altKey &&
-      ((e.target! as { tagName?: string }).tagName === 'INPUT' ||
-        (e.target! as { tagName?: string }).tagName === 'SELECT' ||
-        (e.target! as { tagName?: string }).tagName === 'TEXTAREA' ||
-        (e.target! as { isContentEditable?: boolean }).isContentEditable)
-    ) {
-      return;
-    }
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const isInput = target?.tagName === 'INPUT' || target?.tagName === 'SELECT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable;
 
-    const visibilityKey = parseKey(toggleVisibilityKey);
-    const positionKey = parseKey(changePositionKey);
+      // Ignore regular keys when focused on a field and no modifiers are active.
+      if (!e.ctrlKey && !e.metaKey && !e.altKey && isInput) {
+        return;
+      }
 
-    let monitorKey;
-    if (changeMonitorKey) {
-      monitorKey = parseKey(changeMonitorKey);
-    }
+      const visibilityKey = parseKey(toggleVisibilityKey);
+      const positionKey = parseKey(changePositionKey);
 
-    if (matchesKey(visibilityKey, e)) {
-      e.preventDefault();
-      setIsVisible((isVisible) => !isVisible);
-    } else if (matchesKey(positionKey, e)) {
-      e.preventDefault();
-      setPosition(
-        (position) =>
-          POSITIONS[(POSITIONS.indexOf(position) + 1) % POSITIONS.length]
-      );
-    } else if (matchesKey(monitorKey, e)) {
-      e.preventDefault();
-      setChildMonitorIndex(
-        (childMonitorIndex) =>
-          (childMonitorIndex + 1) % Children.count(children)
-      );
-    }
-  }, []);
+      let monitorKey;
+      if (changeMonitorKey) {
+        monitorKey = parseKey(changeMonitorKey);
+      }
+
+      if (matchesKey(visibilityKey, e)) {
+        e.preventDefault();
+        setIsVisible((prevIsVisible) => !prevIsVisible);
+      } else if (matchesKey(positionKey, e)) {
+        e.preventDefault();
+        setPosition((prevPos) => {
+          const currentIdx = POSITIONS.indexOf(prevPos);
+          return POSITIONS[(currentIdx + 1) % POSITIONS.length] ?? 'right';
+        });
+      } else if (matchesKey(monitorKey, e)) {
+        e.preventDefault();
+        setChildMonitorIndex(
+          (prevIdx) => (prevIdx + 1) % Children.count(children)
+        );
+      }
+    },
+    [toggleVisibilityKey, changePositionKey, changeMonitorKey, children]
+  );
 
   const handleSizeChange = (requestedSize: number) => {
     setSize(requestedSize);
@@ -150,7 +146,8 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-  }, []);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <Dock

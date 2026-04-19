@@ -1,71 +1,86 @@
 {
-  "version": "0.5.0",
+  "name": "recoil-devtools-log-monitor",
+  "version": "1.0.0",
+  "description": "Recoil log monitor — visual state and action history with time-travel",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "author": "ulises-jeremias <ulisescf.24@gmail.com>",
+  "homepage": "https://github.com/ulises-jeremias/recoil-devtools/tree/main/packages/recoil-devtools-log-monitor#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ulises-jeremias/recoil-devtools.git",
+    "directory": "packages/recoil-devtools-log-monitor"
+  },
+  "bugs": {
+    "url": "https://github.com/ulises-jeremias/recoil-devtools/issues"
+  },
+  "keywords": [
+    "recoil",
+    "log-monitor",
+    "devtools",
+    "recoil-devtools",
+    "react",
+    "state-management",
+    "time-travel"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
   "files": [
     "dist",
     "src"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=18"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist coverage"
   },
   "peerDependencies": {
-    "react": ">=16",
-    "recoil": ">=0.4.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
-  },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "name": "recoil-devtools-log-monitor",
-  "author": "ulises-jeremias",
-  "module": "dist/recoil-devtools-log-monitor.esm.js",
-  "devDependencies": {
-    "@babel/core": "^7.10.5",
-    "@storybook/addon-actions": "^5.3.19",
-    "@storybook/addon-docs": "^5.3.19",
-    "@storybook/addon-info": "^5.3.19",
-    "@storybook/addon-links": "^5.3.19",
-    "@storybook/addons": "^5.3.19",
-    "@storybook/react": "^5.3.19",
-    "@types/base16": "^1.0.2",
-    "@types/lodash.debounce": "^4.0.6",
-    "@types/react": "^16.9.43",
-    "@types/react-dom": "^16.9.8",
-    "babel-loader": "^8.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "husky": "^4.2.5",
-    "react": "^16.13.1",
-    "react-docgen-typescript-loader": "^3.7.2",
-    "react-dom": "^16.13.1",
-    "react-is": "^16.13.1",
-    "recoil": "^0.4.0",
-    "ts-loader": "^8.0.1",
-    "tsdx": "^0.13.2",
-    "tslib": "^2.0.0",
-    "typescript": "^3.9.7"
+    "react": ">=17",
+    "recoil": ">=0.7.0"
   },
   "dependencies": {
     "base16": "^1.0.0",
-    "lodash.debounce": "^4.0.8",
-    "react-json-tree": "^0.13.0",
-    "recoil-devtools-themes": "^0.2.0"
+    "lodash-es": "^4.17.21",
+    "react-json-tree": "^0.19.0",
+    "recoil-devtools-themes": "workspace:*"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/base16": "^1.0.2",
+    "@types/lodash-es": "^4.17.12",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^9.17.0",
+    "jsdom": "^25.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recoil": "^0.7.7",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
   }
 }
