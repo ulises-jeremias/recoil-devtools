@@ -26,18 +26,18 @@ This is a monorepo containing the following packages:
 
 ### Core Packages
 
-| Package                                                               | npm                                                                                                                            | Description                           |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- |
-| [`recoil-devtools`](packages/recoil-devtools)                         | [![](https://img.shields.io/npm/v/recoil-devtools.svg)](https://www.npmjs.com/package/recoil-devtools)                         | Main package with composited DevTools |
-| [`recoil-devtools-dock`](packages/recoil-devtools-dock)               | [![](https://img.shields.io/npm/v/recoil-devtools-dock.svg)](https://www.npmjs.com/package/recoil-devtools-dock)               | Dock container                        |
-| [`recoil-devtools-log-monitor`](packages/recoil-devtools-log-monitor) | [![](https://img.shields.io/npm/v/recoil-devtools-log-monitor.svg)](https://www.npmjs.com/package/recoil-devtools-log-monitor) | State history UI                      |
+| Package                                                               | npm                                                                                                                            | Version                                                                                                                         | Downloads                             | Description |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | ----------- |
+| [`recoil-devtools`](packages/recoil-devtools)                         | [![](https://img.shields.io/npm/v/recoil-devtools.svg)](https://www.npmjs.com/package/recoil-devtools)                         | [![](https://img.shields.io/npm/dm/recoil-devtools.svg)](https://www.npmjs.com/package/recoil-devtools)                         | Main package with composited DevTools |
+| [`recoil-devtools-dock`](packages/recoil-devtools-dock)               | [![](https://img.shields.io/npm/v/recoil-devtools-dock.svg)](https://www.npmjs.com/package/recoil-devtools-dock)               | [![](https://img.shields.io/npm/dm/recoil-devtools-dock.svg)](https://www.npmjs.com/package/recoil-devtools-dock)               | Dock container                        |
+| [`recoil-devtools-log-monitor`](packages/recoil-devtools-log-monitor) | [![](https://img.shields.io/npm/v/recoil-devtools-log-monitor.svg)](https://www.npmjs.com/package/recoil-devtools-log-monitor) | [![](https://img.shields.io/npm/dm/recoil-devtools-log-monitor.svg)](https://www.npmjs.com/package/recoil-devtools-log-monitor) | State history UI                      |
 
 ### Utilities
 
-| Package                                                     | npm                                                                                                                  | Description     |
-| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------- |
-| [`recoil-devtools-logger`](packages/recoil-devtools-logger) | [![](https://img.shields.io/npm/v/recoil-devtools-logger.svg)](https://www.npmjs.com/package/recoil-devtools-logger) | Console logging |
-| [`recoil-devtools-themes`](packages/recoil-devtools-themes) | [![](https://img.shields.io/npm/v/recoil-devtools-themes.svg)](https://www.npmjs.com/package/recoil-devtools-themes) | Color themes    |
+| Package                                                     | npm                                                                                                                  | Version                                                                                                               | Downloads       | Description |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------- | ----------- |
+| [`recoil-devtools-logger`](packages/recoil-devtools-logger) | [![](https://img.shields.io/npm/v/recoil-devtools-logger.svg)](https://www.npmjs.com/package/recoil-devtools-logger) | [![](https://img.shields.io/npm/dm/recoil-devtools-logger.svg)](https://www.npmjs.com/package/recoil-devtools-logger) | Console logging |
+| [`recoil-devtools-themes`](packages/recoil-devtools-themes) | [![](https://img.shields.io/npm/v/recoil-devtools-themes.svg)](https://www.npmjs.com/package/recoil-devtools-themes) | [![](https://img.shields.io/npm/dm/recoil-devtools-themes.svg)](https://www.npmjs.com/package/recoil-devtools-themes) | Color themes    |
 
 ## Quick Start
 
