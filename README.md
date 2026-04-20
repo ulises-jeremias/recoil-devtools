@@ -1,7 +1,6 @@
 # Recoil DevTools
 
 [![CI](https://github.com/ulises-jeremias/recoil-devtools/actions/workflows/ci.yml/badge.svg)](https://github.com/ulises-jeremias/recoil-devtools/actions)
-[![npm version](https://img.shields.io/npm/v/recoil-devtools.svg)](https://www.npmjs.com/package/recoil-devtools)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 > Developer Tools to power-up [Recoil](https://recoiljs.org/) development workflow.
@@ -25,13 +24,20 @@ Recoil DevTools provides a complete set of debugging tools for Recoil-based appl
 
 This is a monorepo containing the following packages:
 
-| Package                                                               | Description                           | npm                                                                                        |
-| --------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [`recoil-devtools`](packages/recoil-devtools)                         | Main package with composited DevTools | [`recoil-devtools`](https://www.npmjs.com/package/recoil-devtools)                         |
-| [`recoil-devtools-logger`](packages/recoil-devtools-logger)           | Console logging                       | [`recoil-devtools-logger`](https://www.npmjs.com/package/recoil-devtools-logger)           |
-| [`recoil-devtools-log-monitor`](packages/recoil-devtools-log-monitor) | State history UI                      | [`recoil-devtools-log-monitor`](https://www.npmjs.com/package/recoil-devtools-log-monitor) |
-| [`recoil-devtools-dock`](packages/recoil-devtools-dock)               | Dock container                        | [`recoil-devtools-dock`](https://www.npmjs.com/package/recoil-devtools-dock)               |
-| [`recoil-devtools-themes`](packages/recoil-devtools-themes)           | Color themes                          | [`recoil-devtools-themes`](https://www.npmjs.com/package/recoil-devtools-themes)           |
+### Core Packages
+
+| Package                                                               | npm                                                                                                                            | Description                           |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------- |
+| [`recoil-devtools`](packages/recoil-devtools)                         | [![](https://img.shields.io/npm/v/recoil-devtools.svg)](https://www.npmjs.com/package/recoil-devtools)                         | Main package with composited DevTools |
+| [`recoil-devtools-dock`](packages/recoil-devtools-dock)               | [![](https://img.shields.io/npm/v/recoil-devtools-dock.svg)](https://www.npmjs.com/package/recoil-devtools-dock)               | Dock container                        |
+| [`recoil-devtools-log-monitor`](packages/recoil-devtools-log-monitor) | [![](https://img.shields.io/npm/v/recoil-devtools-log-monitor.svg)](https://www.npmjs.com/package/recoil-devtools-log-monitor) | State history UI                      |
+
+### Utilities
+
+| Package                                                     | npm                                                                                                                  | Description     |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------- |
+| [`recoil-devtools-logger`](packages/recoil-devtools-logger) | [![](https://img.shields.io/npm/v/recoil-devtools-logger.svg)](https://www.npmjs.com/package/recoil-devtools-logger) | Console logging |
+| [`recoil-devtools-themes`](packages/recoil-devtools-themes) | [![](https://img.shields.io/npm/v/recoil-devtools-themes.svg)](https://www.npmjs.com/package/recoil-devtools-themes) | Color themes    |
 
 ## Quick Start
 
