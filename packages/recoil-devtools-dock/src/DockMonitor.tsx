@@ -7,6 +7,7 @@ import {
   useCallback,
   type FC,
   type ReactNode,
+  type CSSProperties,
 } from 'react';
 import { Dock } from 'react-dock';
 import parseKey from 'parse-key';
@@ -59,6 +60,7 @@ export interface DockMonitorProps {
   changeMonitorKey?: string;
   fluid?: boolean;
   persistState?: boolean;
+  showShortcutButton?: boolean;
   children?: ReactNode;
 }
 
@@ -73,6 +75,7 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     defaultSize = 0.3,
     fluid = true,
     persistState = true,
+    showShortcutButton = true,
   } = props;
 
   const [isVisible, setIsVisible] = useState<boolean>(() => {
@@ -91,6 +94,18 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     return stored?.size ?? defaultSize;
   });
   const [childMonitorIndex, setChildMonitorIndex] = useState<number>(0);
+  const [showShortcuts, setShowShortcuts] = useState<boolean>(false);
+
+  // Format shortcut key for display
+  const formatShortcut = (key: string) => {
+    return key
+      .replace('ctrl', 'Ctrl')
+      .replace('meta', '⌘')
+      .replace('shift', '⇧')
+      .replace('alt', '⌥')
+      .split('-')
+      .join(' + ');
+  };
 
   const childrenCount = Children.count(children);
   if (childrenCount === 0) {
@@ -203,6 +218,46 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     }
   }, [isVisible, position, size, persistState]);
 
+  // Shortcut button styles
+  const shortcutButtonStyle: CSSProperties = {
+    position: 'absolute',
+    top: 4,
+    right: 4,
+    padding: '4px 8px',
+    fontSize: '10px',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '3px',
+    cursor: 'pointer',
+    zIndex: 1000,
+  };
+
+  // Shortcuts modal styles
+  const shortcutsModalStyle: CSSProperties = {
+    position: 'absolute',
+    top: 30,
+    right: 4,
+    padding: '12px',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    color: 'white',
+    borderRadius: '4px',
+    fontSize: '12px',
+    zIndex: 1000,
+    minWidth: '180px',
+  };
+
+  // Build shortcuts list
+  const shortcuts = [
+    { label: 'Toggle visibility', key: formatShortcut(toggleVisibilityKey) },
+    ...(changePositionKey
+      ? [{ label: 'Change position', key: formatShortcut(changePositionKey) }]
+      : []),
+    ...(changeMonitorKey && childrenCount > 1
+      ? [{ label: 'Change monitor', key: formatShortcut(changeMonitorKey) }]
+      : []),
+  ];
+
   return (
     <Dock
       position={position}
@@ -212,6 +267,38 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
       onSizeChange={handleSizeChange}
       dimMode="none"
     >
+      {showShortcutButton && (
+        <button
+          style={shortcutButtonStyle}
+          onClick={() => setShowShortcuts(!showShortcuts)}
+          onBlur={() => setShowShortcuts(false)}
+          title="Show keyboard shortcuts"
+        >
+          ⌨
+        </button>
+      )}
+      {showShortcuts && (
+        <div style={shortcutsModalStyle}>
+          <div style={{ marginBottom: 8, fontWeight: 'bold' }}>
+            Keyboard Shortcuts
+          </div>
+          {shortcuts.map((shortcut, idx) => (
+            <div
+              key={idx}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginBottom: 4,
+              }}
+            >
+              <span>{shortcut.label}</span>
+              <span style={{ fontWeight: 'bold', marginLeft: 16 }}>
+                {shortcut.key}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       {Children.map(children, (child: ReactNode, index) =>
         renderChild(child, index, props)
       )}
