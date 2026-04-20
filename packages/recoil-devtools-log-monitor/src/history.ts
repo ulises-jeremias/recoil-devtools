@@ -73,7 +73,8 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
       let currentState: StateTransaction = state.current;
 
       if (values?.length) {
-        values?.forEach(async (value) => {
+        // Use for...of instead of forEach to properly await async callbacks
+        for (const value of values) {
           const nextValue = await snapshot.getPromise(value);
           const previousValue = await previousSnapshot.getPromise(value);
 
@@ -84,7 +85,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
             previousValue,
             nextValue
           );
-        });
+        }
       } else {
         // @ts-ignore: For some reason this says that Iterable<RecoilValue<unknown>>
         // is not iterable.

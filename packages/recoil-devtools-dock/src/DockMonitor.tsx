@@ -94,14 +94,18 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
 
   const childrenCount = Children.count(children);
   if (childrenCount === 0) {
-    // eslint-disable-next-line no-console
+    console.error(
+      '<DockMonitor> requires at least one monitor inside. ' +
+        'Why dont you try <LogMonitor>? You can get it at ' +
+        'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.'
+    );
+  } else if (childrenCount > 1 && !changeMonitorKey) {
     console.error(
       '<DockMonitor> requires at least one monitor inside. ' +
         'Why don’t you try <LogMonitor>? You can get it at ' +
         'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.'
     );
   } else if (childrenCount > 1 && !changeMonitorKey) {
-    // eslint-disable-next-line no-console
     console.error(
       'You specified multiple monitors inside <DockMonitor> ' +
         'but did not provide `changeMonitorKey` prop to change them. ' +
@@ -129,7 +133,11 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
-      const isInput = target?.tagName === 'INPUT' || target?.tagName === 'SELECT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable;
+      const isInput =
+        target?.tagName === 'INPUT' ||
+        target?.tagName === 'SELECT' ||
+        target?.tagName === 'TEXTAREA' ||
+        target?.isContentEditable;
 
       // Ignore regular keys when focused on a field and no modifiers are active.
       if (!e.ctrlKey && !e.metaKey && !e.altKey && isInput) {
