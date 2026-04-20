@@ -1,5 +1,5 @@
-import React, { CSSProperties, FC, MouseEventHandler } from 'react';
-import JSONTree, { StylingValue } from 'react-json-tree';
+import { CSSProperties, FC, MouseEventHandler } from 'react';
+import { JSONTree } from 'react-json-tree';
 import { Base16Theme } from 'base16';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
 
@@ -14,13 +14,18 @@ const styles: { entry: CSSProperties; root: CSSProperties } = {
   },
 };
 
-const getDeepItem = (data: any, path: (string | number)[]) =>
-  path.reduce((obj, key) => obj && obj[key], data);
+const getDeepItem = (data: unknown, path: (string | number)[]): unknown =>
+  path.reduce(
+    (obj, key) =>
+      obj == null ? undefined : (obj as Record<string | number, unknown>)[key],
+    data
+  );
+
 const dataIsEqual = (
-  data: any,
+  data: unknown,
   previousData: unknown,
-  keyPath: (string | number)[]
-) => {
+  keyPath: readonly (string | number)[]
+): boolean => {
   const path = [...keyPath].reverse().slice(1);
 
   return getDeepItem(data, path) === getDeepItem(previousData, path);
@@ -73,18 +78,28 @@ export const LogMonitorEntry: FC<Props> = ({
             typeof previousState !== 'undefined'
               ? select(previousState)
               : undefined;
-          const getValueStyle: StylingValue = ({ style }, _, keyPath) => ({
+          const getValueStyle = (
+            { style }: any,
+            _: unknown,
+            keyPath: unknown
+          ) => ({
             style: {
               ...style,
-              backgroundColor: dataIsEqual(data, previousData, keyPath)
+              backgroundColor: dataIsEqual(
+                data,
+                previousData,
+                (keyPath ?? []) as readonly (string | number)[]
+              )
                 ? 'transparent'
                 : theme.base01,
             },
           });
-          const getNestedNodeStyle: StylingValue = ({ style }, keyPath) => ({
+          const getNestedNodeStyle = ({ style }: any, keyPath: unknown) => ({
             style: {
               ...style,
-              ...(keyPath.length > 1 ? {} : styles.root),
+              ...(((keyPath as readonly (string | number)[])?.length ?? 0) > 1
+                ? {}
+                : styles.root),
             },
           });
           nextTheme = {
@@ -102,7 +117,7 @@ export const LogMonitorEntry: FC<Props> = ({
             data={data}
             invertTheme={false}
             keyPath={['state']}
-            shouldExpandNode={shouldExpandNode}
+            shouldExpandNodeInitially={shouldExpandNodeInitially}
           />
         );
       } catch (err) {
@@ -135,7 +150,11 @@ export const LogMonitorEntry: FC<Props> = ({
     }
   };
 
-  const shouldExpandNode = (_: (string | number)[], __: any, level: number) => {
+  const shouldExpandNodeInitially = (
+    _: readonly (string | number)[],
+    _1: unknown,
+    level: number
+  ): boolean => {
     return expandStateRoot && level === 0;
   };
 
@@ -147,7 +166,7 @@ export const LogMonitorEntry: FC<Props> = ({
   return (
     <div
       style={{
-        opacity: selected ? 0.4 : inFuture ? 0.6 : 1, // eslint-disable-line no-nested-ternary
+        opacity: selected ? 0.4 : inFuture ? 0.6 : 1,  
         textDecoration: collapsed ? 'line-through' : 'none',
         color: theme.base06,
       }}

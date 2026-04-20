@@ -1,5 +1,5 @@
-import React, { CSSProperties, FC, MouseEventHandler } from 'react';
-import JSONTree from 'react-json-tree';
+import { CSSProperties, FC, MouseEventHandler } from 'react';
+import { JSONTree } from 'react-json-tree';
 import { Base16Theme } from 'base16';
 
 const styles = {
@@ -32,7 +32,11 @@ const LogMonitorAction: FC<Props> = ({
   onClick,
   style,
 }) => {
-  const shouldExpandNode = (_: (string | number)[], __: any, level: number) => {
+  const shouldExpandNodeInitially = (
+    _: readonly (string | number)[],
+    __: unknown,
+    level: number
+  ): boolean => {
     return expandActionRoot && level === 0;
   };
 
@@ -49,7 +53,7 @@ const LogMonitorAction: FC<Props> = ({
           invertTheme={false}
           keyPath={['action']}
           data={payload}
-          shouldExpandNode={shouldExpandNode}
+          shouldExpandNodeInitially={shouldExpandNodeInitially}
         />
       ) : (
         ''

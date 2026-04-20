@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Base16Theme } from 'base16';
 import LogMonitorEntry from './LogMonitorEntry';
 
@@ -38,7 +38,9 @@ const LogMonitorEntryList: FC<Props> = ({
     {stagedActionIds.map((stagedActionId, i) => {
       const actionId = stagedActionId;
       const action = actionsById[actionId];
-      const { previousState, nextState: state, error } = computedStates[i];
+      const computedState = computedStates[i];
+      if (!computedState) return null;
+      const { previousState, nextState: state, error } = computedState;
 
       return (
         <LogMonitorEntry

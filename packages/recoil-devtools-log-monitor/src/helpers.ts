@@ -7,12 +7,12 @@
  * findLastIndex immediately returns that element index. Otherwise, findLastIndex returns -1.
  */
 export const findLastIndex = <T>(
-  array: Array<T>,
-  predicate: (value: T, index: number, obj: T[]) => boolean
+  array: readonly T[],
+  predicate: (value: T, index: number, obj: readonly T[]) => boolean
 ): number => {
   let l = array.length;
   while (l--) {
-    if (predicate(array[l], l, array)) return l;
+    if (predicate(array[l] as T, l, array)) return l;
   }
   return -1;
 };

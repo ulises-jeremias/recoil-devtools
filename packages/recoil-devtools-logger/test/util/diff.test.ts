@@ -70,10 +70,10 @@ describe('diffLogger', () => {
 
   beforeEach(() => {
     logger = {
-      log: jest.fn(),
-      groupCollapsed: jest.fn(),
-      groupEnd: jest.fn(),
-      group: jest.fn(),
+      log: vi.fn(),
+      groupCollapsed: vi.fn(),
+      groupEnd: vi.fn(),
+      group: vi.fn(),
     };
   });
 

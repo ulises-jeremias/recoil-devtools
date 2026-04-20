@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC } from 'react';
+import { CSSProperties, FC } from 'react';
 import { Base16Theme } from 'base16';
 import LogMonitorButton from './LogMonitorButton';
 
@@ -32,24 +32,32 @@ const LogMonitorButtonBar: FC<Props> = ({
   onResetClick,
 }) => (
   <div style={{ ...style, borderColor: theme.base02 }}>
-    <LogMonitorButton theme={theme} onClick={onResetClick} enabled>
+    <LogMonitorButton
+      theme={theme}
+      onClick={onResetClick ?? (() => {})}
+      enabled
+    >
       Reset
     </LogMonitorButton>
     <LogMonitorButton
       theme={theme}
-      onClick={onRollbackClick}
+      onClick={onRollbackClick ?? (() => {})}
       enabled={hasStates}
     >
       Revert
     </LogMonitorButton>
     <LogMonitorButton
       theme={theme}
-      onClick={onSweepClick}
+      onClick={onSweepClick ?? (() => {})}
       enabled={hasSkippedActions}
     >
       Sweep
     </LogMonitorButton>
-    <LogMonitorButton theme={theme} onClick={onCommitClick} enabled={hasStates}>
+    <LogMonitorButton
+      theme={theme}
+      onClick={onCommitClick ?? (() => {})}
+      enabled={hasStates}
+    >
       Commit
     </LogMonitorButton>
   </div>

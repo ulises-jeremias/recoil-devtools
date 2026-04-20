@@ -102,12 +102,8 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
         }
       }
 
-      const {
-        actionsById,
-        computedStates,
-        stagedActionIds,
-        snapshotsById,
-      } = state;
+      const { actionsById, computedStates, stagedActionIds, snapshotsById } =
+        state;
       const actionId = stagedActionIds.length;
       const nextActionsById = {
         ...actionsById,
@@ -159,13 +155,60 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   const handleReset = () => {
     const { currentInitialIdx, snapshotsById, stagedActionIds } = state;
     const actionId = stagedActionIds[currentInitialIdx];
+    if (actionId === undefined) return;
     const initialSnapshot = snapshotsById[actionId];
+    if (!initialSnapshot) return;
     gotoSnapshot(initialSnapshot);
     setState(initialStateValue);
   };
 
   const handleSweep = () => {
-    console.warn('Log Monitor: Sweep is not implemented yet');
+    // Sweep removes skipped (disabled) actions from the timeline
+    const {
+      actionsById,
+      computedStates,
+      stagedActionIds,
+      snapshotsById,
+      skippedActionIds,
+    } = state;
+
+    if (Object.values(skippedActionIds).every((v) => v === false)) {
+      // No skipped actions, nothing to sweep
+      return;
+    }
+
+    // Filter out skipped actions
+    const nextStagedActionIds: number[] = [];
+    const nextActionsById: Record<number, unknown> = {};
+    const nextComputedStates: StateTransaction[] = [];
+    const nextSnapshotsById: Record<number, Snapshot> = {};
+
+    let newActionId = 0;
+    stagedActionIds.forEach((actionId, idx) => {
+      if (!skippedActionIds[actionId]) {
+        nextStagedActionIds.push(newActionId);
+        nextActionsById[newActionId] = actionsById[actionId];
+        const computedState = computedStates[idx];
+        if (computedState) {
+          nextComputedStates.push(computedState);
+        }
+        const snapshot = snapshotsById[actionId];
+        if (snapshot) {
+          nextSnapshotsById[newActionId] = snapshot;
+        }
+        newActionId++;
+      }
+    });
+
+    setState({
+      ...state,
+      stagedActionIds: nextStagedActionIds,
+      actionsById: nextActionsById,
+      computedStates: nextComputedStates,
+      snapshotsById: nextSnapshotsById,
+      skippedActionIds: [],
+      currentInitialIdx: state.currentInitialIdx,
+    });
   };
 
   const handleToggleAction = (id: number) => {

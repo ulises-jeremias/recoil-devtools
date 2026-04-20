@@ -1,17 +1,42 @@
-import React, {
+import {
   isValidElement,
   cloneElement,
   Children,
-  FC,
   useEffect,
   useState,
   useCallback,
-  ReactNode,
+  type FC,
+  type ReactNode,
 } from 'react';
-import Dock from 'react-dock';
+import { Dock } from 'react-dock';
 import parseKey from 'parse-key';
-import { RecoilState } from 'recoil';
+import type { RecoilState } from 'recoil';
 import { POSITIONS } from './constants';
+
+const STORAGE_KEY = 'recoil-devtools-dock-state';
+
+interface DockState {
+  isVisible?: boolean;
+  position?: Position;
+  size?: number;
+}
+
+const loadState = (): DockState | null => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : null;
+  } catch {
+    return null;
+  }
+};
+
+const saveState = (state: DockState) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Ignore storage errors
+  }
+};
 
 interface KeyObject {
   name: string;
@@ -22,10 +47,10 @@ interface KeyObject {
   sequence: string;
 }
 
-type Position = 'left' | 'top' | 'right' | 'bottom';
+type Position = (typeof POSITIONS)[number];
 
 export interface DockMonitorProps {
-  values?: RecoilState<any>[];
+  values?: RecoilState<unknown>[];
   defaultPosition?: Position;
   defaultIsVisible?: boolean;
   defaultSize?: number;
@@ -33,6 +58,7 @@ export interface DockMonitorProps {
   changePositionKey?: string;
   changeMonitorKey?: string;
   fluid?: boolean;
+  persistState?: boolean;
   children?: ReactNode;
 }
 
@@ -46,11 +72,24 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     defaultPosition = 'right',
     defaultSize = 0.3,
     fluid = true,
+    persistState = true,
   } = props;
 
-  const [isVisible, setIsVisible] = useState<boolean>(defaultIsVisible);
-  const [position, setPosition] = useState<Position>(defaultPosition);
-  const [size, setSize] = useState<number>(defaultSize);
+  const [isVisible, setIsVisible] = useState<boolean>(() => {
+    if (!persistState) return defaultIsVisible;
+    const stored = loadState();
+    return stored?.isVisible ?? defaultIsVisible;
+  });
+  const [position, setPosition] = useState<Position>(() => {
+    if (!persistState) return defaultPosition;
+    const stored = loadState();
+    return stored?.position ?? defaultPosition;
+  });
+  const [size, setSize] = useState<number>(() => {
+    if (!persistState) return defaultSize;
+    const stored = loadState();
+    return stored?.size ?? defaultSize;
+  });
   const [childMonitorIndex, setChildMonitorIndex] = useState<number>(0);
 
   const childrenCount = Children.count(children);
@@ -87,46 +126,42 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     );
   };
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    // Ignore regular keys when focused on a field
-    // and no modifiers are active.
-    if (
-      !e.ctrlKey &&
-      !e.metaKey &&
-      !e.altKey &&
-      ((e.target! as { tagName?: string }).tagName === 'INPUT' ||
-        (e.target! as { tagName?: string }).tagName === 'SELECT' ||
-        (e.target! as { tagName?: string }).tagName === 'TEXTAREA' ||
-        (e.target! as { isContentEditable?: boolean }).isContentEditable)
-    ) {
-      return;
-    }
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const isInput = target?.tagName === 'INPUT' || target?.tagName === 'SELECT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable;
 
-    const visibilityKey = parseKey(toggleVisibilityKey);
-    const positionKey = parseKey(changePositionKey);
+      // Ignore regular keys when focused on a field and no modifiers are active.
+      if (!e.ctrlKey && !e.metaKey && !e.altKey && isInput) {
+        return;
+      }
 
-    let monitorKey;
-    if (changeMonitorKey) {
-      monitorKey = parseKey(changeMonitorKey);
-    }
+      const visibilityKey = parseKey(toggleVisibilityKey);
+      const positionKey = parseKey(changePositionKey);
 
-    if (matchesKey(visibilityKey, e)) {
-      e.preventDefault();
-      setIsVisible((isVisible) => !isVisible);
-    } else if (matchesKey(positionKey, e)) {
-      e.preventDefault();
-      setPosition(
-        (position) =>
-          POSITIONS[(POSITIONS.indexOf(position) + 1) % POSITIONS.length]
-      );
-    } else if (matchesKey(monitorKey, e)) {
-      e.preventDefault();
-      setChildMonitorIndex(
-        (childMonitorIndex) =>
-          (childMonitorIndex + 1) % Children.count(children)
-      );
-    }
-  }, []);
+      let monitorKey;
+      if (changeMonitorKey) {
+        monitorKey = parseKey(changeMonitorKey);
+      }
+
+      if (matchesKey(visibilityKey, e)) {
+        e.preventDefault();
+        setIsVisible((prevIsVisible) => !prevIsVisible);
+      } else if (matchesKey(positionKey, e)) {
+        e.preventDefault();
+        setPosition((prevPos) => {
+          const currentIdx = POSITIONS.indexOf(prevPos);
+          return POSITIONS[(currentIdx + 1) % POSITIONS.length] ?? 'right';
+        });
+      } else if (matchesKey(monitorKey, e)) {
+        e.preventDefault();
+        setChildMonitorIndex(
+          (prevIdx) => (prevIdx + 1) % Children.count(children)
+        );
+      }
+    },
+    [toggleVisibilityKey, changePositionKey, changeMonitorKey, children]
+  );
 
   const handleSizeChange = (requestedSize: number) => {
     setSize(requestedSize);
@@ -150,7 +185,15 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
-  }, []);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
+
+  // Persist state changes to localStorage
+  useEffect(() => {
+    if (persistState) {
+      saveState({ isVisible, position, size });
+    }
+  }, [isVisible, position, size, persistState]);
 
   return (
     <Dock
