@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   RecoilState,
   Snapshot,
   useGotoRecoilSnapshot,
+  useRecoilSnapshot,
   useRecoilTransactionObserver_UNSTABLE,
 } from 'recoil';
 import { findLastIndex } from './helpers';
@@ -41,6 +42,120 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   >(null);
 
   const gotoSnapshot = useGotoRecoilSnapshot();
+  const currentSnapshot = useRecoilSnapshot();
+
+  // Capture initial state on mount to fix issue #45
+  // Logs were missing before useEffect hook because initial state wasn't captured
+  useEffect(() => {
+    const captureInitialState = async () => {
+      const getInitialPayload = (
+        payload: any,
+        value: any,
+        _: any,
+        nextValue: any
+      ) => ({
+        ...payload,
+        [value.key]: nextValue,
+      });
+
+      const getInitialState = (
+        currentState: StateTransaction,
+        value: any,
+        previousValue: any,
+        nextValue: any
+      ) => {
+        const { previousState, nextState } = currentState;
+        return {
+          previousState: {
+            ...previousState,
+            [value.key]: previousValue,
+          },
+          nextState: {
+            ...nextState,
+            [value.key]: nextValue,
+          },
+        };
+      };
+
+      try {
+        let payload = {};
+        let currentState: StateTransaction = {
+          previousState: {},
+          nextState: {},
+        };
+
+        if (values?.length) {
+          for (const value of values) {
+            const nextValue = await currentSnapshot.getPromise(value);
+            const previousValue = nextValue; // Initial state = previous value
+
+            payload = getInitialPayload(
+              payload,
+              value,
+              previousValue,
+              nextValue
+            );
+            currentState = getInitialState(
+              currentState,
+              value,
+              previousValue,
+              nextValue
+            );
+          }
+        } else {
+          // Capture all atoms in the snapshot
+          for (const node of currentSnapshot.getNodes_UNSTABLE()) {
+            try {
+              const nextValue = await currentSnapshot.getPromise(node);
+              const previousValue = nextValue;
+
+              payload = getInitialPayload(
+                payload,
+                node,
+                previousValue,
+                nextValue
+              );
+              currentState = getInitialState(
+                currentState,
+                node,
+                previousValue,
+                nextValue
+              );
+            } catch {
+              // Skip atoms that can't be accessed
+            }
+          }
+        }
+
+        // Only add if there's actual state to record
+        if (Object.keys(payload).length > 0) {
+          const { actionsById, snapshotsById } = initialStateValue;
+          const actionId = 0;
+
+          setState({
+            ...initialStateValue,
+            actionsById: {
+              ...actionsById,
+              [actionId]: {
+                type: 'Initial State',
+                ...payload,
+              },
+            },
+            computedStates: [{ ...currentState }],
+            stagedActionIds: [actionId],
+            snapshotsById: {
+              ...snapshotsById,
+              [actionId]: currentSnapshot,
+            },
+          });
+        }
+      } catch (err) {
+        // Silently ignore errors when capturing initial state
+      }
+    };
+
+    captureInitialState();
+  }, []); // Empty deps - only run on mount
 
   const getPayload = (payload: any, value: any, _: any, nextValue: any) => ({
     ...payload,
