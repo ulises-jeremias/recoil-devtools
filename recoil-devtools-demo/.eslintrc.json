@@ -1,0 +1,9 @@
+{
+  "extends": "../.eslint.config.mjs",
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "ignorePatterns": ["dist"]
+}

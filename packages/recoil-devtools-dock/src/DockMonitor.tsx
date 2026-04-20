@@ -10,8 +10,33 @@ import {
 } from 'react';
 import { Dock } from 'react-dock';
 import parseKey from 'parse-key';
-import { RecoilState } from 'recoil';
+import type { RecoilState } from 'recoil';
 import { POSITIONS } from './constants';
+
+const STORAGE_KEY = 'recoil-devtools-dock-state';
+
+interface DockState {
+  isVisible?: boolean;
+  position?: Position;
+  size?: number;
+}
+
+const loadState = (): DockState | null => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : null;
+  } catch {
+    return null;
+  }
+};
+
+const saveState = (state: DockState) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Ignore storage errors
+  }
+};
 
 interface KeyObject {
   name: string;
@@ -25,7 +50,7 @@ interface KeyObject {
 type Position = (typeof POSITIONS)[number];
 
 export interface DockMonitorProps {
-  values?: RecoilState<any>[];
+  values?: RecoilState<unknown>[];
   defaultPosition?: Position;
   defaultIsVisible?: boolean;
   defaultSize?: number;
@@ -33,6 +58,7 @@ export interface DockMonitorProps {
   changePositionKey?: string;
   changeMonitorKey?: string;
   fluid?: boolean;
+  persistState?: boolean;
   children?: ReactNode;
 }
 
@@ -46,11 +72,24 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     defaultPosition = 'right',
     defaultSize = 0.3,
     fluid = true,
+    persistState = true,
   } = props;
 
-  const [isVisible, setIsVisible] = useState<boolean>(defaultIsVisible);
-  const [position, setPosition] = useState<Position>(defaultPosition);
-  const [size, setSize] = useState<number>(defaultSize);
+  const [isVisible, setIsVisible] = useState<boolean>(() => {
+    if (!persistState) return defaultIsVisible;
+    const stored = loadState();
+    return stored?.isVisible ?? defaultIsVisible;
+  });
+  const [position, setPosition] = useState<Position>(() => {
+    if (!persistState) return defaultPosition;
+    const stored = loadState();
+    return stored?.position ?? defaultPosition;
+  });
+  const [size, setSize] = useState<number>(() => {
+    if (!persistState) return defaultSize;
+    const stored = loadState();
+    return stored?.size ?? defaultSize;
+  });
   const [childMonitorIndex, setChildMonitorIndex] = useState<number>(0);
 
   const childrenCount = Children.count(children);
@@ -148,6 +187,13 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
+
+  // Persist state changes to localStorage
+  useEffect(() => {
+    if (persistState) {
+      saveState({ isVisible, position, size });
+    }
+  }, [isVisible, position, size, persistState]);
 
   return (
     <Dock

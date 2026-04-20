@@ -1,5 +1,5 @@
-node_modules
-.awcache
-build
-.env.development
-.env.production
+dist/
+.env
+.env.local
+.env.*.local
+node_modules/

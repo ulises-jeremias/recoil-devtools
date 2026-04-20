@@ -165,7 +165,40 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   };
 
   const handleSweep = () => {
-    console.warn('Log Monitor: Sweep is not implemented yet');
+    // Sweep removes skipped (disabled) actions from the timeline
+    const { actionsById, computedStates, stagedActionIds, snapshotsById, skippedActionIds } = state;
+    
+    if (Object.values(skippedActionIds).every(v => v === false)) {
+      // No skipped actions, nothing to sweep
+      return;
+    }
+
+    // Filter out skipped actions
+    const nextStagedActionIds: number[] = [];
+    const nextActionsById: Record<number, unknown> = {};
+    const nextComputedStates: StateTransaction[] = [];
+    const nextSnapshotsById: Record<number, unknown> = {};
+    
+    let newActionId = 0;
+    stagedActionIds.forEach((actionId, idx) => {
+      if (!skippedActionIds[actionId]) {
+        nextStagedActionIds.push(newActionId);
+        nextActionsById[newActionId] = actionsById[actionId];
+        nextComputedStates.push(computedStates[idx]);
+        nextSnapshotsById[newActionId] = snapshotsById[actionId];
+        newActionId++;
+      }
+    });
+
+    setState({
+      ...state,
+      stagedActionIds: nextStagedActionIds,
+      actionsById: nextActionsById,
+      computedStates: nextComputedStates,
+      snapshotsById: nextSnapshotsById,
+      skippedActionIds: [],
+      currentInitialIdx: state.currentInitialIdx,
+    });
   };
 
   const handleToggleAction = (id: number) => {
