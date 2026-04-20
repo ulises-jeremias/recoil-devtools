@@ -1,62 +1,50 @@
-# Recoil Devtools
+# Recoil DevTools
 
-[![npm](https://img.shields.io/npm/v/recoil-devtools.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/recoil-devtools)
-[![npm](https://img.shields.io/npm/dm/recoil-devtools.svg?maxAge=2592000?style=plastic)](https://www.npmjs.com/package/recoil-devtools)
+[![npm](https://img.shields.io/npm/v/recoil-devtools.svg)](https://npmjs.com/package/recoil-devtools)
+[![Downloads](https://img.shields.io/npm/dm/recoil-devtools.svg)](https://npmjs.com/package/recoil-devtools)
 
-## Table of contents
+A composited DevTools component that combines [DockMonitor](recoil-devtools-dock) and [LogMonitor](recoil-devtools-log-monitor) in a single component.
 
-- [Install](#install)
-- [Usage](#usage)
-- [To Do](#to-do)
-- [License](#license)
-
-## Install
+## Installation
 
 ```sh
-$ yarn add recoil-devtools
+pnpm add recoil-devtools
 ```
-
-Typescript types are also available.
 
 ## Usage
 
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { atom, selector, RecoilRoot } from 'recoil';
+```tsx
+import { RecoilRoot } from 'recoil';
 import { RecoilDevtools } from 'recoil-devtools';
-import { RecoilLogger } from 'recoil-devtools-logger';
+import { atom } from 'recoil';
 
-const a = atom({
-  /* ... */
-});
-const b = selector({
-  /* ... */
-});
-const c = atom({
-  /* ... */
+const countAtom = atom({
+  key: 'count',
+  default: 0,
 });
 
-const App = () => (
-  <RecoilRoot>
-    <RecoilDevtools values={[a, b]}>
-      {/* logs for related recoil values "a" and "b" */}
-      <RecoilLogger />
-    </RecoilDevtools>
-
-    {/* code ... */}
-  </RecoilRoot>
-);
-
-ReactDOM.render(<App />, document.getElementById('root'));
+function App() {
+  return (
+    <RecoilRoot>
+      <RecoilDevtools values={[countAtom]} />
+      {/* Your app */}
+    </RecoilRoot>
+  );
+}
 ```
 
-## To Do
+## Props
 
-- [ ] Clean up code, because it's very messy, to be honest
-- [ ] Write tests
+| Prop               | Type            | Default       | Description             |
+| ------------------ | --------------- | ------------- | ----------------------- |
+| `values`           | `RecoilState[]` | All atoms     | Specific atoms to track |
+| `theme`            | `string`        | `"ulisesjcf"` | Color theme             |
+| `defaultIsVisible` | `boolean`       | `true`        | Initial visibility      |
+| `defaultPosition`  | `Position`      | `"right"`     | Dock position           |
 
-Feel free to create PR for any of those tasks!
+## Theme
+
+Available themes: `apath`, `base8`, `base16`, `base16light`, `bespin`, `brewer`, `bright`, `chalk`, `codeschool`, `dracula`, `duotone`, `eighties`, `embedded`, `emacs`, `flat`, `github`, `google`, `grayscale`, `greenscreen`, `harmonic`, `hopper`, `horizon`, `ice`, `inspired`, `irblack`, `lattice`, `lucario`, `material`, `mexico`, `monokai`, `new`, `nord`, `ocean`, `one-light`, `outer`, `panda`, `paraiso`, `pop`, `railscasts`, `recoil`, `rose`, `seti`, `shapeshifter`, `slate`, `solarized`, `spaceduck`, `spoon`, `sunburst`, `tomorrow`, `tomorrownight`, `tomorrownightblue`, `tomorrownightbright`, `twilight`, `ulisesjcf`, `vascular`, `vice`, `xcode`.
 
 ## License
 

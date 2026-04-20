@@ -1,61 +1,68 @@
 # Recoil DevTools Dock Monitor
 
-A resizable and movable dock for [Recoil DevTools](https://github.com/ulises-jeremias/recoil-devtools).
-Powered by [React Dock](https://github.com/alexkuz/react-dock).
+[![npm](https://img.shields.io/npm/v/recoil-devtools-dock.svg)](https://npmjs.com/package/recoil-devtools-dock)
+[![Downloads](https://img.shields.io/npm/dm/recoil-devtools-dock.svg)](https://npmjs.com/package/recoil-devtools-dock)
 
-### Installation
+A resizable and movable dock for Recoil DevTools, powered by [React Dock](https://github.com/alexkuz/react-dock).
 
+## Installation
+
+```sh
+pnpm add recoil-devtools-dock
 ```
-yarn add recoil-devtools-dock
-```
-
-### Usage
-
-Wrap any other recoil DevTools monitor in `DockMonitor` to make it dockable to different screen edges.
-For example, you can use it together with [`LogMonitor`](https://github.com/ulises-jeremias/recoil-devtools/tree/master/packages/recoil-devtools-log-monitor):
 
 ## Usage
 
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import LogMonitor from 'recoil-devtools-log-monitor';
-import DockMonitor from 'recoil-devtools-dock';
+```tsx
+import { RecoilRoot } from 'recoil';
+import { DockMonitor } from 'recoil-devtools-dock';
+import { LogMonitor } from 'recoil-devtools-log-monitor';
 
-const App = () => (
-  <RecoilRoot>
-    <DockMonitor
-      toggleVisibilityKey="ctrl-h"
-      changePositionKey="ctrl-q"
-      changeMonitorKey="ctrl-m"
-    >
-      <LogMonitor />
-    </DockMonitor>
-  </RecoilRoot>
-);
-
-ReactDOM.render(<App />, document.getElementById('root'));
+function App() {
+  return (
+    <RecoilRoot>
+      <DockMonitor>
+        <LogMonitor />
+      </DockMonitor>
+    </RecoilRoot>
+  );
+}
 ```
 
-[Read how to start using recoil DevTools.](https://github.com/ulises-jeremias/recoil-devtools)
+## Props
 
-#### Multiple Monitors
+| Prop                  | Type        | Default                             | Description                    |
+| --------------------- | ----------- | ----------------------------------- | ------------------------------ |
+| `children`            | `ReactNode` | (required) Child monitor components |
+| `toggleVisibilityKey` | `string`    | `"ctrl-h"`                          | Key to toggle visibility       |
+| `changePositionKey`   | `string`    | `"ctrl-q"`                          | Key to change dock position    |
+| `changeMonitorKey`    | `string`    | `"ctrl-m"`                          | Key to switch monitors         |
+| `fluid`               | `boolean`   | `true`                              | Size as fraction vs fixed      |
+| `defaultSize`         | `number`    | `0.3`                               | Dock size                      |
+| `defaultPosition`     | `Position`  | `"right"`                           | Dock position                  |
+| `defaultIsVisible`    | `boolean`   | `true`                              | Initial visibility             |
+| `persistState`        | `boolean`   | `true`                              | Persist to localStorage        |
+| `showShortcutButton`  | `boolean`   | `true`                              | Show keyboard shortcuts button |
 
-You can put more than one monitor inside `<DockMonitor>`. There will still be a single dock, but you will be able to switch between different monitors by pressing a key specified as `changeMonitorKey` prop.
+## Keyboard Shortcuts
 
-### Props
+| Shortcut | Action            |
+| -------- | ----------------- |
+| `Ctrl+H` | Toggle visibility |
+| `Ctrl+Q` | Change position   |
+| `Ctrl+M` | Change monitor    |
 
-| Name                  | Description                                                                                                                                                                                                              |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `children`            | Any valid Recoil DevTools monitor. Required.                                                                                                                                                                              |
-| `toggleVisibilityKey` | A key or a key combination that toggles the dock visibility. Must be recognizable by [parse-key](https://github.com/thlorenz/parse-key) (for example, `'ctrl-h'`). Required.                                             |
-| `changePositionKey`   | A key or a key combination that toggles the dock position. Must be recognizable by [parse-key](https://github.com/thlorenz/parse-key) (for example, `'ctrl-w'`). Required.                                               |
-| `changeMonitorKey`    | A key or a key combination that switches the currently visible monitor. Must be recognizable by [parse-key](https://github.com/thlorenz/parse-key) (for example, `'ctrl-m'`). Required if you use more than one monitor. |
-| `fluid`               | When `true`, the dock size is a fraction of the window size, fixed otherwise. Optional. By default set to `true`.                                                                                                        |
-| `defaultSize`         | Size of the dock. When `fluid` is `true`, a float (`0.5` means half the window size). When `fluid` is `false`, a width in pixels. Optional. By default set to `0.3` (3/10th of the window size).                         |
-| `defaultPosition`     | Where the dock appears on the screen. Valid values: `'left'`, `'top'`, `'right'`, `'bottom'`. Optional. By default set to `'right'`.                                                                                     |
-| `defaultIsVisible`    | Defines whether dock should be open by default. A value of `true` means that it's open when the page/app loads.                                                                                                          |
+Click the ⌨ button in the dock to see available shortcuts.
 
-### License
+## Multiple Monitors
 
-MIT
+```tsx
+<DockMonitor changeMonitorKey="ctrl-m">
+  <LogMonitor />
+  <Inspector />
+</DockMonitor>
+```
+
+## License
+
+[MIT](./LICENSE)
