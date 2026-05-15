@@ -1,7 +1,7 @@
 {
   "name": "recoil-devtools-logger",
-  "version": "1.0.0",
-  "description": "Recoil logging tool — replay state changes as they happened in your browser",
+  "version": "1.0.1",
+  "description": "Recoil console logger — print state changes and actions to the browser console",
   "license": "MIT",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",
   "homepage": "https://github.com/ulises-jeremias/recoil-devtools/tree/main/packages/recoil-devtools-logger#readme",
@@ -40,7 +40,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=18"

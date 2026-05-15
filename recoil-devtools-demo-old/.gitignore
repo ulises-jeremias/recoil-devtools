@@ -1,5 +1,0 @@
-node_modules
-.awcache
-build
-.env.development
-.env.production

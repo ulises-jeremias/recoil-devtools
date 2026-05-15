@@ -1,6 +1,6 @@
 {
   "name": "recoil-devtools-dock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Resizable and movable dock for Recoil DevTools",
   "license": "MIT",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",
@@ -39,7 +39,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "src",
+    "CHANGELOG.md"
   ],
   "engines": {
     "node": ">=18"

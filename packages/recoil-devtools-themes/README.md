@@ -55,6 +55,16 @@ interface Base16Theme {
 }
 ```
 
+## Demo
+
+A live, runnable demo using all packages lives in [`recoil-devtools-demo/`](../../recoil-devtools-demo) (Vite + React 18). Run it locally:
+
+```sh
+cd recoil-devtools-demo && pnpm install && pnpm dev
+```
+
+Or try it online: <https://ulises-jeremias.github.io/recoil-devtools/>
+
 ## License
 
 [MIT](./LICENSE)

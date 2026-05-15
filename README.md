@@ -41,12 +41,14 @@ This is a monorepo containing the following packages:
 
 ## Quick Start
 
+🌐 **Live demo:** <https://ulises-jeremias.github.io/recoil-devtools/>
+
 ```bash
 # Install all packages
 pnpm install
 
-# Run the demo
-pnpm dev
+# Run the demo locally
+pnpm --filter recoil-devtools-demo dev
 ```
 
 ### Basic Usage
@@ -81,6 +83,20 @@ function App() {
 - Node.js 18+
 - React 18+
 - Recoil 0.7+
+
+## Project status
+
+> **Heads-up about Recoil**
+>
+> Meta archived the upstream [Recoil](https://github.com/facebookexperimental/Recoil) repository in early 2025. Recoil itself still works on React 18, but it no longer receives upstream updates.
+>
+> This monorepo continues as an independent, community-maintained set of devtools for projects that are still on Recoil. There is no ongoing dependency on upstream Recoil development.
+>
+> If you are starting a new project, consider modern alternatives such as [Jotai](https://jotai.org/), [Zustand](https://zustand.docs.pmnd.rs/), or React's built-in primitives. If you already use Recoil, these devtools are designed to keep your debugging story productive.
+
+## Contributing
+
+Pull requests, bug reports, and feedback are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
