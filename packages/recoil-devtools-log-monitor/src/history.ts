@@ -155,6 +155,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
     };
 
     captureInitialState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty deps - only run on mount
 
   const getPayload = (payload: any, value: any, _: any, nextValue: any) => ({

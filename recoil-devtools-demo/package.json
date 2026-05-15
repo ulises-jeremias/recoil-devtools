@@ -1,7 +1,7 @@
 {
   "name": "recoil-devtools-demo",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,12 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "recoil-devtools": "workspace:*",
+    "recoil-devtools-dock": "workspace:*",
+    "recoil-devtools-log-monitor": "workspace:*",
+    "recoil-devtools-logger": "workspace:*",
+    "recoil-devtools-themes": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.3.18",

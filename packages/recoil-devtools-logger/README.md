@@ -34,16 +34,16 @@ function App() {
 
 ## Props
 
-| Prop        | Type            | Default                     | Description |
-| ----------- | --------------- | --------------------------- | ----------- |
-| `values`    | `RecoilState[]` | Specific atoms to track     |
-| `predicate` | `Function`      | Filter which actions to log |
-| `collapsed` | `boolean`       | Collapse log groups         |
-| `duration`  | `boolean`       | Print action duration       |
-| `timestamp` | `boolean`       | Print timestamp             |
-| `level`     | `string`        | Log level                   |
-| `colors`    | `object`        | Custom colors               |
-| `logger`    | `object`        | Custom logger               |
+| Prop        | Type            | Default    | Description                                  |
+| ----------- | --------------- | ---------- | -------------------------------------------- |
+| `values`    | `RecoilState[]` | All atoms  | Specific atoms to track                      |
+| `predicate` | `Function`      | `false`    | Filter which actions to log                  |
+| `collapsed` | `boolean`       | `false`    | Collapse log groups in the console           |
+| `duration`  | `boolean`       | `true`     | Print duration of each action                |
+| `timestamp` | `boolean`       | `true`     | Print timestamp with each action             |
+| `level`     | `string`        | `"log"`    | Console method to use (`log`, `warn`, etc.)  |
+| `colors`    | `object`        | (built-in) | Custom title / state / action colors         |
+| `logger`    | `object`        | `console`  | Custom logger implementing the `console` API |
 
 ## Custom Logger
 
@@ -80,6 +80,16 @@ createLogger({
   },
 });
 ```
+
+## Demo
+
+A live, runnable demo using all packages lives in [`recoil-devtools-demo/`](../../recoil-devtools-demo) (Vite + React 18). Run it locally:
+
+```sh
+cd recoil-devtools-demo && pnpm install && pnpm dev
+```
+
+Or try it online: <https://ulises-jeremias.github.io/recoil-devtools/>
 
 ## License
 
