@@ -33,8 +33,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build demo
-        run: pnpm --filter recoil-devtools-demo build
+      - name: Build workspace
+        run: pnpm build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
