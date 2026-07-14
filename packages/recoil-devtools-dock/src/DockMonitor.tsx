@@ -116,12 +116,6 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     );
   } else if (childrenCount > 1 && !changeMonitorKey) {
     console.error(
-      '<DockMonitor> requires at least one monitor inside. ' +
-        'Why don’t you try <LogMonitor>? You can get it at ' +
-        'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.'
-    );
-  } else if (childrenCount > 1 && !changeMonitorKey) {
-    console.error(
       'You specified multiple monitors inside <DockMonitor> ' +
         'but did not provide `changeMonitorKey` prop to change them. ' +
         'Try specifying <DockMonitor changeMonitorKey="ctrl-m" /> ' +
