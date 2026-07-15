@@ -121,8 +121,11 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
                 previousValue,
                 nextValue
               );
-            } catch {
-              // Skip atoms that can't be accessed
+            } catch (err) {
+              console.warn(
+                `Failed to capture initial state for node ${node.key}:`,
+                err
+              );
             }
           }
         }
@@ -150,7 +153,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
           });
         }
       } catch (err) {
-        // Silently ignore errors when capturing initial state
+        console.error('Failed to capture initial state:', err);
       }
     };
 
