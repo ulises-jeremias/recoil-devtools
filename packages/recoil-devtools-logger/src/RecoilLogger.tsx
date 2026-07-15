@@ -57,7 +57,7 @@ export const RecoilLogger: FC<RecoilLoggerProps> = ({
       let currentState: StateTransaction = state;
 
       if (values?.length) {
-        values?.forEach(async (value) => {
+        for (const value of values) {
           const previousValue = await previousSnapshot.getPromise(value);
           const nextValue = await snapshot.getPromise(value);
 
@@ -69,7 +69,7 @@ export const RecoilLogger: FC<RecoilLoggerProps> = ({
             previousValue,
             nextValue
           );
-        });
+        }
       } else {
         for (const node of Array.from(
           snapshot.getNodes_UNSTABLE({ isModified: true })
