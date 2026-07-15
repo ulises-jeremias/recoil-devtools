@@ -121,7 +121,8 @@ export const LogMonitorEntry: FC<Props> = ({
           />
         );
       } catch (err) {
-        errorText = 'Error selecting state.';
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        errorText = `Error selecting state: ${errorMessage}`;
       }
     }
 
@@ -166,7 +167,7 @@ export const LogMonitorEntry: FC<Props> = ({
   return (
     <div
       style={{
-        opacity: selected ? 0.4 : inFuture ? 0.6 : 1,  
+        opacity: selected ? 0.4 : inFuture ? 0.6 : 1,
         textDecoration: collapsed ? 'line-through' : 'none',
         color: theme.base06,
       }}
