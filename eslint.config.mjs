@@ -7,14 +7,6 @@ export default tseslint.config(
   {
     ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/stories/**'],
   },
-  {
-    files: ['**/test/**', '**/*.test.*'],
-    languageOptions: {
-      parserOptions: {
-        projectService: false,
-      },
-    },
-  },
   ...tseslint.configs.recommended,
   ...tseslint.configs.strict,
   ...tseslint.configs.stylistic,
@@ -61,6 +53,14 @@ export default tseslint.config(
       '@typescript-eslint/no-empty-function': 'off',
       'prefer-const': 'off',
       'no-console': 'off',
+    },
+  },
+  {
+    files: ['**/test/**', '**/*.test.*'],
+    languageOptions: {
+      parserOptions: {
+        projectService: false,
+      },
     },
   },
   prettierConfig,

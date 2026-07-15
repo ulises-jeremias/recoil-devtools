@@ -1,10 +1,15 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
+import { render } from '@testing-library/react';
+import { RecoilRoot } from 'recoil';
+import { LogMonitor } from '../src';
 
 describe('Render', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<div />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    const { container } = render(
+      <RecoilRoot>
+        <LogMonitor />
+      </RecoilRoot>
+    );
+    expect(container).toBeTruthy();
   });
 });
