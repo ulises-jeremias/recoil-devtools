@@ -1,8 +1,7 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { RecoilRoot, atom, useSetRecoilState } from 'recoil';
-import { RecoilLogger } from '../src/RecoilLogger';
+import { RecoilLogger } from '../src';
 
 const trackedAtom = atom({
   key: 'logger-test-atom',
@@ -11,9 +10,12 @@ const trackedAtom = atom({
 
 describe('ensure it renders', () => {
   it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<div />, div);
-    ReactDOM.unmountComponentAtNode(div);
+    const { container } = render(
+      <RecoilRoot>
+        <RecoilLogger />
+      </RecoilRoot>
+    );
+    expect(container).toBeTruthy();
   });
 });
 
