@@ -101,3 +101,11 @@ Pull requests, bug reports, and feedback are welcome. See [CONTRIBUTING.md](CONT
 ## License
 
 [MIT](LICENSE)
+
+## 👥 Contributors
+
+<a href="https://github.com/ulises-jeremias/recoil-devtools/contributors">
+  <img src="https://contrib.rocks/image?repo=ulises-jeremias/recoil-devtools"/>
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
