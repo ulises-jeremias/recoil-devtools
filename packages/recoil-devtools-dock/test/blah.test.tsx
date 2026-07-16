@@ -48,7 +48,7 @@ describe('DockMonitor validation', () => {
     );
     expect(error).not.toHaveBeenCalledWith(
       '<DockMonitor> requires at least one monitor inside. ' +
-        'Why don’t you try <LogMonitor>? You can get it at ' +
+        'Why dont you try <LogMonitor>? You can get it at ' +
         'https://github.com/ulises-jeremias/recoil-devtools/tree/main/packages/recoil-devtools-log-monitor.'
     );
   });
