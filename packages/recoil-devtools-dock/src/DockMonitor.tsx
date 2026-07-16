@@ -112,7 +112,7 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     console.error(
       '<DockMonitor> requires at least one monitor inside. ' +
         'Why dont you try <LogMonitor>? You can get it at ' +
-        'https://github.com/reduxjs/redux-devtools/tree/master/packages/redux-devtools-log-monitor.'
+        'https://github.com/ulises-jeremias/recoil-devtools/tree/main/packages/recoil-devtools-log-monitor.'
     );
   } else if (childrenCount > 1 && !changeMonitorKey) {
     console.error(
