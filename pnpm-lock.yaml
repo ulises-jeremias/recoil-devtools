@@ -166,8 +166,8 @@ importers:
         specifier: ^4.18.1
         version: 4.18.1
       react-json-tree:
-        specifier: ^0.19.0
-        version: 0.19.0(@types/react@18.3.31)(react@18.3.1)
+        specifier: ^0.20.0
+        version: 0.20.0(@types/react@18.3.31)(react@18.3.1)
       recoil-devtools-themes:
         specifier: workspace:*
         version: link:../recoil-devtools-themes
@@ -2696,11 +2696,11 @@ packages:
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
-  react-json-tree@0.19.0:
-    resolution: {integrity: sha512-PqT1WRVcWP+RROsZPQfNEKIC1iM/ZMfY4g5jN6oDnXp5593PPRAYgoHcgYCDjflAHQMtxl8XGdlTwIBdEGUXvw==}
+  react-json-tree@0.20.0:
+    resolution: {integrity: sha512-h+f9fUNAxzBx1rbrgUF7+zSWKGHDtt2VPYLErIuB0JyKGnWgFMM21ksqQyb3EXwXNnoMW2rdE5kuAaubgGOx2Q==}
     peerDependencies:
-      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   react-refresh@0.17.0:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
@@ -5844,7 +5844,7 @@ snapshots:
 
   react-is@17.0.2: {}
 
-  react-json-tree@0.19.0(@types/react@18.3.31)(react@18.3.1):
+  react-json-tree@0.20.0(@types/react@18.3.31)(react@18.3.1):
     dependencies:
       '@types/lodash': 4.17.24
       '@types/react': 18.3.31
