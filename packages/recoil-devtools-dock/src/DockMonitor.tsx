@@ -197,7 +197,7 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
       return child;
     }
 
-    return cloneElement(child, { ...otherProps, ...child.props });
+    return cloneElement(child, { ...otherProps, ...(child.props as object) });
   };
 
   useEffect(() => {
