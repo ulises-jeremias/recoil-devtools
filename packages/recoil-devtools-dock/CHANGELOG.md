@@ -1,5 +1,11 @@
 # recoil-devtools-dock
 
+## 1.1.0
+
+### Minor Changes
+
+- bf0431a: Add npm OIDC trusted publisher with provenance attestation for secure package publishing.
+
 ## 1.0.2
 
 ### Patch Changes
