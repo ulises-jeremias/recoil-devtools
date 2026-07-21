@@ -1,6 +1,6 @@
 {
   "name": "recoil-devtools-log-monitor",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Recoil log monitor — visual state and action history with time-travel",
   "license": "MIT",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",
