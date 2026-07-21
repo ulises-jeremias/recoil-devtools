@@ -71,7 +71,7 @@
     "recoil-devtools-themes": "workspace:*"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
     "@types/base16": "^1.0.5",
     "@types/lodash-es": "^4.17.12",
