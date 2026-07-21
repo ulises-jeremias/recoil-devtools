@@ -1,5 +1,11 @@
 # recoil-devtools-dock
 
+## 1.0.2
+
+### Patch Changes
+
+- f0bd27a: Correct the LogMonitor link in DockMonitor validation output.
+
 ## 1.0.1
 
 ### Patch Changes
