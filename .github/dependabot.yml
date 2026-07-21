@@ -4,11 +4,7 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    groups:
-      development-dependencies:
-        dependency-type: development
-      production-dependencies:
-        dependency-type: production
+    open-pull-requests-limit: 20
   - package-ecosystem: github-actions
     directory: /
     schedule:

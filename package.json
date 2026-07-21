@@ -22,19 +22,19 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.10",
-    "@eslint/js": "^9.17.0",
+    "@changesets/cli": "^2.31.1",
+    "@eslint/js": "^9.39.5",
     "@testing-library/jest-dom": "^6.9.1",
-    "eslint": "^9.17.0",
-    "eslint-config-prettier": "^10.0.2",
-    "eslint-plugin-react": "^7.37.4",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.3.0",
-    "prettier": "^3.4.2",
-    "turbo": "^2.9.14",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.21.0"
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.9.6",
+    "turbo": "^2.10.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.65.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -45,5 +45,10 @@
       "prettier --write"
     ]
   },
-  "packageManager": "pnpm@10.32.0+sha512.9b2634bb3fed5601c33633f2d92593f506270a3963b8c51d2b2d6a828da615ce4e9deebef9614ccebbc13ac8d3c0f9c9ccceb583c69c8578436fa477dbb20d70"
+  "packageManager": "pnpm@10.32.0+sha512.9b2634bb3fed5601c33633f2d92593f506270a3963b8c51d2b2d6a828da615ce4e9deebef9614ccebbc13ac8d3c0f9c9ccceb583c69c8578436fa477dbb20d70",
+  "pnpm": {
+    "overrides": {
+      "esbuild": "^0.28.1"
+    }
+  }
 }
