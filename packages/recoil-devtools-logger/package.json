@@ -1,6 +1,6 @@
 {
   "name": "recoil-devtools-logger",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Recoil console logger — print state changes and actions to the browser console",
   "license": "MIT",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",
