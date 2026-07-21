@@ -1,5 +1,16 @@
 # recoil-devtools-log-monitor
 
+## 1.1.0
+
+### Minor Changes
+
+- bf0431a: Add npm OIDC trusted publisher with provenance attestation for secure package publishing.
+
+### Patch Changes
+
+- Updated dependencies [bf0431a]
+  - recoil-devtools-themes@1.1.0
+
 ## 1.0.1
 
 ### Patch Changes

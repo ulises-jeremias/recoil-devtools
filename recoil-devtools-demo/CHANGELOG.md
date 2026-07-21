@@ -1,5 +1,17 @@
 # recoil-devtools-demo
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [bf0431a]
+- Updated dependencies [bf0431a]
+  - recoil-devtools@1.1.0
+  - recoil-devtools-dock@1.1.0
+  - recoil-devtools-logger@1.1.0
+  - recoil-devtools-log-monitor@1.1.0
+  - recoil-devtools-themes@1.1.0
+
 ## 1.0.2
 
 ### Patch Changes
