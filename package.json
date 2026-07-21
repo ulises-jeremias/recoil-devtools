@@ -22,19 +22,19 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.10",
-    "@eslint/js": "^9.17.0",
-    "@testing-library/jest-dom": "^6.9.1",
-    "eslint": "^9.17.0",
+    "@changesets/cli": "^2.31.1",
+    "@eslint/js": "^10.0.1",
+    "@testing-library/jest-dom": "^7.0.0",
+    "eslint": "^10.7.0",
     "eslint-config-prettier": "^10.0.2",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "husky": "^9.1.7",
-    "lint-staged": "^15.3.0",
-    "prettier": "^3.4.2",
-    "turbo": "^2.9.14",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.21.0"
+    "lint-staged": "^17.1.0",
+    "prettier": "^3.9.6",
+    "turbo": "^2.10.5",
+    "typescript": "^7.0.2",
+    "typescript-eslint": "^8.65.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
