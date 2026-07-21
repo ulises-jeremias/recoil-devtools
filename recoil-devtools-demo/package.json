@@ -10,8 +10,8 @@
     "lint": "eslint src --ext ts,tsx"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "recoil": "^0.7.7",
     "recoil-devtools": "workspace:*",
     "recoil-devtools-dock": "workspace:*",
@@ -20,8 +20,8 @@
     "recoil-devtools-themes": "workspace:*"
   },
   "devDependencies": {
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.7.3",
     "vite": "^6.4.3"
