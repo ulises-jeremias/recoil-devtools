@@ -18,7 +18,7 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "publish-packages": "turbo run build && changeset publish",
+    "publish-packages": "pnpm build && changeset publish --provenance",
     "prepare": "husky"
   },
   "devDependencies": {
