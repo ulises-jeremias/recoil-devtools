@@ -78,7 +78,7 @@
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/coverage-v8": "^2.1.9",
+    "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^9.39.5",
     "jsdom": "^29.1.1",
     "react": "^18.3.1",
@@ -86,6 +86,6 @@
     "recoil": "^0.7.7",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.7"
+    "vitest": "^4.1.10"
   }
 }
