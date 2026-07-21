@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.2.8",
     "recoil": "^0.7.7",
     "recoil-devtools": "workspace:*",
     "recoil-devtools-dock": "workspace:*",
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.31",
-    "@types/react-dom": "^18.3.7",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
     "typescript": "^5.9.3",
     "vite": "^6.4.3"
