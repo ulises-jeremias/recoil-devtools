@@ -47,3 +47,5 @@ storybook-static/
 # Misc
 .next/
 .awcache/
+recoil-devtools
+megalinter-reports/

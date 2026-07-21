@@ -1,0 +1,56 @@
+name: Pull Request Validation
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: pr-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  pr-review:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Danger
+        run: pnpm install
+        working-directory: tools/danger
+
+      - name: Danger
+        continue-on-error: true
+        working-directory: tools/danger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          attempt=1
+          max=3
+          until npx danger ci; do
+            code=$?
+            if [ $attempt -ge $max ]; then
+              echo "::error::Danger failed after ${max} attempts (exit ${code})."
+              exit $code
+            fi
+            echo "::warning::Danger attempt ${attempt} failed with exit ${code}; retrying..."
+            attempt=$((attempt + 1))
+            sleep 5
+          done

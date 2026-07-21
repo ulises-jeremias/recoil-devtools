@@ -5,7 +5,7 @@ import prettierConfig from 'eslint-config-prettier';
 
 export default tseslint.config(
   {
-    ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/stories/**'],
+    ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/stories/**', 'tools/danger/**'],
   },
   ...tseslint.configs.recommended,
   ...tseslint.configs.strict,
