@@ -342,7 +342,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   };
 
   const setActionsActive = (start: number, end: number, active: boolean) => {
-    let nextSkippedActionIds = state.skippedActionIds;
+    const nextSkippedActionIds = [...state.skippedActionIds];
     for (let i = start; i < end; i++) {
       nextSkippedActionIds[i] = active;
     }
