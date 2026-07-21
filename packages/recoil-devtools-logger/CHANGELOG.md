@@ -1,5 +1,11 @@
 # recoil-devtools-logger
 
+## 1.0.2
+
+### Patch Changes
+
+- d568b10: Wait for selected Recoil values before emitting transaction logs.
+
 ## 1.0.1
 
 ### Patch Changes
