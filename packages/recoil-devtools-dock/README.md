@@ -2,6 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/recoil-devtools-dock.svg)](https://npmjs.com/package/recoil-devtools-dock)
 [![Downloads](https://img.shields.io/npm/dm/recoil-devtools-dock.svg)](https://npmjs.com/package/recoil-devtools-dock)
+[![Discord](https://img.shields.io/discord/1527933660764831825?label=Discord&logo=discord&logoColor=white)](https://discord.gg/dwFTsR7fK2)
 
 A resizable and movable dock for Recoil DevTools, powered by [React Dock](https://github.com/alexkuz/react-dock).
 
