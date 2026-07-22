@@ -47,5 +47,9 @@ storybook-static/
 # Misc
 .next/
 .awcache/
+<<<<<<< HEAD
+=======
+# Accidental nested clone / self-symlink at repo root only
+>>>>>>> fb15598 (chore: scope root-only recoil-devtools gitignore entry)
 /recoil-devtools
 megalinter-reports/
