@@ -82,7 +82,7 @@ function App() {
 ## Requirements
 
 - Node.js 18+
-- React 18+
+- React 17 or 18 (**not React 19** — Recoil still depends on React internals removed in 19)
 - Recoil 0.7+
 
 ## Project status
