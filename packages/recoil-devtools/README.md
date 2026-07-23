@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/recoil-devtools.svg)](https://npmjs.com/package/recoil-devtools)
 [![Downloads](https://img.shields.io/npm/dm/recoil-devtools.svg)](https://npmjs.com/package/recoil-devtools)
-[![Discord](https://img.shields.io/discord/1527933660764831825?label=Discord&logo=discord&logoColor=white)](https://discord.gg/dwFTsR7fK2)
+[![Discord](https://img.shields.io/discord/1527933660764831825?label=Discord&logo=discord&logoColor=white)](https://discord.gg/bR5VyATgka)
 
 A composited DevTools component that combines [DockMonitor](recoil-devtools-dock) and [LogMonitor](recoil-devtools-log-monitor) in a single component.
 

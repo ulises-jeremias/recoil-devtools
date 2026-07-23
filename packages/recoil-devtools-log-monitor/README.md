@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/recoil-devtools-log-monitor.svg)](https://npmjs.com/package/recoil-devtools-log-monitor)
 [![Downloads](https://img.shields.io/npm/dm/recoil-devtools-log-monitor.svg)](https://npmjs.com/package/recoil-devtools-log-monitor)
-[![Discord](https://img.shields.io/discord/1527933660764831825?label=Discord&logo=discord&logoColor=white)](https://discord.gg/dwFTsR7fK2)
+[![Discord](https://img.shields.io/discord/1527933660764831825?label=Discord&logo=discord&logoColor=white)](https://discord.gg/bR5VyATgka)
 
 A log monitor for Recoil DevTools that displays state history with time-travel capability.
 
