@@ -1,5 +1,11 @@
 # recoil-devtools
 
+## 1.2.2
+
+### Patch Changes
+
+- 3ce0036: test(logger): rename blah.test.tsx → RecoilLogger.test.tsx
+
 ## 1.2.1
 
 ### Patch Changes
