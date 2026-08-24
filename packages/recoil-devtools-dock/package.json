@@ -1,6 +1,6 @@
 {
   "name": "recoil-devtools-dock",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Resizable and movable dock for Recoil DevTools",
   "license": "MIT",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",

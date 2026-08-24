@@ -1,5 +1,13 @@
 # recoil-devtools-log-monitor
 
+## 1.2.1
+
+### Patch Changes
+
+- test(logger): cover formatting and error handling (#216)
+- Updated dependencies
+  - recoil-devtools-themes@1.2.1
+
 ## 1.2.0
 
 ### Minor Changes
