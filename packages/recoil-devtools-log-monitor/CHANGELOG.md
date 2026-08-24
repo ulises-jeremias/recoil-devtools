@@ -1,5 +1,13 @@
 # recoil-devtools-log-monitor
 
+## 1.2.3
+
+### Patch Changes
+
+- chore: release all packages to sync versions
+- Updated dependencies
+  - recoil-devtools-themes@1.2.2
+
 ## 1.2.1
 
 ### Patch Changes

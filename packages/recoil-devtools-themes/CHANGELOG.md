@@ -1,5 +1,11 @@
 # recoil-devtools-themes
 
+## 1.2.3
+
+### Patch Changes
+
+- chore: release all packages to sync versions
+
 ## 1.2.1
 
 ### Patch Changes

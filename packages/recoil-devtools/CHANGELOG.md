@@ -1,5 +1,11 @@
 # recoil-devtools
 
+## 1.2.3
+
+### Patch Changes
+
+- chore: release all packages to sync versions
+
 ## 1.2.2
 
 ### Patch Changes
