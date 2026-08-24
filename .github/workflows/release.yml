@@ -42,7 +42,7 @@ jobs:
   publish:
     name: Publish to npm
     needs: release-pr
-    if: always()
+    if: needs.release-pr.outputs.hasChangesets == 'false'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
