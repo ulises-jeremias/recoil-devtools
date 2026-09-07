@@ -59,7 +59,7 @@
     "clean": "rm -rf dist coverage"
   },
   "peerDependencies": {
-    "react": ">=17 <19"
+    "react": ">=17 <20"
   },
   "dependencies": {
     "base16": "^1.0.0"
