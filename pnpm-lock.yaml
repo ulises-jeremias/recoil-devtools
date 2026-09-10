@@ -276,7 +276,7 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       react:
-        specifier: '>=17 <19'
+        specifier: '>=17 <20'
         version: 18.3.1
     devDependencies:
       '@types/base16':
@@ -3699,7 +3699,7 @@ snapshots:
       picocolors: 1.1.1
       redent: 3.0.0
     optionalDependencies:
-      vitest: 4.1.11(@vitest/coverage-v8@4.1.11)(jsdom@30.0.1)(vite@8.2.2(esbuild@0.27.7)(yaml@2.9.0))
+      vitest: 4.1.11(@vitest/coverage-v8@4.1.11)(jsdom@30.0.1)(vite@8.2.2(esbuild@0.28.1)(yaml@2.9.0))
 
   '@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -3882,7 +3882,7 @@ snapshots:
       obug: 2.1.4
       std-env: 4.2.0
       tinyrainbow: 3.1.1
-      vitest: 4.1.11(@vitest/coverage-v8@4.1.11)(jsdom@30.0.1)(vite@8.2.2(esbuild@0.27.7)(yaml@2.9.0))
+      vitest: 4.1.11(@vitest/coverage-v8@4.1.11)(jsdom@30.0.1)(vite@8.2.2(esbuild@0.28.1)(yaml@2.9.0))
 
   '@vitest/expect@4.1.11':
     dependencies:
