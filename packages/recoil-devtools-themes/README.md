@@ -24,10 +24,10 @@ const colors = themes.ulisesjcf;
 
 - `apath`, `base8`, `base16`, `base16light`, `bespin`, `brewer`, `bright`, `chalk`
 - `codeschool`, `dracula`, `duotone`, `eighties`, `embedded`, `emacs`, `flat`
-- `github`, `google`, `grayscale`, `greenscreen`, `harmonic`, `hopper`, `horizon`
+- `github`, `google`, `grayscale`, `greenscreen`, `gruvbox`, `harmonic`, `hopper`, `horizon`
 - `ice`, `inspired`, `irblack`, `lattice`, `lucario`, `material`, `mexico`, `monokai`
 - `new`, `nord`, `ocean`, `one-light`, `outer`, `panda`, `paraiso`, `pop`
-- `railscasts`, `recoil`, `rose`, `seti`, `shapeshifter`, `slate`, `solarized`
+- `railscasts`, `recoil`, `rose`, `seti`, `shapeshifter`, `slate`, `solarized`, `solarizedLight`
 - `spaceduck`, `spoon`, `sunburst`, `tomorrow`, `tomorrownight`, `tomorrownightblue`
 - `tomorrownightbright`, `twilight`, `ulisesjcf`, `vascular`, `vice`, `xcode`
 
