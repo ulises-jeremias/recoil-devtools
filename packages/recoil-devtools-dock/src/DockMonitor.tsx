@@ -128,10 +128,14 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
       return false;
     }
 
-    const charCode = event.keyCode || event.which;
-    const char = String.fromCharCode(charCode);
+    // Use the modern `KeyboardEvent.key` value instead of the deprecated
+    // `keyCode`/`which` properties, which are incorrect for non-alphabetic
+    // keys. `parse-key` names (e.g. "space") are lowercase words while
+    // `event.key` holds the produced character (e.g. " "), so normalize
+    // the space character before comparing case-insensitively.
+    const pressedKey = event.key === ' ' ? 'space' : event.key;
     return (
-      key.name.toUpperCase() === char.toUpperCase() &&
+      key.name.toLowerCase() === pressedKey.toLowerCase() &&
       key.alt === event.altKey &&
       key.ctrl === event.ctrlKey &&
       key.meta === event.metaKey &&
