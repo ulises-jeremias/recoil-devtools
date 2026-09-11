@@ -1,5 +1,15 @@
 # recoil-devtools-themes
 
+## 1.3.0
+
+### Minor Changes
+
+- 53173ff: Add real base16 themes: `monokai`, `solarized`, `solarizedLight`, `ocean`, `gruvbox`, `nord`, and `dracula`. Values follow the canonical base16 schemes.
+
+### Patch Changes
+
+- 31be736: Widen React peer range to `>=17 <20` to allow React 19. Verified with a production Vite build of RecoilRoot + atom + useRecoilState on React 19.2 with recoil 0.7.7 (no runtime break observed at build level).
+
 ## 1.2.3
 
 ### Patch Changes

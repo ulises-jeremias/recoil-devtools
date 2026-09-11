@@ -1,5 +1,12 @@
 # recoil-devtools-dock
 
+## 1.2.4
+
+### Patch Changes
+
+- 8d51b16: Fix `DockMonitor` keyboard shortcut matching to use the modern `KeyboardEvent.key` value instead of the deprecated `keyCode`/`which` properties, so non-alphabetic shortcuts (e.g. `ctrl-enter`, `ctrl-space`) work correctly.
+- 31be736: Widen React peer range to `>=17 <20` to allow React 19. Verified with a production Vite build of RecoilRoot + atom + useRecoilState on React 19.2 with recoil 0.7.7 (no runtime break observed at build level).
+
 ## 1.2.3
 
 ### Patch Changes
