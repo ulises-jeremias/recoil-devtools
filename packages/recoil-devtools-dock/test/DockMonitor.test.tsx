@@ -31,9 +31,10 @@ function Monitor({ label = 'Monitor' }: { label?: string }) {
 }
 
 function pressShortcut(key: string, ctrlKey = true, shiftKey = false) {
+  // Deliberately omits the deprecated `keyCode`/`which` init dict entries:
+  // shortcut matching must rely on `key` alone.
   return fireEvent.keyDown(window, {
     key,
-    keyCode: key.toUpperCase().charCodeAt(0),
     ctrlKey,
     shiftKey,
   });
@@ -221,6 +222,24 @@ describe('DockMonitor', () => {
     );
     expect(dock().hidden).toBe(false);
     expect(dock().dataset.position).toBe('right');
+  });
+
+  it('matches non-alphabetic shortcuts via event.key without keyCode', () => {
+    const { rerender } = render(
+      <DockMonitor toggleVisibilityKey="ctrl-enter" persistState={false}>
+        <Monitor />
+      </DockMonitor>
+    );
+    expect(dock().hidden).toBe(false);
+    fireEvent.keyDown(window, { key: 'Enter', ctrlKey: true });
+    expect(dock().hidden).toBe(true);
+    rerender(
+      <DockMonitor toggleVisibilityKey="ctrl-space" persistState={false}>
+        <Monitor />
+      </DockMonitor>
+    );
+    fireEvent.keyDown(window, { key: ' ', ctrlKey: true });
+    expect(dock().hidden).toBe(false);
   });
 
   it('removes its keyboard listener on unmount', () => {
