@@ -1,5 +1,12 @@
 # recoil-devtools-log-monitor
 
+## 1.2.4
+
+### Patch Changes
+
+- Updated dependencies [53173ff]
+  - recoil-devtools-themes@1.3.0
+
 ## 1.2.3
 
 ### Patch Changes
