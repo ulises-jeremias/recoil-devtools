@@ -18,7 +18,7 @@ jobs:
       pull-requests: write
       issues: read
     outputs:
-      hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
+      hasChangesets: ${{ steps.changesets.outputs['has-changesets'] }}
     steps:
       - uses: actions/checkout@v7
 
