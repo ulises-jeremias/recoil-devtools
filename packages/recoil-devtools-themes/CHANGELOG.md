@@ -1,5 +1,11 @@
 # recoil-devtools-themes
 
+## 1.3.0
+
+### Minor Changes
+
+- 53173ff: Add real base16 themes: `monokai`, `solarized`, `solarizedLight`, `ocean`, `gruvbox`, `nord`, and `dracula`. Values follow the canonical base16 schemes.
+
 ## 1.2.3
 
 ### Patch Changes
