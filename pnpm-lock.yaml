@@ -276,7 +276,7 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       react:
-        specifier: '>=17 <20'
+        specifier: '>=17 <19'
         version: 18.3.1
     devDependencies:
       '@types/base16':
