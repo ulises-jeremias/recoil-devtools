@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  RecoilState,
+  RecoilValue,
   Snapshot,
   useGotoRecoilSnapshot,
   useRecoilSnapshot,
@@ -8,9 +8,19 @@ import {
 } from 'recoil';
 import { findLastIndex } from './helpers';
 
+export interface AtomValues {
+  [key: string]: unknown;
+}
+
+export interface TransactionAction extends AtomValues {
+  // An atom named "type" can overwrite the generated transaction label.
+  type: unknown;
+}
+
 export interface StateTransaction {
-  previousState: any;
-  nextState: any;
+  previousState: AtomValues;
+  nextState: AtomValues;
+  error?: string;
 }
 
 export interface State {
@@ -21,7 +31,7 @@ export interface State {
   stagedActionIds: number[];
   skippedActionIds: Record<number, boolean>;
   snapshotsById: Record<number, Snapshot>;
-  actionsById: Record<number, any>;
+  actionsById: Partial<Record<number, TransactionAction>>;
 }
 
 const initialStateValue: State = {
@@ -35,7 +45,9 @@ const initialStateValue: State = {
   actionsById: {},
 };
 
-export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
+export const useRecoilTransactionsHistory = (
+  values?: RecoilValue<unknown>[]
+) => {
   const [state, setState] = useState<State>(initialStateValue);
   const [consecutiveToggleStartId, setConsecutiveToggleStartId] = useState<
     number | null
@@ -49,21 +61,21 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
   useEffect(() => {
     const captureInitialState = async () => {
       const getInitialPayload = (
-        payload: any,
-        value: any,
-        _: any,
-        nextValue: any
-      ) => ({
+        payload: AtomValues,
+        value: RecoilValue<unknown>,
+        _: unknown,
+        nextValue: unknown
+      ): AtomValues => ({
         ...payload,
         [value.key]: nextValue,
       });
 
       const getInitialState = (
         currentState: StateTransaction,
-        value: any,
-        previousValue: any,
-        nextValue: any
-      ) => {
+        value: RecoilValue<unknown>,
+        previousValue: unknown,
+        nextValue: unknown
+      ): StateTransaction => {
         const { previousState, nextState } = currentState;
         return {
           previousState: {
@@ -78,7 +90,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
       };
 
       try {
-        let payload = {};
+        let payload: AtomValues = {};
         let currentState: StateTransaction = {
           previousState: {},
           nextState: {},
@@ -161,17 +173,22 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty deps - only run on mount
 
-  const getPayload = (payload: any, value: any, _: any, nextValue: any) => ({
+  const getPayload = (
+    payload: AtomValues,
+    value: RecoilValue<unknown>,
+    _: unknown,
+    nextValue: unknown
+  ): AtomValues => ({
     ...payload,
     [value.key]: nextValue,
   });
 
   const getNextState = (
     currentState: StateTransaction,
-    value: any,
-    previousValue: any,
-    nextValue: any
-  ) => {
+    value: RecoilValue<unknown>,
+    previousValue: unknown,
+    nextValue: unknown
+  ): StateTransaction => {
     const { previousState, nextState } = currentState;
 
     return {
@@ -188,7 +205,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
 
   useRecoilTransactionObserver_UNSTABLE(
     async ({ previousSnapshot, snapshot }) => {
-      let payload = {};
+      let payload: AtomValues = {};
       let currentState: StateTransaction = state.current;
 
       if (values?.length) {
@@ -299,7 +316,7 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
 
     // Filter out skipped actions
     const nextStagedActionIds: number[] = [];
-    const nextActionsById: Record<number, unknown> = {};
+    const nextActionsById: State['actionsById'] = {};
     const nextComputedStates: StateTransaction[] = [];
     const nextSnapshotsById: Record<number, Snapshot> = {};
 
@@ -307,7 +324,10 @@ export const useRecoilTransactionsHistory = (values?: RecoilState<any>[]) => {
     stagedActionIds.forEach((actionId, idx) => {
       if (!skippedActionIds[actionId]) {
         nextStagedActionIds.push(newActionId);
-        nextActionsById[newActionId] = actionsById[actionId];
+        const action = actionsById[actionId];
+        if (action) {
+          nextActionsById[newActionId] = action;
+        }
         const computedState = computedStates[idx];
         if (computedState) {
           nextComputedStates.push(computedState);

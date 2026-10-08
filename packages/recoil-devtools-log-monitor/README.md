@@ -64,6 +64,20 @@ Click any action to toggle it. Disabled actions are crossed out and state is rec
 | `markStateDiff`    | `boolean`       | `false`       | Highlight state changes between actions  |
 | `hideMainButtons`  | `boolean`       | `false`       | Hide the Reset / Revert / Commit / Sweep |
 
+### Selecting state
+
+The `select` callback receives an object keyed by atom names. Atom values can have
+different types, and a transaction can contain only modified atoms. Check the
+value before using a specific type, for example:
+
+```tsx
+<LogMonitor
+  select={(state: Record<string, unknown>) =>
+    typeof state.count === 'number' ? state.count : undefined
+  }
+/>
+```
+
 ## Theme
 
 Available themes: `apath`, `base8`, `base16`, `base16light`, `bespin`, `brewer`, `bright`, `chalk`, `codeschool`, `dracula`, `duotone`, `eighties`, `embedded`, `emacs`, `flat`, `github`, `google`, `grayscale`, `greenscreen`, `harmonic`, `hopper`, `horizon`, `ice`, `inspired`, `irblack`, `lattice`, `lucario`, `material`, `mexico`, `monokai`, `new`, `nord`, `ocean`, `one-light`, `outer`, `panda`, `paraiso`, `pop`, `railscasts`, `recoil`, `rose`, `seti`, `shapeshifter`, `slate`, `solarized`, `spaceduck`, `spoon`, `sunburst`, `tomorrow`, `tomorrownight`, `tomorrownightblue`, `tomorrownightbright`, `twilight`, `ulisesjcf`, `vascular`, `vice`, `xcode`.
