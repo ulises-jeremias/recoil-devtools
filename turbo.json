@@ -18,7 +18,7 @@
     },
     "typecheck": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**", "tsconfig.json"]
+      "inputs": ["src/**", "tsconfig.json", "test/**"]
     },
     "test": {
       "dependsOn": ["^build"],

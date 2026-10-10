@@ -79,6 +79,18 @@ beforeEach(() => vi.clearAllMocks());
 afterEach(() => vi.restoreAllMocks());
 
 describe('useRecoilTransactionsHistory', () => {
+  it('preserves the payload of an atom whose key is type', async () => {
+    const typeAtom = atom({ key: 'type', default: 42 });
+    const initial = {
+      getNodes_UNSTABLE: () => [typeAtom],
+      getPromise: vi.fn(async () => 42),
+    } as unknown as Snapshot;
+    const { result } = mountHistory(initial, [typeAtom]);
+    await waitFor(() => expect(result.current.hasStates).toBe(true));
+    expect(result.current.actionsById[0]).toEqual({ type: 42 });
+    expect(result.current.computedStates[0]?.nextState).toEqual({ type: 42 });
+  });
+
   it('starts with empty history when the snapshot contains no atoms', () => {
     const { result } = mountHistory();
     expect(result.current).toMatchObject({

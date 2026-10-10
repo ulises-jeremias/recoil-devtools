@@ -1,6 +1,7 @@
 import { CSSProperties, FC, MouseEventHandler } from 'react';
 import { JSONTree } from 'react-json-tree';
 import { Base16Theme } from 'base16';
+import type { TransactionAction } from '../history';
 
 const styles = {
   actionBar: {
@@ -18,7 +19,7 @@ const styles = {
 interface Props {
   theme: Base16Theme;
   collapsed: boolean;
-  action: any;
+  action: TransactionAction;
   expandActionRoot: boolean;
   onClick: MouseEventHandler<HTMLDivElement>;
   style: CSSProperties;
@@ -72,7 +73,7 @@ const LogMonitorAction: FC<Props> = ({
       }}
     >
       <div style={styles.actionBar} onClick={onClick}>
-        {type !== null && (type as string).toString()}
+        {type !== null && type !== undefined && type.toString()}
       </div>
       {!collapsed ? renderPayload(payload) : ''}
     </div>
