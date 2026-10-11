@@ -1,5 +1,11 @@
 # recoil-devtools-log-monitor
 
+## 1.2.5
+
+### Patch Changes
+
+- 92e647f: Type log-monitor history, actions and entries with shared interfaces, preserving support for atoms with different value types. Skip incomplete timeline entries instead of rendering a missing action, and handle empty action labels from atoms named `type`.
+
 ## 1.2.4
 
 ### Patch Changes
