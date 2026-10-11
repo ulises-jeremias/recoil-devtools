@@ -1,7 +1,10 @@
 import { CSSProperties, FC, MouseEventHandler } from 'react';
-import { JSONTree } from 'react-json-tree';
+import { JSONTree, type StylingValue } from 'react-json-tree';
 import { Base16Theme } from 'base16';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
+import type { AtomValues, TransactionAction } from '../history';
+
+type StyleCallback = Extract<StylingValue, (...args: never[]) => unknown>;
 
 const styles: { entry: CSSProperties; root: CSSProperties } = {
   entry: {
@@ -33,11 +36,11 @@ const dataIsEqual = (
 
 interface Props {
   theme: Base16Theme;
-  select: (state: any) => unknown;
-  action: any;
+  select: (state: AtomValues) => unknown;
+  action: TransactionAction;
   actionId: number;
-  state: any;
-  previousState: any;
+  state: AtomValues;
+  previousState: AtomValues | undefined;
   collapsed: boolean;
   inFuture: boolean;
   selected: boolean;
@@ -66,7 +69,7 @@ export const LogMonitorEntry: FC<Props> = ({
   onActionClick,
   onActionShiftClick,
 }) => {
-  const printState = (state: any, error: string | undefined) => {
+  const printState = (state: AtomValues, error: string | undefined) => {
     let errorText = error;
     if (!errorText) {
       try {
@@ -78,8 +81,8 @@ export const LogMonitorEntry: FC<Props> = ({
             typeof previousState !== 'undefined'
               ? select(previousState)
               : undefined;
-          const getValueStyle = (
-            { style }: any,
+          const getValueStyle: StyleCallback = (
+            { style },
             _: unknown,
             keyPath: unknown
           ) => ({
@@ -94,7 +97,10 @@ export const LogMonitorEntry: FC<Props> = ({
                 : theme.base01,
             },
           });
-          const getNestedNodeStyle = ({ style }: any, keyPath: unknown) => ({
+          const getNestedNodeStyle: StyleCallback = (
+            { style },
+            keyPath: unknown
+          ) => ({
             style: {
               ...style,
               ...(((keyPath as readonly (string | number)[])?.length ?? 0) > 1

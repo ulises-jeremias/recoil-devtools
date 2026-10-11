@@ -1,16 +1,17 @@
 import { FC } from 'react';
 import { Base16Theme } from 'base16';
 import LogMonitorEntry from './LogMonitorEntry';
+import type { AtomValues, State, StateTransaction } from '../history';
 
 interface Props {
-  actionsById: { [actionId: number]: any };
-  computedStates: { previousState: any; nextState: any; error?: string }[];
+  actionsById: State['actionsById'];
+  computedStates: StateTransaction[];
   stagedActionIds: number[];
   skippedActionIds: Record<number, boolean>;
   currentStateIndex: number;
   consecutiveToggleStartId: number | null | undefined;
 
-  select: (state: any) => unknown;
+  select: (state: AtomValues) => unknown;
   onActionClick: (id: number) => void;
   theme: Base16Theme;
   expandActionRoot: boolean;
@@ -39,7 +40,7 @@ const LogMonitorEntryList: FC<Props> = ({
       const actionId = stagedActionId;
       const action = actionsById[actionId];
       const computedState = computedStates[i];
-      if (!computedState) return null;
+      if (!computedState || !action) return null;
       const { previousState, nextState: state, error } = computedState;
 
       return (
