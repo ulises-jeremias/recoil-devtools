@@ -20,16 +20,29 @@ import * as themes from 'recoil-devtools-themes';
 const colors = themes.ulisesjcf;
 ```
 
-## Available Themes
+## Exports
 
-- `apath`, `base8`, `base16`, `base16light`, `bespin`, `brewer`, `bright`, `chalk`
-- `codeschool`, `dracula`, `duotone`, `eighties`, `embedded`, `emacs`, `flat`
-- `github`, `google`, `grayscale`, `greenscreen`, `gruvbox`, `harmonic`, `hopper`, `horizon`
-- `ice`, `inspired`, `irblack`, `lattice`, `lucario`, `material`, `mexico`, `monokai`
-- `new`, `nord`, `ocean`, `one-light`, `outer`, `panda`, `paraiso`, `pop`
-- `railscasts`, `recoil`, `rose`, `seti`, `shapeshifter`, `slate`, `solarized`, `solarizedLight`
-- `spaceduck`, `spoon`, `sunburst`, `tomorrow`, `tomorrownight`, `tomorrownightblue`
-- `tomorrownightbright`, `twilight`, `ulisesjcf`, `vascular`, `vice`, `xcode`
+This package exports no React component — it is a plain object of Base16 themes.
+Import the whole namespace (`import * as themes from 'recoil-devtools-themes'`),
+or a single theme by name. `keyof typeof themes` is exactly these eight:
+
+| Export           | Type          | `scheme`             | `author`                                    |
+| ---------------- | ------------- | -------------------- | ------------------------------------------- |
+| `dracula`        | `Base16Theme` | Dracula              | clach04                                     |
+| `gruvbox`        | `Base16Theme` | Gruvbox dark, medium | Dawid Kurek, morhetz                        |
+| `monokai`        | `Base16Theme` | Monokai              | Wimer Hazenberg                             |
+| `nord`           | `Base16Theme` | Nord                 | arcticicestudio                             |
+| `ocean`          | `Base16Theme` | Ocean                | Chris Kempson                               |
+| `solarized`      | `Base16Theme` | Solarized Dark       | Ethan Schoonover (modified by aramisgithub) |
+| `solarizedLight` | `Base16Theme` | Solarized Light      | Ethan Schoonover (modified by aramisgithub) |
+| `ulisesjcf`      | `Base16Theme` | ulises-jeremias      | ulises-jeremias                             |
+
+Each theme is the default export of its module, and every one of them carries all
+16 `base00`-`base0F` slots plus `scheme` and `author`.
+
+These are the names accepted by the `theme` prop of
+[`<LogMonitor>`](../recoil-devtools-log-monitor#theme); any other name warns and
+falls back to `ulisesjcf`.
 
 ## Theme Format
 

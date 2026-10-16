@@ -54,15 +54,18 @@ Click any action to toggle it. Disabled actions are crossed out and state is rec
 
 ## Props
 
-| Prop               | Type            | Default       | Description                              |
-| ------------------ | --------------- | ------------- | ---------------------------------------- |
-| `values`           | `RecoilState[]` | All atoms     | Specific atoms to track                  |
-| `select`           | `Function`      | `s => s`      | Select state slice to display            |
-| `theme`            | `string`        | `"ulisesjcf"` | Color theme name                         |
-| `expandActionRoot` | `boolean`       | `true`        | Expand action tree by default            |
-| `expandStateRoot`  | `boolean`       | `true`        | Expand state tree by default             |
-| `markStateDiff`    | `boolean`       | `false`       | Highlight state changes between actions  |
-| `hideMainButtons`  | `boolean`       | `false`       | Hide the Reset / Revert / Commit / Sweep |
+| Prop               | Type                                 | Default       | Description                                                                 |
+| ------------------ | ------------------------------------ | ------------- | --------------------------------------------------------------------------- |
+| `values`           | `RecoilState<any>[]`                 | All atoms     | Atoms to track. When empty, every node modified by a transaction is tracked |
+| `select`           | `(state: any) => unknown`            | `s => s`      | Select the state slice to display                                           |
+| `theme`            | `keyof typeof themes \| Base16Theme` | `"ulisesjcf"` | Theme name from `recoil-devtools-themes`, or a full Base16 theme object     |
+| `expandActionRoot` | `boolean`                            | `true`        | Expand the action tree by default                                           |
+| `expandStateRoot`  | `boolean`                            | `true`        | Expand the state tree by default                                            |
+| `markStateDiff`    | `boolean`                            | `false`       | Highlight state changes between actions                                     |
+| `hideMainButtons`  | `boolean`                            | `false`       | Hide the Reset / Revert / Commit / Sweep bar                                |
+
+`<LogMonitor>` is the only export of this package; the button bar and the entry
+list are internal and are not exported.
 
 ### Selecting state
 
@@ -80,7 +83,14 @@ value before using a specific type, for example:
 
 ## Theme
 
-Available themes: `apath`, `base8`, `base16`, `base16light`, `bespin`, `brewer`, `bright`, `chalk`, `codeschool`, `dracula`, `duotone`, `eighties`, `embedded`, `emacs`, `flat`, `github`, `google`, `grayscale`, `greenscreen`, `harmonic`, `hopper`, `horizon`, `ice`, `inspired`, `irblack`, `lattice`, `lucario`, `material`, `mexico`, `monokai`, `new`, `nord`, `ocean`, `one-light`, `outer`, `panda`, `paraiso`, `pop`, `railscasts`, `recoil`, `rose`, `seti`, `shapeshifter`, `slate`, `solarized`, `spaceduck`, `spoon`, `sunburst`, `tomorrow`, `tomorrownight`, `tomorrownightblue`, `tomorrownightbright`, `twilight`, `ulisesjcf`, `vascular`, `vice`, `xcode`.
+`theme` accepts any named export of
+[`recoil-devtools-themes`](../recoil-devtools-themes): `dracula`, `gruvbox`,
+`monokai`, `nord`, `ocean`, `solarized`, `solarizedLight`, `ulisesjcf`.
+
+A name that is not exported logs `DevTools theme <name> not found, defaulting to
+ulisesjcf` and falls back to `ulisesjcf`. To use any other palette, pass a
+[`Base16Theme`](../recoil-devtools-themes#theme-format) object directly instead
+of a name.
 
 ## Demo
 
