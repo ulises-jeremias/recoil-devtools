@@ -60,6 +60,7 @@ export default tseslint.config(
       '**/test/**',
       '**/*.test.*',
       '**/vitest.config.ts',
+      '**/tsup.config.ts',
       '**/.storybook/main.js',
     ],
     languageOptions: {
