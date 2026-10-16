@@ -32,18 +32,24 @@ function App() {
 
 ## Props
 
-| Prop                  | Type        | Default                             | Description                    |
-| --------------------- | ----------- | ----------------------------------- | ------------------------------ |
-| `children`            | `ReactNode` | (required) Child monitor components |
-| `toggleVisibilityKey` | `string`    | `"ctrl-h"`                          | Key to toggle visibility       |
-| `changePositionKey`   | `string`    | `"ctrl-q"`                          | Key to change dock position    |
-| `changeMonitorKey`    | `string`    | `"ctrl-m"`                          | Key to switch monitors         |
-| `fluid`               | `boolean`   | `true`                              | Size as fraction vs fixed      |
-| `defaultSize`         | `number`    | `0.3`                               | Dock size                      |
-| `defaultPosition`     | `Position`  | `"right"`                           | Dock position                  |
-| `defaultIsVisible`    | `boolean`   | `true`                              | Initial visibility             |
-| `persistState`        | `boolean`   | `true`                              | Persist to localStorage        |
-| `showShortcutButton`  | `boolean`   | `true`                              | Show keyboard shortcuts button |
+| Prop                  | Type                                     | Default    | Description                                                                                         |
+| --------------------- | ---------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------- |
+| `children`            | `ReactNode`                              | —          | Monitors rendered inside the dock. At least one is required                                         |
+| `values`              | `RecoilState<unknown>[]`                 | —          | Atoms forwarded to the active child monitor. The child's own `values` wins                          |
+| `defaultIsVisible`    | `boolean`                                | `true`     | Initial visibility, when nothing has been persisted yet                                             |
+| `defaultPosition`     | `'left' \| 'top' \| 'right' \| 'bottom'` | `"right"`  | Initial dock position, when nothing has been persisted yet                                          |
+| `defaultSize`         | `number`                                 | `0.3`      | Initial dock size                                                                                   |
+| `toggleVisibilityKey` | `string`                                 | `"ctrl-h"` | Key to toggle visibility                                                                            |
+| `changePositionKey`   | `string`                                 | `"ctrl-q"` | Key to change dock position                                                                         |
+| `changeMonitorKey`    | `string`                                 | `"ctrl-m"` | Key to switch between the child monitors                                                            |
+| `fluid`               | `boolean`                                | `true`     | Size dock as a fraction of the viewport instead of a fixed value                                    |
+| `persistState`        | `boolean`                                | `true`     | Save and restore visibility, position and size in `localStorage` under `recoil-devtools-dock-state` |
+| `showShortcutButton`  | `boolean`                                | `true`     | Show the ⌨ button that lists the active shortcuts                                                   |
+
+Keys are parsed by [`parse-key`](https://www.npmjs.com/package/parse-key), which
+expects `"c"`, `"ctrl-c"` or `"shift-ctrl-c"`; modifiers (`ctrl`, `alt`, `shift`,
+`meta`) are all required to match, and an unparseable value throws inside the
+global `keydown` handler.
 
 ## Keyboard Shortcuts
 

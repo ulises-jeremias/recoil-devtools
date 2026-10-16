@@ -33,18 +33,52 @@ function App() {
 }
 ```
 
+## Exports
+
+| Export         | Type                            | Description                                            |
+| -------------- | ------------------------------- | ------------------------------------------------------ |
+| `RecoilLogger` | `FC<RecoilLoggerProps>`         | Component that observes Recoil transactions            |
+| `createLogger` | `(options?: Options) => Logger` | Builds the curried logger passed to `logger`           |
+| `logger`       | `Logger`                        | The default logger, `createLogger()` with no options   |
+| `defaults`     | `object`                        | The default `Options` merged into every `createLogger` |
+
 ## Props
 
-| Prop        | Type            | Default    | Description                                  |
-| ----------- | --------------- | ---------- | -------------------------------------------- |
-| `values`    | `RecoilState[]` | All atoms  | Specific atoms to track                      |
-| `predicate` | `Function`      | `false`    | Filter which actions to log                  |
-| `collapsed` | `boolean`       | `false`    | Collapse log groups in the console           |
-| `duration`  | `boolean`       | `true`     | Print duration of each action                |
-| `timestamp` | `boolean`       | `true`     | Print timestamp with each action             |
-| `level`     | `string`        | `"log"`    | Console method to use (`log`, `warn`, etc.)  |
-| `colors`    | `object`        | (built-in) | Custom title / state / action colors         |
-| `logger`    | `object`        | `console`  | Custom logger implementing the `console` API |
+`<RecoilLogger>` renders `null`; it only observes transactions.
+
+| Prop                | Type                   | Default                       | Description                                                                            |
+| ------------------- | ---------------------- | ----------------------------- | -------------------------------------------------------------------------------------- |
+| `values`            | `RecoilState<any>[]`   | All modified atoms            | Atoms to read on each transaction. When empty, every node reported as modified is read |
+| `logger`            | `Logger`               | `createLogger()`              | `(next) => ({ prevState, nextState, action }) => any`                                  |
+| `actionTransformer` | `(action: any) => any` | `(action) => ({ ...action })` | Rewrites the action object handed to `logger`                                          |
+
+The action passed down is `{ description: "Updated keys: <keys>", <atomKey>: <nextValue> }`,
+and the entry is `{ prevState, nextState, action }`.
+
+`RecoilLoggerProps` also declares `next?: Function`, but the component never reads
+it: it always invokes `logger(() => null)`, so there is no way to chain a `next`
+through `<RecoilLogger>`.
+
+## `createLogger()` options
+
+These belong to `createLogger`, not to `<RecoilLogger>`. Every option is optional
+and is merged over `defaults`.
+
+| Option              | Type                  | Default              | Description                                                         |
+| ------------------- | --------------------- | -------------------- | ------------------------------------------------------------------- |
+| `level`             | `LogLevel`            | `() => "log"`        | `console` method: a string, a function, or an object keyed by type  |
+| `logger`            | `object`              | `console`            | Implementation of the `console` API. If `undefined`, nothing logs   |
+| `predicate`         | `Function`            | `false`              | `(state, action) => boolean`; `state` is `{ prevState, nextState }` |
+| `collapsed`         | `Function`            | `false`              | `(getState, action, logEntry) => boolean`; group collapsed?         |
+| `logErrors`         | `boolean \| Function` | `true`               | Catch, log and re-throw errors thrown by `next`                     |
+| `duration`          | `boolean`             | `true`               | Print how long each transaction took                                |
+| `timestamp`         | `boolean`             | `true`               | Print a timestamp with each entry                                   |
+| `colors`            | `object`              | (built-in palette)   | `title`, `prevState`, `action`, `nextState`, `error` color getters  |
+| `stateTransformer`  | `Function`            | `(state) => state`   | Transform the state before printing                                 |
+| `actionTransformer` | `Function`            | `(action) => action` | Transform the action before printing                                |
+| `errorTransformer`  | `Function`            | `(error) => error`   | Transform the error before printing                                 |
+| `diff`              | `boolean`             | `false`              | Print a `deep-diff` of previous vs next state below the entry       |
+| `diffPredicate`     | `Function`            | `() => false`        | `(nextState, action) => boolean`; per-entry override of `diff`      |
 
 ## Custom Logger
 
@@ -52,8 +86,9 @@ function App() {
 import { RecoilLogger, createLogger } from 'recoil-devtools-logger';
 
 const logger = createLogger({
-  predicate: (_, action) => action.type !== 'HIDDEN',
-  collapsed: true,
+  // Actions only carry `description` and one entry per atom key, so filter on those
+  predicate: (state, action) => action.description.includes('count'),
+  collapsed: () => true,
 });
 
 <RecoilLogger logger={logger} />;
