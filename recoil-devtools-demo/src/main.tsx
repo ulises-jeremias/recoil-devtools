@@ -1,5 +1,11 @@
 import { createRoot } from 'react-dom/client';
-import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil';
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 import { RecoilLogger } from 'recoil-devtools-logger';
 import { DockMonitor } from 'recoil-devtools-dock';
 import { LogMonitor } from 'recoil-devtools-log-monitor';
@@ -39,12 +45,12 @@ function App() {
   return (
     <div className="app">
       <h1>Recoil DevTools Demo</h1>
-      
+
       <div className="controls">
         <p>Counter: {count}</p>
         <p>Doubled: {doubled}</p>
         <p>Status: {status}</p>
-        
+
         <button onClick={() => setCount(count + 1)}>Increment</button>
         <button onClick={() => setCount(count - 1)}>Decrement</button>
         <button onClick={() => setCount(0)}>Reset</button>

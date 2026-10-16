@@ -10,7 +10,7 @@ export interface RecoilDevtoolsProps {
 /**
  * RecoilDevtools wraps children and passes Recoil atoms to them via props.
  * This enables child components to subscribe to specific atoms for debugging.
- * 
+ *
  * @example
  * ```tsx
  * <RecoilDevtools values={[atom1, atom2]}>

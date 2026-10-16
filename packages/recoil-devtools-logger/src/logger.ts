@@ -56,56 +56,57 @@ const createLogger = (options?: Options) => {
 
   const logBuffer: any[] = [];
 
-  return (next: Function) => ({
-    prevState,
-    nextState,
-    action,
-  }: {
-    prevState: any;
-    nextState: any;
-    action: any;
-  }) => {
-    // Exit early if predicate function returns 'false'
-    if (
-      typeof predicate === 'function' &&
-      !predicate({ prevState, nextState }, action)
-    ) {
-      return next(action);
-    }
-
-    const logEntry: LogEntry = {};
-
-    logBuffer.push(logEntry);
-
-    logEntry.started = timer.now();
-    logEntry.startedTime = new Date();
-    logEntry.prevState = stateTransformer(prevState);
-    logEntry.action = action;
-
-    let returnedValue;
-    if (logErrors) {
-      try {
-        returnedValue = next(action);
-      } catch (e) {
-        logEntry.error = errorTransformer(e);
+  return (next: Function) =>
+    ({
+      prevState,
+      nextState,
+      action,
+    }: {
+      prevState: any;
+      nextState: any;
+      action: any;
+    }) => {
+      // Exit early if predicate function returns 'false'
+      if (
+        typeof predicate === 'function' &&
+        !predicate({ prevState, nextState }, action)
+      ) {
+        return next(action);
       }
-    } else {
-      returnedValue = next(action);
-    }
 
-    logEntry.took = timer.now() - logEntry.started;
-    logEntry.nextState = stateTransformer(nextState);
+      const logEntry: LogEntry = {};
 
-    const diff =
-      loggerOptions.diff && typeof diffPredicate === 'function'
-        ? diffPredicate(nextState, action)
-        : loggerOptions.diff;
-    printBuffer(logBuffer, { ...loggerOptions, diff });
-    logBuffer.length = 0;
+      logBuffer.push(logEntry);
 
-    if (logEntry.error) throw logEntry.error;
-    return returnedValue;
-  };
+      logEntry.started = timer.now();
+      logEntry.startedTime = new Date();
+      logEntry.prevState = stateTransformer(prevState);
+      logEntry.action = action;
+
+      let returnedValue;
+      if (logErrors) {
+        try {
+          returnedValue = next(action);
+        } catch (e) {
+          logEntry.error = errorTransformer(e);
+        }
+      } else {
+        returnedValue = next(action);
+      }
+
+      logEntry.took = timer.now() - logEntry.started;
+      logEntry.nextState = stateTransformer(nextState);
+
+      const diff =
+        loggerOptions.diff && typeof diffPredicate === 'function'
+          ? diffPredicate(nextState, action)
+          : loggerOptions.diff;
+      printBuffer(logBuffer, { ...loggerOptions, diff });
+      logBuffer.length = 0;
+
+      if (logEntry.error) throw logEntry.error;
+      return returnedValue;
+    };
 };
 
 const defaultLogger = createLogger();
