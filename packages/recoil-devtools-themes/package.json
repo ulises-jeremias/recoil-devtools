@@ -68,7 +68,7 @@
     "@types/base16": "^1.0.5",
     "@types/react": "^18.3.31",
     "eslint": "^9.39.5",
-    "tsup": "^8.5.1",
+    "tsup": "^9.0.0",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5"
   }
