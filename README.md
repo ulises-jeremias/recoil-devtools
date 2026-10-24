@@ -40,6 +40,65 @@ This is a monorepo containing the following packages:
 | [`recoil-devtools-logger`](packages/recoil-devtools-logger) | [![](https://img.shields.io/npm/v/recoil-devtools-logger.svg)](https://www.npmjs.com/package/recoil-devtools-logger) | [![](https://img.shields.io/npm/dm/recoil-devtools-logger.svg)](https://www.npmjs.com/package/recoil-devtools-logger) | Console logging |
 | [`recoil-devtools-themes`](packages/recoil-devtools-themes) | [![](https://img.shields.io/npm/v/recoil-devtools-themes.svg)](https://www.npmjs.com/package/recoil-devtools-themes) | [![](https://img.shields.io/npm/dm/recoil-devtools-themes.svg)](https://www.npmjs.com/package/recoil-devtools-themes) | Color themes    |
 
+## Architecture
+
+The workspace in [`pnpm-workspace.yaml`](pnpm-workspace.yaml) contains five
+published packages under `packages/*` and the private demo app.
+
+### Package dependencies
+
+Arrows point from a workspace package to a dependency declared in its
+`package.json`. Third-party and peer dependencies are omitted.
+
+```mermaid
+flowchart LR
+    demo["recoil-devtools-demo"]
+    subgraph packages["packages/*"]
+        composite["recoil-devtools"]
+        dock["recoil-devtools-dock"]
+        monitor["recoil-devtools-log-monitor"]
+        logger["recoil-devtools-logger"]
+        themes["recoil-devtools-themes"]
+        monitor --> themes
+    end
+    demo --> composite
+    demo --> dock
+    demo --> monitor
+    demo --> logger
+    demo --> themes
+```
+
+### React integration and subscriptions
+
+The demo composes `RecoilLogger`, `DockMonitor`, and `LogMonitor` inside
+`RecoilRoot`. The history hook captures an initial snapshot and observes
+transactions; `RecoilLogger` registers its own transaction observer for console
+logging. `DockMonitor` provides the panel that contains the log monitor.
+
+```mermaid
+flowchart TD
+    subgraph app["React app inside RecoilRoot"]
+        state["Recoil atoms and selectors"]
+        initial["useRecoilSnapshot"]
+        transactions["useRecoilTransactionObserver_UNSTABLE"]
+        history["useRecoilTransactionsHistory"]
+        logger["RecoilLogger"]
+        monitor["LogMonitor inside DockMonitor"]
+        state -->|snapshot on mount| initial
+        initial --> history
+        state -->|transactions| transactions
+        transactions --> history
+        transactions --> logger
+        history -->|history and controls| monitor
+        monitor -->|Reset via useGotoRecoilSnapshot| state
+    end
+    logger --> console["Console output"]
+```
+
+`RecoilDevtools` currently passes its children through unchanged; it does not
+forward `values` to them. Set `values` on `LogMonitor` or `RecoilLogger` itself to
+observe selected atoms.
+
 ## Quick Start
 
 🌐 **Live demo:** <https://ulises-jeremias.github.io/recoil-devtools/>
