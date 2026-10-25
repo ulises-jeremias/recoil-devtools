@@ -63,11 +63,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # changeset creates annotated tags (`git tag <name> -m <name>`), which need a
+      # committer identity. Without one `git tag` fails, changeset ignores the exit
+      # code, and the tag push below has nothing to send.
+      - name: Configure git identity for release tags
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
       - name: Publish packages
         run: pnpm publish-packages
 
       - name: Create git tags for published versions
-        run: npx changeset tag
+        run: npx changeset git-tag
 
       - name: Push git tags
         run: git push origin --tags
