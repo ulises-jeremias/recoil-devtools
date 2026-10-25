@@ -1,4 +1,4 @@
-import { vi } from 'vitest'
+import { vi } from 'vitest';
 import { repeat, pad, formatTime } from '../../src/util/helpers';
 
 describe('repeat', () => {

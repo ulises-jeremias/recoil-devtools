@@ -1,5 +1,13 @@
 # recoil-devtools-log-monitor
 
+## 1.2.6
+
+### Patch Changes
+
+- af90ba8: Correct the Props and API tables in each package README so they match the exported components, defaults and theme names. Build with tsup 9: the published JavaScript is byte-identical, and the type declarations only switch to an equivalent `export type` form.
+- Updated dependencies [af90ba8]
+  - recoil-devtools-themes@1.3.1
+
 ## 1.2.5
 
 ### Patch Changes

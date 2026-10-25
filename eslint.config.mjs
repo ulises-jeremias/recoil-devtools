@@ -56,7 +56,13 @@ export default tseslint.config(
     },
   },
   {
-    files: ['**/test/**', '**/*.test.*'],
+    files: [
+      '**/test/**',
+      '**/*.test.*',
+      '**/vitest.config.ts',
+      '**/tsup.config.ts',
+      '**/.storybook/main.js',
+    ],
     languageOptions: {
       parserOptions: {
         projectService: false,

@@ -1,6 +1,6 @@
 {
   "name": "recoil-devtools-logger",
-  "version": "1.2.3",
+  "version": "1.2.6",
   "description": "Recoil console logger — print state changes and actions to the browser console",
   "license": "MIT",
   "author": "ulises-jeremias <ulisescf.24@gmail.com>",
@@ -74,14 +74,14 @@
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^6.1.2",
-    "@vitest/coverage-v8": "^5.0.3",
+    "@vitest/coverage-v8": "^5.0.5",
     "eslint": "^9.39.5",
-    "jsdom": "^30.1.2",
+    "jsdom": "^30.1.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "recoil": "^0.7.7",
-    "tsup": "^8.5.1",
+    "tsup": "^9.0.0",
     "typescript": "^6.0.3",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.5"
   }
 }
