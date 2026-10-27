@@ -80,15 +80,17 @@ flowchart TD
     subgraph app["React app inside RecoilRoot"]
         state["Recoil atoms and selectors"]
         initial["useRecoilSnapshot"]
-        transactions["useRecoilTransactionObserver_UNSTABLE"]
+        historyObserver["History transaction observer"]
+        loggerObserver["Logger transaction observer"]
         history["useRecoilTransactionsHistory"]
         logger["RecoilLogger"]
         monitor["LogMonitor inside DockMonitor"]
         state -->|snapshot on mount| initial
         initial --> history
-        state -->|transactions| transactions
-        transactions --> history
-        transactions --> logger
+        state -->|transactions| historyObserver
+        historyObserver --> history
+        state -->|transactions| loggerObserver
+        loggerObserver --> logger
         history -->|history and controls| monitor
         monitor -->|Reset via useGotoRecoilSnapshot| state
     end
