@@ -5,7 +5,10 @@ import { brighten } from '../helpers';
 const styles: { base: CSSProperties } = {
   base: {
     cursor: 'pointer',
+    appearance: 'none',
+    border: 0,
     fontWeight: 'bold',
+    fontFamily: 'inherit',
     borderRadius: 3,
     padding: 4,
     marginLeft: 3,
@@ -68,12 +71,14 @@ const LogMonitorButton: FC<Props> = ({
     style = {
       ...style,
       opacity: 0.2,
-      cursor: 'text',
+      cursor: 'not-allowed',
       backgroundColor: 'transparent',
     };
   }
   return (
-    <a
+    <button
+      type="button"
+      disabled={!enabled}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseDown}
@@ -82,7 +87,7 @@ const LogMonitorButton: FC<Props> = ({
       style={style}
     >
       {children}
-    </a>
+    </button>
   );
 };
 
