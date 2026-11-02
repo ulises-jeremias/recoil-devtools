@@ -1,5 +1,11 @@
 # recoil-devtools-log-monitor
 
+## 1.2.7
+
+### Patch Changes
+
+- 03a64f2: Render log monitor controls as native buttons with built-in keyboard and disabled behavior.
+
 ## 1.2.6
 
 ### Patch Changes
