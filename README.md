@@ -40,6 +40,45 @@ This is a monorepo containing the following packages:
 | [`recoil-devtools-logger`](packages/recoil-devtools-logger) | [![](https://img.shields.io/npm/v/recoil-devtools-logger.svg)](https://www.npmjs.com/package/recoil-devtools-logger) | [![](https://img.shields.io/npm/dm/recoil-devtools-logger.svg)](https://www.npmjs.com/package/recoil-devtools-logger) | Logs state changes and actions to the browser console (`RecoilLogger`) |
 | [`recoil-devtools-themes`](packages/recoil-devtools-themes) | [![](https://img.shields.io/npm/v/recoil-devtools-themes.svg)](https://www.npmjs.com/package/recoil-devtools-themes) | [![](https://img.shields.io/npm/dm/recoil-devtools-themes.svg)](https://www.npmjs.com/package/recoil-devtools-themes) | Eight color themes for the monitors                                    |
 
+## Quick Start
+
+🌐 **Live demo:** <https://ulises-jeremias.github.io/recoil-devtools/>
+
+```bash
+# Install all packages
+pnpm install
+
+# Run the demo locally
+pnpm --filter recoil-devtools-demo dev
+```
+
+### Basic Usage
+
+```tsx
+import { RecoilRoot } from 'recoil';
+import { DockMonitor } from 'recoil-devtools-dock';
+import { LogMonitor } from 'recoil-devtools-log-monitor';
+
+function App() {
+  return (
+    <RecoilRoot>
+      <DockMonitor>
+        <LogMonitor />
+      </DockMonitor>
+      {/* Your app */}
+    </RecoilRoot>
+  );
+}
+```
+
+### Keyboard Shortcuts
+
+| Shortcut | Action                         |
+| -------- | ------------------------------ |
+| `Ctrl+H` | Toggle visibility              |
+| `Ctrl+Q` | Change dock position           |
+| `Ctrl+M` | Change monitor (when multiple) |
+
 ## Architecture
 
 The workspace in [`pnpm-workspace.yaml`](pnpm-workspace.yaml) contains five
@@ -100,45 +139,6 @@ flowchart TD
 `RecoilDevtools` currently passes its children through unchanged; it does not
 forward `values` to them. Set `values` on `LogMonitor` or `RecoilLogger` itself to
 observe selected atoms.
-
-## Quick Start
-
-🌐 **Live demo:** <https://ulises-jeremias.github.io/recoil-devtools/>
-
-```bash
-# Install all packages
-pnpm install
-
-# Run the demo locally
-pnpm --filter recoil-devtools-demo dev
-```
-
-### Basic Usage
-
-```tsx
-import { RecoilRoot } from 'recoil';
-import { DockMonitor } from 'recoil-devtools-dock';
-import { LogMonitor } from 'recoil-devtools-log-monitor';
-
-function App() {
-  return (
-    <RecoilRoot>
-      <DockMonitor>
-        <LogMonitor />
-      </DockMonitor>
-      {/* Your app */}
-    </RecoilRoot>
-  );
-}
-```
-
-### Keyboard Shortcuts
-
-| Shortcut | Action                         |
-| -------- | ------------------------------ |
-| `Ctrl+H` | Toggle visibility              |
-| `Ctrl+Q` | Change dock position           |
-| `Ctrl+M` | Change monitor (when multiple) |
 
 ## Requirements
 
