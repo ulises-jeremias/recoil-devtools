@@ -73,6 +73,127 @@ describe('log monitor entries', () => {
     expect(entryProps.onActionShiftClick).toHaveBeenCalledWith(1);
   });
 
+  it('exposes actionable headers as keyboard-focusable buttons', () => {
+    render(
+      <LogMonitorEntry
+        {...entryProps}
+        select={(values) => values}
+        onActionClick={vi.fn()}
+        onActionShiftClick={vi.fn()}
+      />
+    );
+
+    const actionBar = screen.getByRole('button', { name: 'Transaction #2' });
+
+    expect(actionBar.getAttribute('tabindex')).toBe('0');
+    actionBar.focus();
+    expect(document.activeElement).toBe(actionBar);
+  });
+
+  it('activates action headers with Enter and Space', () => {
+    const onActionClick = vi.fn();
+    render(
+      <LogMonitorEntry
+        {...entryProps}
+        select={(values) => values}
+        onActionClick={onActionClick}
+        onActionShiftClick={vi.fn()}
+      />
+    );
+    const actionBar = screen.getByRole('button', {
+      name: 'Transaction #2',
+    });
+
+    fireEvent.keyDown(actionBar, { key: 'Enter' });
+    const spaceNotCancelled = fireEvent.keyDown(actionBar, { key: ' ' });
+
+    expect(onActionClick).toHaveBeenCalledTimes(2);
+    expect(onActionClick).toHaveBeenNthCalledWith(1, 1);
+    expect(onActionClick).toHaveBeenNthCalledWith(2, 1);
+    expect(spaceNotCancelled).toBe(false);
+  });
+
+  it('uses Shift+Enter for consecutive toggles', () => {
+    const onActionShiftClick = vi.fn();
+    render(
+      <LogMonitorEntry
+        {...entryProps}
+        select={(values) => values}
+        onActionClick={vi.fn()}
+        onActionShiftClick={onActionShiftClick}
+      />
+    );
+
+    fireEvent.keyDown(screen.getByRole('button', { name: 'Transaction #2' }), {
+      key: 'Enter',
+      shiftKey: true,
+    });
+
+    expect(onActionShiftClick).toHaveBeenCalledOnce();
+    expect(onActionShiftClick).toHaveBeenCalledWith(1);
+  });
+
+  it('keeps the initial action inert', () => {
+    const onActionClick = vi.fn();
+    const onActionShiftClick = vi.fn();
+    render(
+      <LogMonitorEntry
+        {...entryProps}
+        action={{ type: 'Initial state' }}
+        actionId={0}
+        select={(values) => values}
+        onActionClick={onActionClick}
+        onActionShiftClick={onActionShiftClick}
+      />
+    );
+    const actionBar = screen.getByText('Initial state');
+
+    expect(screen.queryByRole('button', { name: 'Initial state' })).toBeNull();
+    expect(actionBar.getAttribute('tabindex')).toBeNull();
+    fireEvent.click(actionBar);
+    fireEvent.keyDown(actionBar, { key: 'Enter' });
+    fireEvent.keyDown(actionBar, { key: ' ', shiftKey: true });
+
+    expect(onActionClick).not.toHaveBeenCalled();
+    expect(onActionShiftClick).not.toHaveBeenCalled();
+  });
+
+  it('does not toggle actions from nested JSON controls', () => {
+    const onActionClick = vi.fn();
+    render(
+      <LogMonitorEntry
+        {...entryProps}
+        select={(values) => values}
+        onActionClick={onActionClick}
+        onActionShiftClick={vi.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getAllByText('details:')[0]);
+
+    expect(onActionClick).not.toHaveBeenCalled();
+  });
+
+  it('suppresses repeated Space activation and scrolling', () => {
+    const onActionClick = vi.fn();
+    render(
+      <LogMonitorEntry
+        {...entryProps}
+        select={(values) => values}
+        onActionClick={onActionClick}
+        onActionShiftClick={vi.fn()}
+      />
+    );
+
+    const spaceNotCancelled = fireEvent.keyDown(
+      screen.getByRole('button', { name: 'Transaction #2' }),
+      { key: ' ', repeat: true }
+    );
+
+    expect(spaceNotCancelled).toBe(false);
+    expect(onActionClick).not.toHaveBeenCalled();
+  });
+
   it('shows selection failures without losing the action header', () => {
     render(
       <LogMonitorEntry

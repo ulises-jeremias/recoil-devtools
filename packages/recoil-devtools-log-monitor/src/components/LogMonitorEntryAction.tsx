@@ -1,4 +1,10 @@
-import { CSSProperties, FC, MouseEventHandler } from 'react';
+import {
+  AriaRole,
+  CSSProperties,
+  FC,
+  KeyboardEventHandler,
+  MouseEventHandler,
+} from 'react';
 import { JSONTree } from 'react-json-tree';
 import { Base16Theme } from 'base16';
 import type { TransactionAction } from '../history';
@@ -22,7 +28,10 @@ interface Props {
   action: TransactionAction;
   expandActionRoot: boolean;
   onClick: MouseEventHandler<HTMLDivElement>;
+  onKeyDown?: KeyboardEventHandler<HTMLDivElement>;
+  role?: AriaRole;
   style: CSSProperties;
+  tabIndex?: number;
 }
 
 const LogMonitorAction: FC<Props> = ({
@@ -31,7 +40,10 @@ const LogMonitorAction: FC<Props> = ({
   action,
   expandActionRoot,
   onClick,
+  onKeyDown,
+  role,
   style,
+  tabIndex,
 }) => {
   const shouldExpandNodeInitially = (
     _: readonly (string | number)[],
@@ -72,7 +84,13 @@ const LogMonitorAction: FC<Props> = ({
         ...style,
       }}
     >
-      <div style={styles.actionBar} onClick={onClick}>
+      <div
+        style={styles.actionBar}
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+        role={role}
+        tabIndex={tabIndex}
+      >
         {type !== null && type !== undefined && type.toString()}
       </div>
       {!collapsed ? renderPayload(payload) : ''}
