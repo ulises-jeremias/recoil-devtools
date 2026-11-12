@@ -1,4 +1,9 @@
-import { CSSProperties, FC, MouseEventHandler } from 'react';
+import {
+  CSSProperties,
+  FC,
+  KeyboardEventHandler,
+  MouseEventHandler,
+} from 'react';
 import { JSONTree, type StylingValue } from 'react-json-tree';
 import { Base16Theme } from 'base16';
 import LogMonitorEntryAction from './LogMonitorEntryAction';
@@ -147,14 +152,29 @@ export const LogMonitorEntry: FC<Props> = ({
     );
   };
 
-  const handleActionClick: MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleActionToggle = (shiftKey: boolean) => {
     if (actionId > 0) {
-      if (e.shiftKey) {
+      if (shiftKey) {
         onActionShiftClick(actionId);
       } else {
         onActionClick(actionId);
       }
     }
+  };
+
+  const handleActionClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    handleActionToggle(e.shiftKey);
+  };
+
+  const handleActionKeyDown: KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+
+    if (e.key === ' ') {
+      e.preventDefault();
+    }
+    if (e.repeat) return;
+
+    handleActionToggle(e.shiftKey);
   };
 
   const shouldExpandNodeInitially = (
@@ -184,6 +204,13 @@ export const LogMonitorEntry: FC<Props> = ({
         action={action}
         expandActionRoot={expandActionRoot}
         onClick={handleActionClick}
+        {...(actionId > 0
+          ? {
+              onKeyDown: handleActionKeyDown,
+              role: 'button' as const,
+              tabIndex: 0,
+            }
+          : {})}
         style={{ ...styles.entry, ...styleEntry }}
       />
       {!collapsed && (
