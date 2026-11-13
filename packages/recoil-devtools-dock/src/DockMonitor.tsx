@@ -5,9 +5,12 @@ import {
   useEffect,
   useState,
   useCallback,
+  useRef,
   type FC,
   type ReactNode,
   type CSSProperties,
+  type FocusEvent as ReactFocusEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
 import { Dock } from 'react-dock';
 import parseKey from 'parse-key';
@@ -15,6 +18,7 @@ import type { RecoilState } from 'recoil';
 import { POSITIONS } from './constants';
 
 const STORAGE_KEY = 'recoil-devtools-dock-state';
+let nextShortcutsDialogId = 0;
 
 interface DockState {
   isVisible?: boolean;
@@ -95,6 +99,12 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
   });
   const [childMonitorIndex, setChildMonitorIndex] = useState<number>(0);
   const [showShortcuts, setShowShortcuts] = useState<boolean>(false);
+  const [shortcutsDialogId] = useState(() => {
+    nextShortcutsDialogId += 1;
+    return `recoil-devtools-shortcuts-${nextShortcutsDialogId}`;
+  });
+  const shortcutButtonRef = useRef<HTMLButtonElement>(null);
+  const shortcutsDialogRef = useRef<HTMLDivElement>(null);
 
   // Format shortcut key for display
   const formatShortcut = (key: string) => {
@@ -209,6 +219,12 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 
+  useEffect(() => {
+    if (showShortcuts) {
+      shortcutsDialogRef.current?.focus();
+    }
+  }, [showShortcuts]);
+
   // Persist state changes to localStorage
   useEffect(() => {
     if (persistState) {
@@ -256,6 +272,28 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
       : []),
   ];
 
+  const handleShortcutsBlur = (event: ReactFocusEvent<HTMLElement>) => {
+    const nextTarget = event.relatedTarget;
+    if (
+      nextTarget instanceof Node &&
+      (shortcutButtonRef.current?.contains(nextTarget) ||
+        shortcutsDialogRef.current?.contains(nextTarget))
+    ) {
+      return;
+    }
+
+    setShowShortcuts(false);
+  };
+
+  const handleShortcutsKeyDown = (event: ReactKeyboardEvent<HTMLElement>) => {
+    if (showShortcuts && event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      setShowShortcuts(false);
+      shortcutButtonRef.current?.focus();
+    }
+  };
+
   return (
     <Dock
       position={position}
@@ -267,16 +305,31 @@ const DockMonitor: FC<DockMonitorProps> = (props) => {
     >
       {showShortcutButton && (
         <button
+          ref={shortcutButtonRef}
+          type="button"
           style={shortcutButtonStyle}
           onClick={() => setShowShortcuts(!showShortcuts)}
-          onBlur={() => setShowShortcuts(false)}
+          onBlur={handleShortcutsBlur}
+          onKeyDown={handleShortcutsKeyDown}
+          aria-label="Show keyboard shortcuts"
+          aria-expanded={showShortcuts}
+          aria-controls={showShortcuts ? shortcutsDialogId : undefined}
           title="Show keyboard shortcuts"
         >
           ⌨
         </button>
       )}
       {showShortcuts && (
-        <div style={shortcutsModalStyle}>
+        <div
+          ref={shortcutsDialogRef}
+          id={shortcutsDialogId}
+          role="dialog"
+          aria-label="Keyboard shortcuts"
+          tabIndex={-1}
+          style={shortcutsModalStyle}
+          onBlur={handleShortcutsBlur}
+          onKeyDown={handleShortcutsKeyDown}
+        >
           <div style={{ marginBottom: 8, fontWeight: 'bold' }}>
             Keyboard Shortcuts
           </div>

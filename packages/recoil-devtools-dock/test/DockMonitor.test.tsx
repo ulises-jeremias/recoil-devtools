@@ -1,6 +1,8 @@
-import React, { type ComponentProps } from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import React, { StrictMode, type ComponentProps } from 'react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { hydrateRoot, type Root } from 'react-dom/client';
+import { renderToString } from 'react-dom/server';
 import type { Dock } from 'react-dock';
 import { DockMonitor } from '../src';
 
@@ -161,6 +163,150 @@ describe('DockMonitor', () => {
     await user.click(button);
     await user.tab();
     expect(screen.queryByText('Keyboard Shortcuts')).toBeNull();
+  });
+
+  it('exposes the shortcut toggle and popup with related accessible names', async () => {
+    const user = userEvent.setup();
+    render(
+      <DockMonitor persistState={false}>
+        <Monitor />
+      </DockMonitor>
+    );
+
+    const button = screen.getByRole('button', {
+      name: 'Show keyboard shortcuts',
+    });
+    expect(button.getAttribute('type')).toBe('button');
+    expect(button.getAttribute('aria-expanded')).toBe('false');
+
+    await user.click(button);
+
+    const dialog = screen.getByRole('dialog', {
+      name: 'Keyboard shortcuts',
+    });
+    expect(button.getAttribute('aria-expanded')).toBe('true');
+    expect(button.getAttribute('aria-controls')).toBe(dialog.id);
+    expect(dialog.getAttribute('aria-modal')).toBeNull();
+  });
+
+  it('hydrates in StrictMode without an ID mismatch and links the opened dialog', async () => {
+    const user = userEvent.setup();
+    const consoleError = vi
+      .spyOn(console, 'error')
+      .mockImplementation(() => undefined);
+    const container = document.createElement('div');
+    document.body.append(container);
+    const ui = (
+      <StrictMode>
+        <DockMonitor persistState={false}>
+          <Monitor />
+        </DockMonitor>
+      </StrictMode>
+    );
+    container.innerHTML = renderToString(ui);
+    let root: Root | undefined;
+
+    try {
+      await act(async () => {
+        root = hydrateRoot(container, ui);
+      });
+
+      expect(consoleError).not.toHaveBeenCalled();
+      const button = within(container).getByRole('button', {
+        name: 'Show keyboard shortcuts',
+      });
+      expect(button.getAttribute('aria-controls')).toBeNull();
+
+      await user.click(button);
+      const dialog = within(container).getByRole('dialog', {
+        name: 'Keyboard shortcuts',
+      });
+      expect(button.getAttribute('aria-controls')).toBe(dialog.id);
+    } finally {
+      await act(async () => root?.unmount());
+      container.remove();
+      consoleError.mockRestore();
+    }
+  });
+
+  it('uses distinct dialog relationships for multiple dock instances', async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <DockMonitor persistState={false}>
+          <Monitor label="First" />
+        </DockMonitor>
+        <DockMonitor persistState={false}>
+          <Monitor label="Second" />
+        </DockMonitor>
+      </>
+    );
+
+    const buttons = screen.getAllByRole('button', {
+      name: 'Show keyboard shortcuts',
+    });
+    await user.click(buttons[0]!);
+    const firstId = screen.getByRole('dialog').id;
+    await user.click(buttons[0]!);
+
+    await user.click(buttons[1]!);
+    const secondId = screen.getByRole('dialog').id;
+    expect(secondId).not.toBe(firstId);
+  });
+
+  it('opens from the keyboard and returns focus to the toggle on Escape', async () => {
+    const user = userEvent.setup();
+    render(
+      <DockMonitor persistState={false}>
+        <Monitor />
+      </DockMonitor>
+    );
+
+    const button = screen.getByRole('button', {
+      name: 'Show keyboard shortcuts',
+    });
+    button.focus();
+    await user.keyboard('{Enter}');
+
+    const dialog = screen.getByRole('dialog', {
+      name: 'Keyboard shortcuts',
+    });
+    expect(document.activeElement).toBe(dialog);
+
+    await user.keyboard('{Escape}');
+    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(document.activeElement).toBe(button);
+  });
+
+  it('keeps the popup open for internal focus changes and dismisses it on outside focus', async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <DockMonitor persistState={false}>
+          <Monitor />
+        </DockMonitor>
+        <button type="button">Outside control</button>
+      </>
+    );
+
+    await user.click(
+      screen.getByRole('button', { name: 'Show keyboard shortcuts' })
+    );
+    const dialog = screen.getByRole('dialog', {
+      name: 'Keyboard shortcuts',
+    });
+    expect(document.activeElement).toBe(dialog);
+
+    const shortcut = screen.getByText('Ctrl + h');
+    shortcut.setAttribute('tabindex', '-1');
+    await user.click(shortcut);
+    expect(dialog.contains(document.activeElement)).toBe(true);
+    expect(screen.getByRole('dialog')).toBe(dialog);
+
+    const outside = screen.getByRole('button', { name: 'Outside control' });
+    await user.click(outside);
+    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(document.activeElement).toBe(outside);
   });
 
   it('can disable the shortcut help button', () => {
