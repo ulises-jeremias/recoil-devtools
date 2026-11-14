@@ -102,8 +102,8 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1
       react-dock:
-        specifier: ^0.8.0
-        version: 0.8.0(@types/react@18.3.31)(react@18.3.1)
+        specifier: ^0.8.1
+        version: 0.8.1(@types/react@18.3.31)(react@18.3.1)
     devDependencies:
       '@testing-library/jest-dom':
         specifier: ^7.0.1
@@ -2333,8 +2333,8 @@ packages:
   react-base16-styling@0.10.0:
     resolution: {integrity: sha512-H1k2eFB6M45OaiRru3PBXkuCcn2qNmx+gzLb4a9IPMR7tMH8oBRXU5jGbPDYG1Hz+82d88ED0vjR8BmqU3pQdg==}
 
-  react-dock@0.8.0:
-    resolution: {integrity: sha512-/sUBWnsNlHIxmxoUHFPq8gcaH5k7MWGuHHeG3UjnXH3UblByxnARlUYewlMBtCUqcmbpPquYE5+GGvaG/hRkkg==}
+  react-dock@0.8.1:
+    resolution: {integrity: sha512-/nJNVkZ0pYpwef8y8spbVKzGgT/mNNqeULkJ/wlfSenriClSulkelTCtp4deNqDIWJgYKk6xQA4LwVN4/eR+7w==}
     peerDependencies:
       '@types/react': ^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react: ^16.3.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -4806,7 +4806,7 @@ snapshots:
       csstype: 3.2.3
       lodash-es: 4.18.1
 
-  react-dock@0.8.0(@types/react@18.3.31)(react@18.3.1):
+  react-dock@0.8.1(@types/react@18.3.31)(react@18.3.1):
     dependencies:
       '@types/lodash-es': 4.17.12
       '@types/react': 18.3.31
